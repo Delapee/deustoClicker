@@ -2,6 +2,8 @@ package es.b04.log;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class Registro extends JFrame {
 
@@ -64,6 +66,30 @@ public class Registro extends JFrame {
         add(BorderLayout.PAGE_START,sup);
         add(BorderLayout.CENTER,cen);
         add(BorderLayout.PAGE_END,inf);
+
+
+        //Action Listener
+
+        cancelar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+                SwingUtilities.invokeLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        new VentanaInicio();
+                    }
+                });
+            }
+        });
+
+        registrar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //Falta el linkeo con la base de datos
+
+            }
+        });
 
 
         setVisible(true);
