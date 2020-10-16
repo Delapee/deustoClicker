@@ -6,9 +6,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class VentanaInicio extends JFrame {
-    private JButton login;
-    private JButton registro;
-    private JButton salir;
 
     public VentanaInicio(){
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
@@ -18,9 +15,9 @@ public class VentanaInicio extends JFrame {
 
         this.setLayout(new GridLayout(3, 2));
 
-        login = new JButton("Ya tienes cuenta?");
-        registro = new JButton("Registrate!!");
-        salir = new JButton("Salir");
+        JButton login = new JButton("Ya tienes cuenta?");
+        JButton registro = new JButton("Registrate!!");
+        JButton salir = new JButton("Salir");
 
         JPanel topSide = new JPanel(new FlowLayout());
         JPanel midSide = new JPanel(new FlowLayout());
@@ -36,6 +33,7 @@ public class VentanaInicio extends JFrame {
 
         setVisible(true);
 
+        //Actions
         salir.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -46,16 +44,16 @@ public class VentanaInicio extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 Login ventanaLogin = new Login();
-
+                dispose();
             }
         });
         registro.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                Registro ventanaRegistro = new Registro();
+                dispose();
             }
         });
-
     }
 
     public static void main(String[] args) {
