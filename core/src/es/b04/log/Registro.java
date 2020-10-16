@@ -12,7 +12,7 @@ public class Registro extends JFrame {
 
         //Superior
         JPanel sup = new JPanel(new FlowLayout());
-        sup.add(new JLabel("Ventana de Registro"));
+        sup.add(new JLabel("Ventana de Registro DeustoClick"));
 
 
         //Medio
