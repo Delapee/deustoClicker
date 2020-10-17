@@ -24,6 +24,13 @@ public class Usuario {
         this.sexo = "";
         this.edad = 0;
     }
+    public Usuario(Usuario copia) {
+        this.nombre = copia.nombre;
+        this.pass = copia.pass;
+        this.email = copia.email;
+        this.sexo = copia.sexo;
+        this.edad = copia.edad;
+    }
 
     public static int getId() {
         return id;
