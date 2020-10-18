@@ -8,7 +8,7 @@ import java.awt.event.ActionListener;
 public class Login extends JFrame {
 
     public Login(){
-        JButton cancelar = new JButton("Cancelar");
+        JButton resgistro = new JButton("Registrarse");
         JButton iniciar = new JButton("Iniciar sesion");
 
         JLabel user = new JLabel("Usuario");
@@ -17,14 +17,14 @@ public class Login extends JFrame {
         JTextField usuario = new JTextField();
         JPasswordField contrasena = new JPasswordField();
 
-        cancelar.addActionListener(new ActionListener() {
+        resgistro.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 dispose();
                 SwingUtilities.invokeLater(new Runnable() {
                     @Override
                     public void run() {
-                        new VentanaInicio();
+                        new Register();
                     }
                 });
             }
@@ -54,7 +54,7 @@ public class Login extends JFrame {
         panelUsuario.add(pass);
         panelUsuario.add(contrasena);
 
-        panelBotones.add(cancelar);
+        panelBotones.add(resgistro);
         panelBotones.add(iniciar);
 
         mainPanel.add(panelUsuario);

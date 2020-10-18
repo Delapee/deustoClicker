@@ -77,7 +77,7 @@ public class Register extends JFrame {
                 SwingUtilities.invokeLater(new Runnable() {
                     @Override
                     public void run() {
-                        new VentanaInicio();
+                        new Login();
                     }
                 });
             }
@@ -94,16 +94,4 @@ public class Register extends JFrame {
 
         setVisible(true);
     }
-
-    public static void main(String[] args) {
-
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                new Register();
-            }
-        });
-
-    }
-
 }
