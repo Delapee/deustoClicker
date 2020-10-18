@@ -29,8 +29,8 @@ public class User {
         this.expProgress = expProgress;
         this.gold = gold;
         this.autoClick = autoClick;
-        this.squad = new ArrayList<>(squad);
-        this.inventory = new ArrayList<>(inventory);
+        this.squad = squad;
+        this.inventory = inventory;
     }
 
     public User() {
@@ -44,8 +44,8 @@ public class User {
         this.expProgress = 0;
         this.gold = 0;
         this.autoClick = 0;
-        this.squad = new ArrayList<>();
-        this.inventory = new ArrayList<>();
+        this.squad = new ArrayList<Champion>();
+        this.inventory = new ArrayList<Champion>();
     }
 
     public User(User copy) {
@@ -59,8 +59,8 @@ public class User {
         this.expProgress = copy.expProgress;
         this.gold = copy.gold;
         this.autoClick = copy.autoClick;
-        this.squad = new ArrayList<>(copy.squad);
-        this.inventory = new ArrayList<>(copy.inventory);
+        this.squad = copy.squad;
+        this.inventory = copy.inventory;
     }
 
     public static int getId() {
