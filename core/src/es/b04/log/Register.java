@@ -5,12 +5,12 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class Registro extends JFrame {
+public class Register extends JFrame {
 
-    public Registro(){
+    public Register(){
         setTitle("Ventana de Registro");
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-        setSize(600,500);
+        setSize(500,450);
 
         //Superior
         JPanel sup = new JPanel(new FlowLayout());
@@ -18,7 +18,7 @@ public class Registro extends JFrame {
 
 
         //Medio
-        JPanel cen = new JPanel(new GridLayout(3,2));
+        JPanel cen = new JPanel(new GridLayout(3,2,1,1));
         JPanel cen1 = new JPanel(new FlowLayout());
         JPanel cen2 = new JPanel(new FlowLayout());
         JPanel cen3 = new JPanel(new FlowLayout());
@@ -26,19 +26,19 @@ public class Registro extends JFrame {
         JPanel cen5 = new JPanel(new FlowLayout());
         JPanel cen6 = new JPanel(new FlowLayout());
 
-        cen1.add(new JLabel("Usuario"));
-        cen2.add(new JLabel("e-mail"));
+        cen1.add(new JLabel("Nombre de Usuario"));
+        cen2.add(new JLabel("Direccion e-mail"));
         cen3.add(new JLabel("Contraseña"));
-        cen4.add(new JLabel("R-Contraseña"));
+        cen4.add(new JLabel("Repetir Contraseña"));
         cen5.add(new JLabel("Sexo"));
         cen6.add(new JLabel("Edad"));
 
-        JTextField usuario = new JTextField(15);
-        JTextField mail = new JTextField(15);
-        JTextField contra = new JTextField(15);
-        JTextField contraR = new JTextField(15);
-        JTextField sexo = new JTextField(15);
-        JTextField edad = new JTextField(15);
+        JTextField usuario = new JTextField(20);
+        JTextField mail = new JTextField(20);
+        JTextField contra = new JTextField(20);
+        JTextField contraR = new JTextField(20);
+        JTextField sexo = new JTextField(20);
+        JTextField edad = new JTextField(20);
 
         cen1.add(usuario);
         cen2.add(mail);
@@ -100,7 +100,7 @@ public class Registro extends JFrame {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
-                new Registro();
+                new Register();
             }
         });
 
