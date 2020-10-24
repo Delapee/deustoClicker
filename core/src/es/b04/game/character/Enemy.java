@@ -46,6 +46,21 @@ public class Enemy extends Entity {
         this.dodgeProb = 0.0;
     }
 
+    public Enemy(Enemy copia) {
+        super(copia.x, copia.y, copia.width, copia.length, copia.sprite);
+        this.level = copia.level;
+        this.name = copia.name;
+        this.health = copia.health;
+        this.attackP = copia.attackP;
+        this.attackS = copia.attackS;
+        this.dmg = copia.dmg;
+        this.def = copia.def;
+        this.accuracy = copia.accuracy;
+        this.attackSpeed = copia.attackSpeed;
+        this.criticProb = copia.criticProb;
+        this.dodgeProb = copia.dodgeProb;
+    }
+
 
     public static int getId() {
         return id;
