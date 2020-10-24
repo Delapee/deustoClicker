@@ -1,6 +1,4 @@
-package es.b04.game;
-
-import java.util.ArrayList;
+package es.b04.character;
 
 public class Champion {
     protected static int id;
@@ -15,8 +13,10 @@ public class Champion {
     protected double attackSpeed;
     protected double criticProb;
     protected double dodgeProb;
+    protected String sprite;
 
-    public Champion(int level, String name, int expMax, int expProgress, Attack attackP, Attack attackS, int dmg, double accuracy, double attackSpeed, double criticProb, double dodgeProb) {
+    public Champion(int level, String name, int expMax, int expProgress, Attack attackP, Attack attackS,
+                    int dmg, double accuracy, double attackSpeed, double criticProb, double dodgeProb, String sprite) {
         this.level = level;
         this.name = name;
         this.expMax = expMax;
@@ -28,6 +28,7 @@ public class Champion {
         this.attackSpeed = attackSpeed;
         this.criticProb = criticProb;
         this.dodgeProb = dodgeProb;
+        this.sprite = sprite;
     }
     public Champion(Champion copia) {
         this.level = copia.level;
@@ -41,6 +42,7 @@ public class Champion {
         this.attackSpeed = copia.attackSpeed;
         this.criticProb = copia.criticProb;
         this.dodgeProb = copia.dodgeProb;
+        this.sprite = copia.sprite;
     }
     public Champion() {
         this.level = 1;
@@ -54,6 +56,7 @@ public class Champion {
         this.attackSpeed = 1.0;
         this.criticProb = 0.0;
         this.dodgeProb = 0.0;
+        this.sprite = "";
     }
 
     public static int getId() {
@@ -152,6 +155,14 @@ public class Champion {
         this.dodgeProb = dodgeProb;
     }
 
+    public String getSprite() {
+        return sprite;
+    }
+
+    public void setSprite(String sprite) {
+        this.sprite = sprite;
+    }
+
     @Override
     public String toString() {
         return "Champion{" +
@@ -166,6 +177,7 @@ public class Champion {
                 ", attackSpeed=" + attackSpeed +
                 ", criticProb=" + criticProb +
                 ", dodgeProb=" + dodgeProb +
+                ", sprite=" + sprite +
                 '}';
     }
 }
