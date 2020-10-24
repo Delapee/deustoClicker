@@ -1,4 +1,4 @@
-package es.b04.game;
+package es.b04.game.main;
 
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;

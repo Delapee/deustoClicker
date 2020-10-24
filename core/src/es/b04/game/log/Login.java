@@ -1,4 +1,4 @@
-package es.b04.log;
+package es.b04.game.log;
 
 import javax.swing.*;
 import java.awt.*;

@@ -1,4 +1,4 @@
-package es.b04.character;
+package es.b04.game.character;
 
 public class Champion {
     protected static int id;

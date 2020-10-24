@@ -1,6 +1,6 @@
-package es.b04.log;
+package es.b04.game.log;
 
-import es.b04.character.Champion;
+import es.b04.game.character.Champion;
 
 import java.util.ArrayList;
 
