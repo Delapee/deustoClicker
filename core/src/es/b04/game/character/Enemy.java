@@ -1,64 +1,49 @@
 package es.b04.game.character;
 
-public class Champion extends Entity{
+public class Enemy extends Entity {
     private static int id;
-    private int level;
+    private double level;
     private String name;
-    private int expMax;
-    private int expProgress;
+    private int health;
     private Attack attackP;
     private Attack attackS;
     private int dmg;
+    private int def;
     private double accuracy;
     private double attackSpeed;
     private double criticProb;
     private double dodgeProb;
 
-    public Champion(double x, double y, int width, int length, String sprite, int level, String name, int expMax,
-                    int expProgress, Attack attackP, Attack attackS, int dmg, double accuracy, double attackSpeed,
-                    double criticProb, double dodgeProb) {
+    public Enemy(double x, double y, int width, int length, String sprite, double level, String name,
+                 int health, Attack attackP, Attack attackS, int dmg, int def, double accuracy,
+                 double attackSpeed, double criticProb, double dodgeProb) {
         super(x, y, width, length, sprite);
         this.level = level;
         this.name = name;
-        this.expMax = expMax;
-        this.expProgress = expProgress;
+        this.health = health;
         this.attackP = attackP;
         this.attackS = attackS;
         this.dmg = dmg;
+        this.def = def;
         this.accuracy = accuracy;
         this.attackSpeed = attackSpeed;
         this.criticProb = criticProb;
         this.dodgeProb = dodgeProb;
     }
 
-    public Champion() {
+    public Enemy() {
         super();
         this.level = 0;
         this.name = "";
-        this.expMax = 800;
-        this.expProgress = 0;
+        this.health = 0;
         this.attackP = new Attack();
         this.attackS = new Attack();
         this.dmg = 0;
+        this.def = 0;
         this.accuracy = 0.0;
         this.attackSpeed = 0.0;
         this.criticProb = 0.0;
         this.dodgeProb = 0.0;
-    }
-
-    public Champion(Champion copia) {
-        super(copia.x, copia.y, copia.width, copia.length, copia.sprite);
-        this.level = copia.level;
-        this.name = copia.name;
-        this.expMax = copia.expMax;
-        this.expProgress = copia.expProgress;
-        this.attackP = copia.attackP;
-        this.attackS = copia.attackS;
-        this.dmg = copia.dmg;
-        this.accuracy = copia.accuracy;
-        this.attackSpeed = copia.attackSpeed;
-        this.criticProb = copia.criticProb;
-        this.dodgeProb = copia.dodgeProb;
     }
 
 
@@ -67,14 +52,14 @@ public class Champion extends Entity{
     }
 
     public static void setId(int id) {
-        Champion.id = id;
+        Enemy.id = id;
     }
 
-    public int getLevel() {
+    public double getLevel() {
         return level;
     }
 
-    public void setLevel(int level) {
+    public void setLevel(double level) {
         this.level = level;
     }
 
@@ -86,20 +71,12 @@ public class Champion extends Entity{
         this.name = name;
     }
 
-    public int getExpMax() {
-        return expMax;
+    public int getHealth() {
+        return health;
     }
 
-    public void setExpMax(int expMax) {
-        this.expMax = expMax;
-    }
-
-    public int getExpProgress() {
-        return expProgress;
-    }
-
-    public void setExpProgress(int expProgress) {
-        this.expProgress = expProgress;
+    public void setHealth(int health) {
+        this.health = health;
     }
 
     public Attack getAttackP() {
@@ -124,6 +101,14 @@ public class Champion extends Entity{
 
     public void setDmg(int dmg) {
         this.dmg = dmg;
+    }
+
+    public int getDef() {
+        return def;
+    }
+
+    public void setDef(int def) {
+        this.def = def;
     }
 
     public double getAccuracy() {
@@ -161,14 +146,14 @@ public class Champion extends Entity{
 
     @Override
     public String toString() {
-        return "Champion{" +
+        return "Enemy{" +
                 "level=" + level +
                 ", name='" + name + '\'' +
-                ", expMax=" + expMax +
-                ", expProgress=" + expProgress +
+                ", health=" + health +
                 ", attackP=" + attackP +
                 ", attackS=" + attackS +
                 ", dmg=" + dmg +
+                ", def=" + def +
                 ", accuracy=" + accuracy +
                 ", attackSpeed=" + attackSpeed +
                 ", criticProb=" + criticProb +

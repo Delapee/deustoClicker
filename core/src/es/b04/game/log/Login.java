@@ -67,7 +67,10 @@ public class Login extends JFrame {
         this.setSize(400, 250);
         this.setResizable(false);
         this.setVisible(true);
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        this.setLocation( ( screenSize.width - this.getSize().width ) / 2, ( screenSize.height - this.getSize().height ) /2  );
     }
+
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(new Runnable() {

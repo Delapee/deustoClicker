@@ -1,12 +1,13 @@
 package es.b04.game.character;
 
 public class Attack {
-    protected int buff;
-    protected int debuff;
-    protected int atkCode;
-    protected int cd;
-    protected boolean main;
-    protected String sprite;
+    private int buff;
+    private int debuff;
+    private int atkCode;
+    private int cd;
+    private boolean main;
+    private String sprite;
+
 
     public Attack(int buff, int debuff, int atkCode, int cd, boolean main, String sprite) {
         this.buff = buff;
@@ -34,6 +35,7 @@ public class Attack {
         this.main = copia.main;
         this.sprite = copia.sprite;
     }
+
 
     public int getBuff() {
         return buff;
@@ -82,6 +84,7 @@ public class Attack {
     public void setSprite(String sprite) {
         this.sprite = sprite;
     }
+
 
     @Override
     public String toString() {
