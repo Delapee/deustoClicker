@@ -2,7 +2,9 @@ package es.b04.game.main;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.Cursor;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
@@ -19,6 +21,11 @@ public class MainGame extends Game {
 	public void create () {
 		batch = new SpriteBatch();
 		img = new Texture("backgroundV2.jpg");
+
+		Pixmap pixmap = new Pixmap(Gdx.files.internal("cursor.png"));
+		Cursor cursor = Gdx.graphics.newCursor(pixmap, 0, 0);
+		Gdx.graphics.setCursor(cursor);
+		pixmap.dispose();
 	}
 
 	@Override
@@ -31,7 +38,6 @@ public class MainGame extends Game {
 	
 	@Override
 	public void dispose () {
-
 	}
 
 }
