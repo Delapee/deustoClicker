@@ -20,7 +20,7 @@ public class MainGame extends Game {
 
 	public void create () {
 		batch = new SpriteBatch();
-		img = new Texture("backgroundV2.jpg");
+		img = new Texture("background.png");
 
 		Pixmap pixmap = new Pixmap(Gdx.files.internal("cursor.png"));
 		Cursor cursor = Gdx.graphics.newCursor(pixmap, 0, 0);
