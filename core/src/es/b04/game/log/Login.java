@@ -11,7 +11,8 @@ public class Login extends JFrame {
         JButton resgistro = new JButton("Registrarse");
         JButton iniciar = new JButton("Iniciar sesion");
 
-        JLabel user = new JLabel("Usuario");
+        JLabel user = new JLabel("Usuario")
+                ;
         JLabel pass = new JLabel("Contraseña");
 
         JTextField usuario = new JTextField();
