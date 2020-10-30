@@ -3,6 +3,7 @@ package es.b04.game.main;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.Cursor;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Pixmap;
@@ -12,6 +13,8 @@ import com.badlogic.gdx.math.Vector3;
 public class MainGame extends Game {
 	private static OrthographicCamera camera;
 	private Vector3 mousePosition;
+
+
 
 	@Override
 	public void dispose() {
@@ -60,10 +63,13 @@ public class MainGame extends Game {
 
 	@Override
 	public void create() {
+
+
 		mousePosition = new Vector3();
 		camera = new OrthographicCamera();
 		camera.setToOrtho(false, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-		this.setScreen(new MainGameScreen());
+
+		this.setScreen(new GameMenuScreen(this));
 
 	}
 

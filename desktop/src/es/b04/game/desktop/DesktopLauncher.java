@@ -6,10 +6,12 @@ import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 import es.b04.game.main.MainGame;
 
 public class DesktopLauncher {
+
 	public static void main (String[] arg) {
+
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
 		config.addIcon("asdf.png", Files.FileType.Classpath);
-		config.title = "desutoClicker";
+		config.title = "deustoClicker";
 		config.width = LwjglApplicationConfiguration.getDesktopDisplayMode().width;
 		config.height = LwjglApplicationConfiguration.getDesktopDisplayMode().height;
 		config.fullscreen = true;
