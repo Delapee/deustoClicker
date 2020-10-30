@@ -44,6 +44,7 @@ public class MainGame extends Game {
 		camera.update();
 		mousePosition.set(Gdx.input.getX(), Gdx.input.getY(), 0);
 		MainGame.camera.unproject(mousePosition);
+		//System.out.println(mousePosition);
 	}
 
 	@Override
