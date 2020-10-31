@@ -11,6 +11,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.utils.ActorGestureListener;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.FitViewport;
+import es.b04.game.hud.CustomMouse;
 import es.b04.game.hud.IButton;
 
 public class GameMenuScreen extends ScreenAdapter {
@@ -20,6 +21,7 @@ public class GameMenuScreen extends ScreenAdapter {
     private Stage stage;
 
 
+
     public GameMenuScreen(Game game) {
         this.game = game;
     }
@@ -27,6 +29,7 @@ public class GameMenuScreen extends ScreenAdapter {
     @Override
     public void show() {
         super.show();
+
 
         tittleBackground = new Texture("mainTittle.png");
         menuBatch = new SpriteBatch();
@@ -57,6 +60,8 @@ public class GameMenuScreen extends ScreenAdapter {
         menuBatch.begin();
         menuBatch.draw(tittleBackground, 0, 0);
         menuBatch.end();
+
+
 
         stage.act(delta);
         stage.draw();

@@ -9,11 +9,10 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
+import es.b04.game.hud.CustomMouse;
 
 public class MainGame extends Game {
-	private static OrthographicCamera camera;
-	private Vector3 mousePosition;
-
+	private CustomMouse customMouse;
 
 
 	@Override
@@ -34,17 +33,9 @@ public class MainGame extends Game {
 	@Override
 	public void render() {
 		super.render();
+		customMouse.getMousePosition();
+		customMouse.mouseAct();
 
-		//Skin personalizada del raton
-		Pixmap pixmap = new Pixmap(Gdx.files.internal("cursor.png"));
-		Cursor cursor = Gdx.graphics.newCursor(pixmap, 0, 0);
-		Gdx.graphics.setCursor(cursor);
-
-		//Trakeo de la possicion del raton
-		camera.update();
-		mousePosition.set(Gdx.input.getX(), Gdx.input.getY(), 0);
-		MainGame.camera.unproject(mousePosition);
-		//System.out.println(mousePosition);
 	}
 
 	@Override
@@ -64,12 +55,7 @@ public class MainGame extends Game {
 
 	@Override
 	public void create() {
-
-
-		mousePosition = new Vector3();
-		camera = new OrthographicCamera();
-		camera.setToOrtho(false, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-
+		customMouse = new CustomMouse("cursor.png");
 		this.setScreen(new GameMenuScreen(this));
 
 	}
