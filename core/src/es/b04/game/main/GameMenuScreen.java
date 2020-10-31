@@ -6,7 +6,9 @@ import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.utils.ActorGestureListener;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import es.b04.game.hud.IButton;
@@ -16,8 +18,7 @@ public class GameMenuScreen extends ScreenAdapter {
     private SpriteBatch menuBatch;
     private final Game game;
     private Stage stage;
-    private Texture playTexture;
-    private Texture playPressTexture;
+
 
     public GameMenuScreen(Game game) {
         this.game = game;
@@ -33,7 +34,19 @@ public class GameMenuScreen extends ScreenAdapter {
         Gdx.input.setInputProcessor(stage);
 
         IButton play = new IButton("B1.png","B2.png",Gdx.graphics.getWidth() / 2f, Gdx.graphics.getHeight() / 4f,Align.center, new MainGameScreen(), game);
+        IButton salir = new IButton("B1.png","B2.png",Gdx.graphics.getWidth() / 2f, Gdx.graphics.getHeight() / 6f,Align.center);
+
+        salir.addListener( new ActorGestureListener(){
+            @Override
+            public void tap(InputEvent event, float x, float y, int count, int button) {
+                super.tap(event, x, y, count, button);
+                Gdx.app.exit();
+            }
+
+        });
+
         stage.addActor(play);
+        stage.addActor(salir);
     }
 
     @Override

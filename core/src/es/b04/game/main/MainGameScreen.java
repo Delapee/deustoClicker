@@ -8,6 +8,11 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.utils.ActorGestureListener;
+import com.badlogic.gdx.utils.viewport.FitViewport;
+import es.b04.game.hud.CEnemy;
 import es.b04.game.hud.CustomFont;
 import es.b04.game.log.User;
 
@@ -15,6 +20,8 @@ public class MainGameScreen extends ScreenAdapter {
     private SpriteBatch batch;
     private Texture img;
     private User userL;
+    private Stage stage;
+    private CEnemy cEnemy;
 
     private BitmapFont fontDung70;
     private BitmapFont fontDung50;
@@ -25,6 +32,29 @@ public class MainGameScreen extends ScreenAdapter {
         super.show();
         batch = new SpriteBatch();
         img = new Texture("backgroundOp.png");
+        stage = new Stage(new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()));
+        Gdx.input.setInputProcessor(stage);
+
+        cEnemy = new CEnemy("C1.png","C2.png",10,10,50);
+        stage.addActor(cEnemy);
+
+
+        cEnemy.addListener( new ActorGestureListener(){
+
+            @Override
+            public void tap(InputEvent event, float x, float y, int count, int button) {
+                super.tap(event, x, y, count, button);
+
+                cEnemy.setHealth(cEnemy.getHealth() - 1);
+
+                if (cEnemy.getHealth() == 0){
+                    userL.setGold(userL.getGold() + cEnemy.getGoldXClick());
+                    userL.setExpProgress(userL.getExpProgress() + cEnemy.getExpXClick());
+                }
+
+            }
+        });
+
 
         // User de Prueba
         userL = new User();
@@ -45,10 +75,13 @@ public class MainGameScreen extends ScreenAdapter {
         clearScreen();
 
         batch.begin();
-        batch.draw(img, 0, 0);
-        renderUser();
+
+        renderText();
+        checkClicker();
 
 
+        stage.act(delta);
+        stage.draw();
         batch.end();
 
     }
@@ -83,8 +116,12 @@ public class MainGameScreen extends ScreenAdapter {
 
 
     // Metodos de Renderizado
-    public void renderUser(){
+    public void renderText(){
 
+        //Fondo
+        batch.draw(img, 0, 0);
+
+        //User
         fontDung70.draw(batch,userL.getName(),430,1005);
         fontDung70.draw(batch,Integer.toString(userL.getGold()),430,943);
         if (userL.getLevel() >= 10){
@@ -93,5 +130,25 @@ public class MainGameScreen extends ScreenAdapter {
             fontDung50.draw(batch,Integer.toString(userL.getLevel()),376,877);
         }
         fontDung70.draw(batch,userL.getExpProgress() + "/" + userL.getExpMax(),430,877);
+
+        // Clicker
+        fontDung70.draw(batch,Integer.toString(cEnemy.getHealth()),730,550);
+
+
     }
+
+    // Controlar el clicker
+    public void checkClicker(){
+
+        if (cEnemy.getHealth() == 0){
+            cEnemy.setHealth(cEnemy.getHealth() + 10);
+            cEnemy.setGoldXClick(cEnemy.getGoldXClick() + 10);
+            cEnemy.setExpXClick(cEnemy.getExpXClick() + 10);
+
+
+        }
+
+
+    }
+
 }
