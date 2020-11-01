@@ -141,10 +141,8 @@ public class MainGameScreen extends ScreenAdapter {
     public void checkClicker(){
 
         if (cEnemy.getHealth() == 0){
-            cEnemy.setHealth(cEnemy.getHealth() + 10);
-            cEnemy.setGoldXClick(cEnemy.getGoldXClick() + 10);
-            cEnemy.setExpXClick(cEnemy.getExpXClick() + 10);
 
+            cEnemy = new CEnemy("C1.png","C2.png",cEnemy.getMaxhelth() + 10,cEnemy.getGoldXClick() + 10,cEnemy.getExpXClick() + 10);
 
         }
 
