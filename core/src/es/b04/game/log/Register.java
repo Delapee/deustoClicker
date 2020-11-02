@@ -8,12 +8,15 @@ import java.awt.event.ActionListener;
 
 public class Register extends JFrame {
     private boolean check = false;
+    private final Login l;
 
     public boolean getCheck(){
         return check;
     }
 
-    public Register(){
+    public Register(final Login l){
+        this.l = l;
+
         setTitle("Ventana de Registro");
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setSize(500,350);
@@ -98,6 +101,7 @@ public class Register extends JFrame {
                 setVisible(false);
 
 
+
             }
         });
 
@@ -153,6 +157,7 @@ public class Register extends JFrame {
                     User u = new User(user.getText(), String.valueOf(pass.getPassword()),
                                       email.getText(), String.valueOf(gender.getSelectedItem()), (Integer) age.getValue());
                     check = true;
+                    l.setCheck(true);
                     dispose();
                 }
 

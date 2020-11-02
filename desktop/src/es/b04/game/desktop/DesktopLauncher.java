@@ -15,7 +15,6 @@ public class DesktopLauncher {
 	public static void main (String[] arg) {
 
 		l = new Login();
-
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
 		config.addIcon("asdf.png", Files.FileType.Classpath);
 		config.title = "deustoClicker";
@@ -23,12 +22,12 @@ public class DesktopLauncher {
 		config.height = LwjglApplicationConfiguration.getDesktopDisplayMode().height;
 		config.fullscreen = true;
 
+
 		do {
 			l.getCheck();
-			System.out.println(1);
-		}while (!l.getCheck());
 
-		new LwjglApplication(new MainGame(), config);
+		}while (!l.getCheck() );
+			new LwjglApplication(new MainGame(), config);
 
 	}
 }

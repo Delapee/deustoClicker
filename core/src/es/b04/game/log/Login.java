@@ -16,12 +16,16 @@ public class Login extends JFrame {
         return check;
     }
 
+    public void setCheck(boolean check) {
+        this.check = check;
+    }
+
     public Register getR() {
         return r;
     }
 
     private Register creacionRegistro(){
-        return r = new Register();
+        return r = new Register(this);
     }
 
     public Login(){
@@ -33,6 +37,7 @@ public class Login extends JFrame {
 
         final JTextField usuario = new JTextField();
         final JPasswordField contrasena = new JPasswordField();
+
 
         resgistro.addActionListener(new ActionListener() {
             @Override
@@ -57,19 +62,19 @@ public class Login extends JFrame {
                     usuario.setBorder(new LineBorder(Color.RED, 2));
                     todoOk = false;
                 }else {
-                    usuario.setBorder(new LineBorder(Color.BLACK));
+                    usuario.setBorder(new LineBorder(Color.GREEN));
                 }
 
                 if (String.valueOf(contrasena.getPassword()).equals("")){
                     contrasena.setBorder(new LineBorder(Color.RED, 2));
                     todoOk = false;
                 }else{
-                    contrasena.setBorder(new LineBorder(Color.BLACK));
+                    contrasena.setBorder(new LineBorder(Color.GREEN));
                 }
 
                 if (todoOk){
                     check = true;
-                    dispose();
+
                 }
             }
         });
