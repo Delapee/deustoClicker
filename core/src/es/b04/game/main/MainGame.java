@@ -4,6 +4,7 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.ScreenAdapter;
+import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Cursor;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Pixmap;
@@ -13,7 +14,11 @@ import es.b04.game.hud.CustomMouse;
 
 public class MainGame extends Game {
 	private CustomMouse customMouse;
+	private final AssetManager assetManager = new AssetManager();
 
+	public AssetManager getAssetManager() {
+		return assetManager;
+	}
 
 	@Override
 	public void dispose() {
