@@ -23,10 +23,8 @@ public class DesktopLauncher {
 		do {
 			if (!l.isVisible()){
 				close = true;
-				System.out.println(1);
 			}
 			l.getCheck();
-			System.out.println(2);
 		}while (!l.getCheck() && !close);
 		l.dispose();
 
