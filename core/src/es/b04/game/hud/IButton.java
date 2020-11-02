@@ -28,27 +28,27 @@ public class IButton extends ImageButton {
         super.setPosition(x,y,align);
     }
 
-    public IButton(String normal, String press, float x, float y, ScreenAdapter screen, final Game game) {
+    public IButton(String normal, String press, float x, float y, final ScreenAdapter screen, final Game game) {
         super(new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal(normal)))),new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal(press)))));
         super.setPosition(x,y);
         super.addListener( new ActorGestureListener(){
             @Override
             public void tap(InputEvent event, float x, float y, int count, int button) {
                 super.tap(event, x, y, count, button);
-                game.setScreen(new MainGameScreen());
+                game.setScreen(screen);
             }
 
         });
     }
 
-    public IButton(String normal, String press, float x, float y, int align, ScreenAdapter screen, final Game game) {
+    public IButton(String normal, String press, float x, float y, int align, final ScreenAdapter screen, final Game game) {
         super(new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal(normal)))),new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal(press)))));
         super.setPosition(x,y,align);
         super.addListener( new ActorGestureListener(){
             @Override
             public void tap(InputEvent event, float x, float y, int count, int button) {
                 super.tap(event, x, y, count, button);
-                game.setScreen(new MainGameScreen());
+                game.setScreen(screen);
             }
 
         });

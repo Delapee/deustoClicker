@@ -5,16 +5,14 @@ import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 import es.b04.game.log.Login;
 import es.b04.game.main.MainGame;
-import es.b04.game.log.Register;
-
-import javax.swing.*;
 
 public class DesktopLauncher {
 	private static Login l;
 
 	public static void main (String[] arg) {
-
+		boolean close = false;
 		l = new Login();
+
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
 		config.addIcon("asdf.png", Files.FileType.Classpath);
 		config.title = "deustoClicker";
@@ -22,12 +20,18 @@ public class DesktopLauncher {
 		config.height = LwjglApplicationConfiguration.getDesktopDisplayMode().height;
 		config.fullscreen = true;
 
-
 		do {
+			if (!l.isVisible()){
+				close = true;
+				System.out.println(1);
+			}
 			l.getCheck();
+			System.out.println(2);
+		}while (!l.getCheck() && !close);
+		l.dispose();
 
-		}while (!l.getCheck() );
+		if (!close){
 			new LwjglApplication(new MainGame(), config);
-
+		}
 	}
 }

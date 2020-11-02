@@ -1,7 +1,5 @@
 package es.b04.game.log;
 
-import sun.rmi.runtime.Log;
-
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 import java.awt.*;
@@ -42,7 +40,6 @@ public class Login extends JFrame {
         resgistro.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                setVisible(false);
                 SwingUtilities.invokeLater(new Runnable() {
                     @Override
                     public void run() {
@@ -62,19 +59,19 @@ public class Login extends JFrame {
                     usuario.setBorder(new LineBorder(Color.RED, 2));
                     todoOk = false;
                 }else {
-                    usuario.setBorder(new LineBorder(Color.GREEN));
+                    usuario.setBorder(new LineBorder(Color.BLACK));
                 }
 
                 if (String.valueOf(contrasena.getPassword()).equals("")){
                     contrasena.setBorder(new LineBorder(Color.RED, 2));
                     todoOk = false;
                 }else{
-                    contrasena.setBorder(new LineBorder(Color.GREEN));
+                    contrasena.setBorder(new LineBorder(Color.BLACK));
                 }
 
                 if (todoOk){
                     check = true;
-
+                    setVisible(false);
                 }
             }
         });
@@ -104,7 +101,7 @@ public class Login extends JFrame {
 
         this.add(mainPanel);
 
-        this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        this.setDefaultCloseOperation(HIDE_ON_CLOSE);
         this.setTitle("Login");
         this.setSize(400, 250);
         this.setResizable(false);
@@ -112,15 +109,4 @@ public class Login extends JFrame {
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         this.setLocation( ( screenSize.width - this.getSize().width ) / 2, ( screenSize.height - this.getSize().height ) /2  );
     }
-
-
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                new Login();
-            }
-        });
-    }
-
 }

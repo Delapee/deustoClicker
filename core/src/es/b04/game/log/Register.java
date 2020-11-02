@@ -7,18 +7,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class Register extends JFrame {
-    private boolean check = false;
     private final Login l;
-
-    public boolean getCheck(){
-        return check;
-    }
 
     public Register(final Login l){
         this.l = l;
 
         setTitle("Ventana de Registro");
-        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         setSize(500,350);
         setVisible(true);
         setResizable(false);
@@ -31,7 +26,6 @@ public class Register extends JFrame {
 
         //Medio
         JPanel cen = new JPanel(new GridLayout(3,2,1,1));
-        //cen.setBorder(BorderFactory.createEmptyBorder(0,20,0,20));
 
         JPanel cen1 = new JPanel(new GridLayout(2,1,1,1));
         cen1.setBorder(BorderFactory.createEmptyBorder(20,20,10,10));
@@ -98,10 +92,7 @@ public class Register extends JFrame {
         cancel.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                setVisible(false);
-
-
-
+                dispose();
             }
         });
 
@@ -156,8 +147,6 @@ public class Register extends JFrame {
                 if (todoOk){
                     User u = new User(user.getText(), String.valueOf(pass.getPassword()),
                                       email.getText(), String.valueOf(gender.getSelectedItem()), (Integer) age.getValue());
-                    check = true;
-                    l.setCheck(true);
                     dispose();
                 }
 
