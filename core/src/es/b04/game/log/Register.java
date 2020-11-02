@@ -18,7 +18,8 @@ public class Register extends JFrame {
         setVisible(true);
         setResizable(false);
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        this.setLocation( ( screenSize.width - this.getSize().width ) / 2, ( screenSize.height - this.getSize().height ) /2  );
+        this.setLocation( ( screenSize.width - this.getSize().width ) / 2,
+                ( screenSize.height - this.getSize().height ) /2  );
 
         //Superior
         JPanel top = new JPanel(new FlowLayout());
@@ -44,7 +45,7 @@ public class Register extends JFrame {
         final JTextField email = new JTextField(20);
         final JPasswordField pass = new JPasswordField(20);
         final JPasswordField passR = new JPasswordField(20);
-        final JComboBox<String> gender = new JComboBox<String>();
+        final JComboBox<String> gender = new JComboBox<>();
         gender.addItem("Hombre");
         gender.addItem("Mujer");
         gender.addItem("Otro");
@@ -146,7 +147,8 @@ public class Register extends JFrame {
 
                 if (todoOk){
                     User u = new User(user.getText(), String.valueOf(pass.getPassword()),
-                                      email.getText(), String.valueOf(gender.getSelectedItem()), (Integer) age.getValue());
+                                      email.getText(), String.valueOf(gender.getSelectedItem()),
+                            (Integer) age.getValue());
                     dispose();
                 }
 

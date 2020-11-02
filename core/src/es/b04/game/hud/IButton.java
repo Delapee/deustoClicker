@@ -9,27 +9,33 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ActorGestureListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
+import es.b04.game.main.MainGame;
 import es.b04.game.main.MainGameScreen;
+import sun.rmi.rmic.Main;
 
 public class IButton extends ImageButton {
 
     private String normal;
     private String press;
+    private MainGame game;
     private float x;
     private float y;
 
     public IButton(String normal, String press, float x, float y){
-        super(new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal(normal)))),new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal(press)))));
+        super(new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal(normal)))),
+                new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal(press)))));
         super.setPosition(x,y);
     }
 
     public IButton(String normal, String press, float x, float y, int align){
-        super(new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal(normal)))),new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal(press)))));
+        super(new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal(normal)))),
+                new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal(press)))));
         super.setPosition(x,y,align);
     }
 
-    public IButton(String normal, String press, float x, float y, final ScreenAdapter screen, final Game game) {
-        super(new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal(normal)))),new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal(press)))));
+    public IButton(String normal, String press, float x, float y, final ScreenAdapter screen, final MainGame game) {
+        super(new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal(normal)))),
+                new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal(press)))));
         super.setPosition(x,y);
         super.addListener( new ActorGestureListener(){
             @Override
@@ -41,8 +47,10 @@ public class IButton extends ImageButton {
         });
     }
 
-    public IButton(String normal, String press, float x, float y, int align, final ScreenAdapter screen, final Game game) {
-        super(new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal(normal)))),new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal(press)))));
+    public IButton(String normal, String press, float x, float y, int align, final ScreenAdapter screen,
+                   final MainGame game) {
+        super(new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal(normal)))),
+                new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal(press)))));
         super.setPosition(x,y,align);
         super.addListener( new ActorGestureListener(){
             @Override

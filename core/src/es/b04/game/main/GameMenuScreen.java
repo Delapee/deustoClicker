@@ -17,13 +17,14 @@ import es.b04.game.hud.IButton;
 public class GameMenuScreen extends ScreenAdapter {
     private Texture tittleBackground;
     private SpriteBatch menuBatch;
-    private final Game game;
+    private final MainGame mainGame;
     private Stage stage;
 
 
 
-    public GameMenuScreen(Game game) {
-        this.game = game;
+    public GameMenuScreen(MainGame mainGame) {
+        this.mainGame = mainGame;
+
     }
 
     @Override
@@ -36,8 +37,10 @@ public class GameMenuScreen extends ScreenAdapter {
         stage = new Stage(new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()));
         Gdx.input.setInputProcessor(stage);
 
-        IButton play = new IButton("B1.png","B2.png",Gdx.graphics.getWidth() / 2f, Gdx.graphics.getHeight() / 4f,Align.center, new MainGameScreen(game), game);
-        IButton salir = new IButton("B1.png","B2.png",Gdx.graphics.getWidth() / 2f, Gdx.graphics.getHeight() / 6f,Align.center);
+        IButton play = new IButton("B1.png","B2.png",Gdx.graphics.getWidth() / 2f,
+                Gdx.graphics.getHeight() / 4f,Align.center, new LoadingScreen(mainGame), mainGame);
+        IButton salir = new IButton("B1.png","B2.png",Gdx.graphics.getWidth() /
+                2f, Gdx.graphics.getHeight() / 6f,Align.center);
 
         salir.addListener( new ActorGestureListener(){
             @Override

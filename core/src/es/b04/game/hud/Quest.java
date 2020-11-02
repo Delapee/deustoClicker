@@ -9,7 +9,8 @@ public class Quest {
     private int expReward;
     private int questCode;
 
-    public Quest(int objetive, int actual, String description, boolean complete, int goldReward, int expReward, int questCode) {
+    public Quest(int objetive, int actual, String description, boolean complete, int goldReward, int expReward,
+                 int questCode) {
         this.objetive = objetive;
         this.actual = actual;
         this.description = description;
