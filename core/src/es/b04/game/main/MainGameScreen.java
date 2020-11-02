@@ -1,5 +1,6 @@
 package es.b04.game.main;
 
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.Color;
@@ -11,9 +12,11 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.utils.ActorGestureListener;
+import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import es.b04.game.hud.CEnemy;
 import es.b04.game.hud.CustomFont;
+import es.b04.game.hud.IButton;
 import es.b04.game.log.User;
 
 public class MainGameScreen extends ScreenAdapter {
@@ -22,10 +25,14 @@ public class MainGameScreen extends ScreenAdapter {
     private User userL;
     private Stage stage;
     private CEnemy cEnemy;
+    private Game game;
 
     private BitmapFont fontDung70;
     private BitmapFont fontDung50;
 
+    public MainGameScreen(Game game) {
+        this.game = game;
+    }
 
     @Override
     public void show() {
@@ -34,6 +41,9 @@ public class MainGameScreen extends ScreenAdapter {
         img = new Texture("backgroundOp.png");
         stage = new Stage(new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()));
         Gdx.input.setInputProcessor(stage);
+
+        IButton squadButton = new IButton("B1.png","B2.png",Gdx.graphics.getWidth() / 2f, Gdx.graphics.getHeight() / 4f, new SquadMenuScreen(game), game);
+        stage.addActor(squadButton);
 
         cEnemy = new CEnemy("C1.png","C2.png",10,10,50);
         stage.addActor(cEnemy);

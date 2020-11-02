@@ -25,6 +25,7 @@ public class DesktopLauncher {
 				close = true;
 			}
 			l.getCheck();
+			System.out.println();
 		}while (!l.getCheck() && !close);
 		l.dispose();
 
