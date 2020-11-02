@@ -7,11 +7,12 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.utils.Logger;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import es.b04.game.character.AssetEnum;
 
 public class LoadingScreen extends ScreenAdapter {
     private static final float WORLD_WIDTH = Gdx.graphics.getWidth();
     private static final float WORLD_HEIGHT = Gdx.graphics.getHeight();
-    private static final float PROGRESS_BAR_WIDTH = 100;
+    private static final float PROGRESS_BAR_WIDTH = 400;
     private static final float PROGRESS_BAR_HEIGHT = 25;
     private ShapeRenderer shapeRenderer;
     private Viewport viewport;
@@ -28,7 +29,7 @@ public class LoadingScreen extends ScreenAdapter {
     @Override
     public void render(float delta) {
         super.render(delta);
-        //update();
+        update();
         clearScreen();
         draw();
     }
@@ -47,17 +48,16 @@ public class LoadingScreen extends ScreenAdapter {
         camera.update();
         viewport = new FitViewport(WORLD_WIDTH, WORLD_HEIGHT, camera);
         shapeRenderer = new ShapeRenderer();
-        /*
-        game.getAssetManager().load("B1.png", Texture.class);
-        game.getAssetManager().load("B2.png", Texture.class);
-        game.getAssetManager().load("backgroundOp.png", Texture.class);
-        game.getAssetManager().load("C1.png", Texture.class);
-        game.getAssetManager().load("C2.png", Texture.class);
-        game.getAssetManager().load("cursor.png", Texture.class);
-        game.getAssetManager().load("mainTittle.png", Texture.class);
 
+        game.getAssetManager().load(AssetEnum.PLAY1.getAsset(), Texture.class);
+        game.getAssetManager().load(AssetEnum.PLAY2.getAsset(), Texture.class);
+        game.getAssetManager().load(AssetEnum.GAMEBCK.getAsset(), Texture.class);
+        game.getAssetManager().load(AssetEnum.SQUADBCK.getAsset(), Texture.class);
+        game.getAssetManager().load(AssetEnum.CENEMY1.getAsset(), Texture.class);
+        game.getAssetManager().load(AssetEnum.CENEMY2.getAsset(), Texture.class);
+        game.getAssetManager().load(AssetEnum.CURSOR.getAsset(), Texture.class);
+        game.getAssetManager().load(AssetEnum.MAINTITTLE.getAsset(), Texture.class);
 
-         */
     }
 
     @Override
@@ -85,22 +85,29 @@ public class LoadingScreen extends ScreenAdapter {
         shapeRenderer.setTransformMatrix(camera.view);
         shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
         shapeRenderer.setColor(Color.WHITE);
-        shapeRenderer.rect((WORLD_WIDTH - PROGRESS_BAR_WIDTH) / 2, (WORLD_HEIGHT - PROGRESS_BAR_HEIGHT / 2), progress * PROGRESS_BAR_WIDTH, PROGRESS_BAR_HEIGHT);
+        shapeRenderer.rect((WORLD_WIDTH - PROGRESS_BAR_WIDTH) / 2, (WORLD_HEIGHT - PROGRESS_BAR_HEIGHT / 2),
+                progress * PROGRESS_BAR_WIDTH, PROGRESS_BAR_HEIGHT);
         shapeRenderer.end();
     }
     private void clearScreen() {
         Gdx.gl.glClearColor(Color.BLACK.r, Color.BLACK.g,
                 Color.BLACK.b, Color.BLACK.a);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-    }/*
+    }
+
     private void update() {
+        try {
+            Thread.sleep(200);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         if (game.getAssetManager().update()) {
             game.setScreen(new MainGameScreen(game));
         } else {
             progress = game.getAssetManager().getProgress();
         }
     }
-    */
+
 
 
 }
