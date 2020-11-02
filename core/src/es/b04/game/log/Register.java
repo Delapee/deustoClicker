@@ -7,6 +7,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class Register extends JFrame {
+    private boolean check = false;
+
+    public boolean getCheck(){
+        return check;
+    }
 
     public Register(){
         setTitle("Ventana de Registro");
@@ -89,13 +94,9 @@ public class Register extends JFrame {
         cancelar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                dispose();
-                SwingUtilities.invokeLater(new Runnable() {
-                    @Override
-                    public void run() {
-                        new Login();
-                    }
-                });
+                setVisible(false);
+
+
             }
         });
 
@@ -150,7 +151,7 @@ public class Register extends JFrame {
                 if (todoOk){
                     User u = new User(usuario.getText(), String.valueOf(contraR.getPassword()),
                                       mail.getText(), String.valueOf(sexo.getSelectedItem()), (Integer) edad.getValue());
-
+                    check = true;
                     dispose();
                 }
 

@@ -1,11 +1,28 @@
 package es.b04.game.log;
 
+import sun.rmi.runtime.Log;
+
 import javax.swing.*;
+import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class Login extends JFrame {
+    private boolean check = false;
+    private Register r;
+
+    public boolean getCheck(){
+        return check;
+    }
+
+    public Register getR() {
+        return r;
+    }
+
+    private Register creacionRegistro(){
+        return r = new Register();
+    }
 
     public Login(){
         JButton resgistro = new JButton("Registrarse");
@@ -14,17 +31,17 @@ public class Login extends JFrame {
         JLabel user = new JLabel("Usuario");
         JLabel pass = new JLabel("Contraseña");
 
-        JTextField usuario = new JTextField();
-        JPasswordField contrasena = new JPasswordField();
+        final JTextField usuario = new JTextField();
+        final JPasswordField contrasena = new JPasswordField();
 
         resgistro.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                dispose();
+                setVisible(false);
                 SwingUtilities.invokeLater(new Runnable() {
                     @Override
                     public void run() {
-                        new Register();
+                        creacionRegistro();
                     }
                 });
             }
@@ -33,7 +50,27 @@ public class Login extends JFrame {
         iniciar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //Hay que implementarlo
+                //Hay que implementar la BD
+                boolean todoOk = true;
+
+                if (usuario.getText().equals("")){
+                    usuario.setBorder(new LineBorder(Color.RED, 2));
+                    todoOk = false;
+                }else {
+                    usuario.setBorder(new LineBorder(Color.BLACK));
+                }
+
+                if (String.valueOf(contrasena.getPassword()).equals("")){
+                    contrasena.setBorder(new LineBorder(Color.RED, 2));
+                    todoOk = false;
+                }else{
+                    contrasena.setBorder(new LineBorder(Color.BLACK));
+                }
+
+                if (todoOk){
+                    check = true;
+                    dispose();
+                }
             }
         });
 
