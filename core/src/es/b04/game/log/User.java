@@ -37,6 +37,22 @@ public class User {
         this.inventory = new ArrayList<Champion>(inventory);
     }
 
+    public User(String name, String pass, String email, String gender, int age) {
+        this.name = name;
+        this.pass = pass;
+        this.email = email;
+        this.gender = gender;
+        this.age = age;
+        this.level = 1;
+        this.expMax = 200;
+        this.expProgress = 0;
+        this.gold = 0;
+        this.autoClick = 0;
+        this.icon = "";
+        this.squad = new ArrayList<Champion>();
+        this.inventory = new ArrayList<Champion>();
+    }
+
     public User() {
         this.name = "";
         this.pass = "";
@@ -44,7 +60,7 @@ public class User {
         this.gender = "";
         this.age = 1;
         this.level = 1;
-        this.expMax = 800;
+        this.expMax = 200;
         this.expProgress = 0;
         this.gold = 0;
         this.autoClick = 0;
@@ -179,6 +195,22 @@ public class User {
 
     public void setInventory(ArrayList<Champion> inventory) {
         this.inventory = inventory;
+    }
+
+    public void addChampionSquad(Champion c){
+        squad.add(c);
+    }
+
+    public void removeChampionSquad(Champion c){
+        squad.remove(c);
+    }
+
+    public void addChampionInventory(Champion c){
+        inventory.add(c);
+    }
+
+    public void removeChampionInventory(Champion c){
+        inventory.remove(c);
     }
 
 
