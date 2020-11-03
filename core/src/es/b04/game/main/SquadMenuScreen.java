@@ -8,8 +8,10 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import es.b04.game.character.AssetEnum;
+import es.b04.game.hud.IButton;
 import es.b04.game.log.User;
 
 public class SquadMenuScreen extends ScreenAdapter {
@@ -19,7 +21,6 @@ public class SquadMenuScreen extends ScreenAdapter {
     private final AssetManager assetManager;
     private Stage stage;
     private User userl;
-
 
     public SquadMenuScreen(MainGame game) {
         super();
@@ -35,7 +36,17 @@ public class SquadMenuScreen extends ScreenAdapter {
         Batch = new SpriteBatch();
         stage = new Stage(new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()));
         userl = game.getUser();
+
+        IButton acept = new IButton("B1.png","B2.png",53,
+                195, new MainGameScreen(game), game);
+
+        IButton equip = new IButton("B1.png","B2.png",1490, 280);
+        IButton upgrade = new IButton("B1.png","B2.png",1490, 195);
+
         Gdx.input.setInputProcessor(stage);
+        stage.addActor(acept);
+        stage.addActor(equip);
+        stage.addActor(upgrade);
 
     }
 
@@ -92,7 +103,7 @@ public class SquadMenuScreen extends ScreenAdapter {
 
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 5; j++) {
-                Batch.draw(new Texture("pirate.png"),488 + 196*j,646 - 242*i);
+                Batch.draw(new Texture("pirate.png"),488 + 196*j,646 - 244*i);
             }
         }
 

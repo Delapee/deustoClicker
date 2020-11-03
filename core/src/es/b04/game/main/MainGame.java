@@ -45,7 +45,7 @@ public class MainGame extends Game {
 		super.render();
 		customMouse.getMousePosition();
 		customMouse.mouseAct();
-		//customMouse.getMousePosition();
+		customMouse.getMousePosition();
 
 	}
 

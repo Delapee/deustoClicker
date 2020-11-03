@@ -32,6 +32,7 @@ public class IButton extends ImageButton {
         super.setPosition(x,y,align);
     }
 
+    // Constructor Directamente enlazado
     public IButton(String normal, String press, float x, float y, final ScreenAdapter screen, final MainGame game) {
         super(new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal(normal)))),
                 new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal(press)))));
@@ -46,6 +47,7 @@ public class IButton extends ImageButton {
         });
     }
 
+    // Constructor directamente enlazado a una Pantalla con el Alineado
     public IButton(String normal, String press, float x, float y, int align, final ScreenAdapter screen,
                    final MainGame game) {
         super(new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal(normal)))),

@@ -41,16 +41,6 @@ public class MainGameScreen extends ScreenAdapter {
     public MainGameScreen(MainGame game) {
         this.game = game;
         this.assetManager = game.getAssetManager();
-        /*
-        assetManager.load(AssetEnum.PLAY1.getAsset(), Texture.class);
-        assetManager.load(AssetEnum.PLAY2.getAsset(), Texture.class);
-        assetManager.load(AssetEnum.GAMEBCK.getAsset(), Texture.class);
-        assetManager.load(AssetEnum.SQUADBCK.getAsset(), Texture.class);
-        assetManager.load(AssetEnum.CENEMY1.getAsset(), Texture.class);
-        assetManager.load(AssetEnum.CENEMY2.getAsset(), Texture.class);
-        assetManager.finishLoading();
-
-         */
     }
 
 
@@ -63,8 +53,8 @@ public class MainGameScreen extends ScreenAdapter {
         Gdx.input.setInputProcessor(stage);
         background = assetManager.get(AssetEnum.GAMEBCK.getAsset());
 
-        IButton squadButton = new IButton("B1.png","B2.png",Gdx.graphics.getWidth() / 2f,
-                Gdx.graphics.getHeight() / 4f, new SquadMenuScreen(game), game);
+        IButton squadButton = new IButton("B1.png","B2.png",280,
+                37, new SquadMenuScreen(game), game);
         stage.addActor(squadButton);
 
         cEnemy = new CEnemy("C1.png","C2.png",10,10,50);
