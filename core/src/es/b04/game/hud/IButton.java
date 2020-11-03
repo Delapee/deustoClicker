@@ -11,7 +11,6 @@ import com.badlogic.gdx.scenes.scene2d.utils.ActorGestureListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import es.b04.game.main.MainGame;
 import es.b04.game.main.MainGameScreen;
-import sun.rmi.rmic.Main;
 
 public class IButton extends ImageButton {
 

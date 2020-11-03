@@ -59,6 +59,7 @@ public class MainGameScreen extends ScreenAdapter {
         super.show();
         batch = new SpriteBatch();
         stage = new Stage(new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()));
+        userL = game.getUser();
         Gdx.input.setInputProcessor(stage);
         background = assetManager.get(AssetEnum.GAMEBCK.getAsset());
 
@@ -68,7 +69,6 @@ public class MainGameScreen extends ScreenAdapter {
 
         cEnemy = new CEnemy("C1.png","C2.png",10,10,50);
         stage.addActor(cEnemy);
-
 
         cEnemy.addListener( new ActorGestureListener(){
 
@@ -87,13 +87,6 @@ public class MainGameScreen extends ScreenAdapter {
         });
 
 
-        // User de Prueba
-        userL = new User();
-        userL.setName("UserPrueba");
-        userL.setGold(8000000);
-        userL.setLevel(1);
-        userL.setExpMax(10000);
-        userL.setExpProgress(200);
 
         // Declaracion de las Fuentes
         fontDung70 = new CustomFont(70,255,255,255,3.0f,0,

@@ -10,11 +10,16 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
+import es.b04.game.character.Champion;
 import es.b04.game.hud.CustomMouse;
+import es.b04.game.log.User;
+
+import java.util.ArrayList;
 
 public class MainGame extends Game {
 	private CustomMouse customMouse;
 	private final AssetManager assetManager = new AssetManager();
+	private User user;
 
 	public AssetManager getAssetManager() {
 		return assetManager;
@@ -40,6 +45,7 @@ public class MainGame extends Game {
 		super.render();
 		customMouse.getMousePosition();
 		customMouse.mouseAct();
+		//customMouse.getMousePosition();
 
 	}
 
@@ -61,19 +67,38 @@ public class MainGame extends Game {
 	@Override
 	public void create() {
 		customMouse = new CustomMouse("cursor.png");
+		user = new User();
+		loadUserA();
 		this.setScreen(new GameMenuScreen(this));
 
 	}
 
-	public Vector2 getMousePosition(){
-		return new Vector2(Gdx.input.getX(), Gdx.input.getY());
+
+	public User getUser() {
+		return user;
 	}
 
-	public float getMousePositionX(){
-		return Gdx.input.getX();
+	// CARGAR USER PRUEBA
+	public void loadUserA(){
+		user.setName("UserPrueba");
+		user.setGold(8000000);
+		user.setLevel(1);
+		user.setExpMax(10000);
+		user.setExpProgress(200);
+
+		Champion c1 = new Champion();
+		Champion c2 = new Champion();
+		Champion c3 = new Champion();
+		Champion c4 = new Champion();
+
+		ArrayList<Champion> squad = new ArrayList<>();
+		squad.add(c1);
+		squad.add(c2);
+		squad.add(c3);
+		squad.add(c4);
+
+		user.setSquad(squad);
+
 	}
 
-	public float getMousePositionY(){
-		return Gdx.input.getY();
-	}
 }
