@@ -3,21 +3,28 @@ package es.b04.game.main;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
+import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.FitViewport;
+import es.b04.game.character.AssetEnum;
+import es.b04.game.log.User;
 
 public class SquadMenuScreen extends ScreenAdapter {
     private Texture tittleBackground;
     private SpriteBatch Batch;
-    private final Game game;
+    private final MainGame game;
+    private final AssetManager assetManager;
     private Stage stage;
+    private User userl;
 
-    public SquadMenuScreen(Game game) {
+
+    public SquadMenuScreen(MainGame game) {
         super();
         this.game = game;
+        this.assetManager = game.getAssetManager();
     }
 
     @Override
@@ -27,9 +34,8 @@ public class SquadMenuScreen extends ScreenAdapter {
         tittleBackground = new Texture("BackgroundSquad.png");
         Batch = new SpriteBatch();
         stage = new Stage(new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()));
+        userl = game.getUser();
         Gdx.input.setInputProcessor(stage);
-
-
 
     }
 
@@ -40,13 +46,10 @@ public class SquadMenuScreen extends ScreenAdapter {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         Batch.begin();
         Batch.draw(tittleBackground, 0, 0);
+        renderChampions();
         Batch.end();
-
-
-
         stage.act(delta);
         stage.draw();
-
 
     }
 
@@ -54,7 +57,6 @@ public class SquadMenuScreen extends ScreenAdapter {
     public void resize(int width, int height) {
         super.resize(width, height);
     }
-
 
 
     @Override
@@ -76,4 +78,24 @@ public class SquadMenuScreen extends ScreenAdapter {
     public void dispose() {
         super.dispose();
     }
+
+    // Metodos de Renderizacion
+    public void renderChampions(){
+
+        // Renderizado del Squad
+        Batch.draw((Texture) assetManager.get(AssetEnum.PIRATE.getAsset()),70,530);
+        Batch.draw(new Texture("pirate.png"),255,530);
+        Batch.draw(new Texture("pirate.png"),70,297);
+        Batch.draw(new Texture("pirate.png"),255,297);
+
+        // Rendereizado del Inventario
+
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 5; j++) {
+                Batch.draw(new Texture("pirate.png"),488 + 196*j,646 - 242*i);
+            }
+        }
+
+    }
+
 }
