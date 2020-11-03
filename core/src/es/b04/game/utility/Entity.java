@@ -1,4 +1,4 @@
-package es.b04.game.character;
+package es.b04.game.utility;
 
 public abstract class Entity {
     protected double x;

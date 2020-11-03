@@ -1,6 +1,5 @@
 package es.b04.game.main;
 
-import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.assets.AssetManager;
@@ -9,15 +8,13 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.utils.ActorGestureListener;
-import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.FitViewport;
-import es.b04.game.character.AssetEnum;
+import es.b04.game.utility.AssetEnum;
 import es.b04.game.hud.CEnemy;
-import es.b04.game.hud.CustomFont;
+import es.b04.game.utility.CustomFont;
 import es.b04.game.hud.IButton;
 import es.b04.game.log.User;
 
@@ -37,12 +34,10 @@ public class MainGameScreen extends ScreenAdapter {
     private final AssetManager assetManager;
     private Texture background;
 
-
     public MainGameScreen(MainGame game) {
         this.game = game;
         this.assetManager = game.getAssetManager();
     }
-
 
     @Override
     public void show() {
@@ -72,12 +67,8 @@ public class MainGameScreen extends ScreenAdapter {
                     userL.setGold(userL.getGold() + cEnemy.getGoldXClick());
                     userL.setExpProgress(userL.getExpProgress() + cEnemy.getExpXClick());
                 }
-
             }
         });
-
-
-
         // Declaracion de las Fuentes
         fontDung70 = new CustomFont(70,255,255,255,3.0f,0,
                 2.5f,Color.BLACK).getCustomFont();
@@ -132,10 +123,8 @@ public class MainGameScreen extends ScreenAdapter {
         super.dispose();
     }
 
-
     // Metodos de Renderizado
     public void renderText(){
-
         //Fondo
         batch.draw(background, 0, 0);
 
@@ -152,8 +141,6 @@ public class MainGameScreen extends ScreenAdapter {
 
         // Clicker
         fontDung70.draw(batch,Integer.toString(cEnemy.getHealth()),730,550);
-
-
     }
     /*
     public void rules(){
@@ -161,9 +148,7 @@ public class MainGameScreen extends ScreenAdapter {
 
         }
 
-    }
-
-     */
+    }*/
 
     // Controlar el clicker
     public void checkClicker(){
@@ -174,8 +159,5 @@ public class MainGameScreen extends ScreenAdapter {
                     cEnemy.getGoldXClick() + 10,cEnemy.getExpXClick() + 10);
 
         }
-
-
     }
-
 }

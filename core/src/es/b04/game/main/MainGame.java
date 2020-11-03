@@ -1,17 +1,10 @@
 package es.b04.game.main;
 
 import com.badlogic.gdx.Game;
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.assets.AssetManager;
-import com.badlogic.gdx.graphics.Cursor;
-import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Pixmap;
-import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.math.Vector3;
 import es.b04.game.character.Champion;
-import es.b04.game.hud.CustomMouse;
+import es.b04.game.utility.CustomMouse;
 import es.b04.game.log.User;
 
 import java.util.ArrayList;

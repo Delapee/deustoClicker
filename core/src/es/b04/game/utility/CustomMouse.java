@@ -1,12 +1,10 @@
-package es.b04.game.hud;
+package es.b04.game.utility;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Cursor;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.math.Vector3;
-
-import java.util.EventListener;
 
 public class CustomMouse {
     private String cursorImg;
@@ -59,8 +57,6 @@ public class CustomMouse {
 
     public void mouseAct(){
         Gdx.graphics.setCursor(cursor);
-
-
     }
 
     public void mousetrack(){

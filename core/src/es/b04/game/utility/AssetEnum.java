@@ -1,4 +1,4 @@
-package es.b04.game.character;
+package es.b04.game.utility;
 
 public enum AssetEnum {
     PLAY1("B1.png"), PLAY2("B2.png"), GAMEBCK("backgroundOp.png"), SQUADBCK("BackgroundSquad.png"), CENEMY1("C1.png"),

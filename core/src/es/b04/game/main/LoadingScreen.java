@@ -4,10 +4,9 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.*;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.badlogic.gdx.utils.Logger;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
-import es.b04.game.character.AssetEnum;
+import es.b04.game.utility.AssetEnum;
 
 public class LoadingScreen extends ScreenAdapter {
     private static final float WORLD_WIDTH = Gdx.graphics.getWidth();

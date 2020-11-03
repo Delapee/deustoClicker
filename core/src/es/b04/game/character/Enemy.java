@@ -1,5 +1,7 @@
 package es.b04.game.character;
 
+import es.b04.game.utility.Entity;
+
 public class Enemy extends Entity {
     private static int id;
     private double level;

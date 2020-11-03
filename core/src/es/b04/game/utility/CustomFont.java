@@ -1,4 +1,4 @@
-package es.b04.game.hud;
+package es.b04.game.utility;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
@@ -141,6 +141,7 @@ public class CustomFont {
     }
 
 
+    //Metodo que recoje todas la fuentes guardadas en el directorio especificado
     private String takeFont(int i){
         fonts = new ArrayList<String>();
         File dir = new File("core/assets/fonts");
@@ -157,6 +158,7 @@ public class CustomFont {
         return fonts.get(i);
     }
 
+    //Metodo que te crea la fuente a tu gusto y te la devuelve en un formato con la que GDX sabe tabajar
     public BitmapFont getCustomFont(){
         FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal(fontDir));
         FreeTypeFontParameter parameter = new FreeTypeFontParameter();

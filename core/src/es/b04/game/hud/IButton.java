@@ -1,6 +1,5 @@
 package es.b04.game.hud;
 
-import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.Texture;
@@ -10,7 +9,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ActorGestureListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import es.b04.game.main.MainGame;
-import es.b04.game.main.MainGameScreen;
 
 public class IButton extends ImageButton {
 

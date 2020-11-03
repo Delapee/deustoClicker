@@ -1,6 +1,8 @@
 package es.b04.game.character;
 
-public class Champion extends Entity{
+import es.b04.game.utility.Entity;
+
+public class Champion extends Entity {
     private static int id;
     private int level;
     private String name;
