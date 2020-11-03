@@ -14,8 +14,8 @@ public class DesktopLauncher {
 		l = new Login();
 
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
-		config.addIcon("asdf.png", Files.FileType.Classpath);
-		config.title = "deustoClicker";
+		config.addIcon("icon/dragon.png", Files.FileType.Classpath);
+		config.title = "Dungeon Clicker";
 		config.width = LwjglApplicationConfiguration.getDesktopDisplayMode().width;
 		config.height = LwjglApplicationConfiguration.getDesktopDisplayMode().height;
 		config.fullscreen = true;
@@ -24,6 +24,7 @@ public class DesktopLauncher {
 			if (!l.isVisible()){
 				close = true;
 			}
+			System.out.println();
 			l.getCheck();
 			System.out.println();
 		}while (!l.getCheck() && !close);

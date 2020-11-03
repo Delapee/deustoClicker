@@ -12,8 +12,9 @@ public class Register extends JFrame {
     public Register(final Login l){
         this.l = l;
 
-        setTitle("Ventana de Registro");
+        setTitle("Dungeon clicker");
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+        setIconImage(Toolkit.getDefaultToolkit().getImage("core/assets/icon/dragon.png"));
         setSize(500,350);
         setVisible(true);
         setResizable(false);
@@ -23,7 +24,7 @@ public class Register extends JFrame {
 
         //Superior
         JPanel top = new JPanel(new FlowLayout());
-        top.add(new JLabel("Ventana de Registro DeustoClick"));
+        top.add(new JLabel("Ventana de registro Dungeon Clicker"));
 
         //Medio
         JPanel cen = new JPanel(new GridLayout(3,2,1,1));
@@ -100,7 +101,7 @@ public class Register extends JFrame {
         register.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //Falta el linkeo con la base de datos
+                //Verificación de que los dato ha sido bien introducido en cada campo
                 boolean todoOk = true;
 
                 if (user.getText().equals("")){

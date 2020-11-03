@@ -102,7 +102,8 @@ public class Login extends JFrame {
         this.add(mainPanel);
 
         this.setDefaultCloseOperation(HIDE_ON_CLOSE);
-        this.setTitle("Login");
+        this.setTitle("Dungeon Clicker");
+        this.setIconImage(Toolkit.getDefaultToolkit().getImage("core/assets/icon/dragon.png"));
         this.setSize(400, 250);
         this.setResizable(false);
         this.setVisible(true);
