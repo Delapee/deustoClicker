@@ -49,7 +49,7 @@ public class MainGameScreen extends ScreenAdapter {
         background = assetManager.get(AssetEnum.GAMEBCK.getAsset());
 
         IButton squadButton = new IButton("B1.png","B2.png",280,
-                37, new SquadMenuScreen(game), game);
+                37, (ScreenAdapter) game.getScreens().get(2), game);
         stage.addActor(squadButton);
 
         cEnemy = new CEnemy("C1.png","C2.png",10,10,50);

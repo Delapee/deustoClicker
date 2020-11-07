@@ -36,7 +36,7 @@ public class SquadMenuScreen extends ScreenAdapter {
         userl = game.getUser();
 
         IButton acept = new IButton("B1.png","B2.png",53,
-                195, new MainGameScreen(game), game);
+                195, (ScreenAdapter) game.getScreens().get(0), game);
 
         IButton equip = new IButton("B1.png","B2.png",1490, 280);
         IButton upgrade = new IButton("B1.png","B2.png",1490, 195);

@@ -8,14 +8,20 @@ import es.b04.game.utility.CustomMouse;
 import es.b04.game.log.User;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class MainGame extends Game {
 	private CustomMouse customMouse;
 	private final AssetManager assetManager = new AssetManager();
 	private User user;
+	private List<Screen> screens;
 
 	public AssetManager getAssetManager() {
 		return assetManager;
+	}
+
+	public List<Screen> getScreens() {
+		return screens;
 	}
 
 	@Override
@@ -63,6 +69,13 @@ public class MainGame extends Game {
 		user = new User();
 		loadUserA();
 		this.setScreen(new GameMenuScreen(this));
+		screens = new ArrayList<>();
+		MainGameScreen gameScreen = new MainGameScreen(this);
+		GameMenuScreen menuScreen = new GameMenuScreen(this);
+		SquadMenuScreen squadScreen = new SquadMenuScreen(this);
+		screens.add(gameScreen);
+		screens.add(menuScreen);
+		screens.add(squadScreen);
 
 	}
 

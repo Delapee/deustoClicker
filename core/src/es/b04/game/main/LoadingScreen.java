@@ -101,7 +101,7 @@ public class LoadingScreen extends ScreenAdapter {
             e.printStackTrace();
         }
         if (game.getAssetManager().update()) {
-            game.setScreen(new MainGameScreen(game));
+            game.setScreen(game.getScreens().get(0));
         } else {
             progress = game.getAssetManager().getProgress();
         }
@@ -109,4 +109,4 @@ public class LoadingScreen extends ScreenAdapter {
 
 
 
-}
+} 
