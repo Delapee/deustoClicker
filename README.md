@@ -10,6 +10,7 @@
 ## Run game 
 ```
 git clone https://github.com/Delapee/deustoClicker.git
+
 Running: 
 - Right click your DesktopLauncher class
 - Select 'Run DesktopLauncher.main()'
