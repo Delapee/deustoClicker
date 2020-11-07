@@ -1,8 +1,6 @@
 package es.b04.game.character;
 
-import es.b04.game.utility.Entity;
-
-public class Enemy extends Entity {
+public class Enemy {
     private static int id;
     private double level;
     private String name;
@@ -16,10 +14,9 @@ public class Enemy extends Entity {
     private double criticProb;
     private double dodgeProb;
 
-    public Enemy(double x, double y, int width, int length, String sprite, double level, String name,
+    public Enemy(double level, String name,
                  int health, Attack attackP, Attack attackS, int dmg, int def, double accuracy,
                  double attackSpeed, double criticProb, double dodgeProb) {
-        super(x, y, width, length, sprite);
         this.level = level;
         this.name = name;
         this.health = health;
@@ -34,7 +31,6 @@ public class Enemy extends Entity {
     }
 
     public Enemy() {
-        super();
         this.level = 0;
         this.name = "";
         this.health = 0;
@@ -49,7 +45,6 @@ public class Enemy extends Entity {
     }
 
     public Enemy(Enemy copia) {
-        super(copia.x, copia.y, copia.width, copia.length, copia.sprite);
         this.level = copia.level;
         this.name = copia.name;
         this.health = copia.health;
@@ -158,28 +153,5 @@ public class Enemy extends Entity {
 
     public void setDodgeProb(double dodgeProb) {
         this.dodgeProb = dodgeProb;
-    }
-
-
-    @Override
-    public String toString() {
-        return "Enemy{" +
-                "level=" + level +
-                ", name='" + name + '\'' +
-                ", health=" + health +
-                ", attackP=" + attackP +
-                ", attackS=" + attackS +
-                ", dmg=" + dmg +
-                ", def=" + def +
-                ", accuracy=" + accuracy +
-                ", attackSpeed=" + attackSpeed +
-                ", criticProb=" + criticProb +
-                ", dodgeProb=" + dodgeProb +
-                ", x=" + x +
-                ", y=" + y +
-                ", width=" + width +
-                ", length=" + length +
-                ", sprite='" + sprite + '\'' +
-                '}';
     }
 }
