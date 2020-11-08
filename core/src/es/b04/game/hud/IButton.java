@@ -8,6 +8,7 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ActorGestureListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
+import es.b04.game.character.Champion;
 import es.b04.game.main.MainGame;
 
 public class IButton extends ImageButton {
@@ -21,6 +22,12 @@ public class IButton extends ImageButton {
     public IButton(String normal, String press, float x, float y){
         super(new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal(normal)))),
                 new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal(press)))));
+        super.setPosition(x,y);
+    }
+
+    public IButton(Champion champ, float x, float y){
+        super(new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal(champ.getTexture().get(0))))),
+                new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal(champ.getTexture().get(1))))));
         super.setPosition(x,y);
     }
 
@@ -94,7 +101,6 @@ public class IButton extends ImageButton {
     public void setY(Float y) {
         this.y = y;
     }
-
 
 }
 

@@ -92,18 +92,25 @@ public class MainGame extends Game {
 		user.setExpMax(10000);
 		user.setExpProgress(200);
 
-		Champion c1 = new Champion();
-		Champion c2 = new Champion();
-		Champion c3 = new Champion();
-		Champion c4 = new Champion();
+		ArrayList<String> sChampion = new ArrayList<>();
+		sChampion.add("pirate.png");
+		sChampion.add("pirate.png");
 
+		Champion c1 = new Champion(sChampion,"El PIRATA",1,1,100,0.7,0.5,0.3,0.5,null,null,false);
+		Champion c2 = new Champion(sChampion,"El PERRATA",2,1,120,1.7,1.5,2.3,3.5,null,null,false);
 		ArrayList<Champion> squad = new ArrayList<>();
-		squad.add(c1);
-		squad.add(c2);
-		squad.add(c3);
-		squad.add(c4);
+		squad.add(new Champion(c1));
+		squad.add(new Champion(c1));
+		squad.add(new Champion(c1));
+
+		ArrayList<Champion> invent = new ArrayList<>();
+		invent.add((new Champion(c2)));
+		for (int i = 0; i < 14; i++) {
+			invent.add((new Champion(c1)));
+		}
 
 		user.setSquad(squad);
+		user.setInventory(invent);
 
 	}
 

@@ -1,11 +1,13 @@
 package es.b04.game.character;
 
+import es.b04.game.hud.IButton;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class Champion {
     private static int id;
-    private List<String> texturas;
+    private List<String> texture;
     private String name;
     private int level;
     private int levelMax;
@@ -17,10 +19,11 @@ public class Champion {
     private double dodgeProb;
     private Attack attackP;
     private Attack attackS;
+    private boolean onSquad;
 
-    public Champion(List<String> texturas, String name, int level, int rare, int dmg, double accuracy,
-                    double attackSpeed, double criticProb, double dodgeProb, Attack attackP, Attack attackS) {
-        this.texturas = new ArrayList<String>(texturas);
+    public Champion(List<String> texture, String name, int level, int rare, int dmg, double accuracy,
+                    double attackSpeed, double criticProb, double dodgeProb, Attack attackP, Attack attackS, boolean onSquad) {
+        this.texture = new ArrayList<>(texture);
         this.name = name;
         this.level = level;
         this.levelMax = level * 10;
@@ -32,10 +35,11 @@ public class Champion {
         this.dodgeProb = dodgeProb;
         this.attackP = attackP;
         this.attackS = attackS;
+        this.onSquad = onSquad;
     }
 
     public Champion() {
-        this.texturas = new ArrayList<String>();
+        this.texture = new ArrayList<>();
         this.name = "";
         this.level = 1;
         this.levelMax = 10;
@@ -47,10 +51,11 @@ public class Champion {
         this.dodgeProb = 0.0;
         this.attackP = new Attack();
         this.attackS = new Attack();
+        this.onSquad = false;
     }
 
     public Champion(Champion copy) {
-        this.texturas = new ArrayList<String>(copy.texturas);
+        this.texture = new ArrayList<>(copy.texture);
         this.name = copy.name;
         this.level = copy.level;
         this.levelMax = copy.levelMax;
@@ -62,6 +67,7 @@ public class Champion {
         this.dodgeProb = copy.dodgeProb;
         this.attackP = copy.attackP;
         this.attackS = copy.attackS;
+        this.onSquad = copy.onSquad;
     }
 
     public static int getId() {
@@ -72,12 +78,12 @@ public class Champion {
         Champion.id = id;
     }
 
-    public List<String> getTexturas() {
-        return texturas;
+    public List<String> getTexture() {
+        return texture;
     }
 
-    public void setTexturas(List<String> texturas) {
-        this.texturas = texturas;
+    public void setTexture(List<String> texture) {
+        this.texture = texture;
     }
 
     public String getName() {
@@ -167,5 +173,18 @@ public class Champion {
     public void setAttackS(Attack attackS) {
         this.attackS = attackS;
     }
+
+    public boolean isOnSquad() {
+        return onSquad;
+    }
+
+    public void setOnSquad(boolean onSquad) {
+        this.onSquad = onSquad;
+    }
+
+    public IButton toButton(float x, float y){
+        return new IButton(this,x,y);
+    }
+
 
 }
