@@ -1,41 +1,47 @@
 package es.b04.game.character;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+
 public class Attack {
+    private final String id;
     private int buff;
     private int debuff;
-    private int atkCode;
     private int cd;
     private boolean main;
-    private String sprite;
+    private List<String> sprite;
 
-
-    public Attack(int buff, int debuff, int atkCode, int cd, boolean main, String sprite) {
+    public Attack(int buff, int debuff, int atkCode, int cd, boolean main,  List<String> sprite) {
+        this.id = UUID.randomUUID().toString();
         this.buff = buff;
         this.debuff = debuff;
-        this.atkCode = atkCode;
         this.cd = cd;
         this.main = main;
-        this.sprite = sprite;
+        this.sprite = new ArrayList<>(sprite);
     }
 
     public Attack() {
+        this.id = UUID.randomUUID().toString();
         this.buff = 0;
         this.debuff = 0;
-        this.atkCode = 0;
         this.cd = 0;
         this.main = false;
-        this.sprite = "";
+        this.sprite = new ArrayList<>();
     }
 
-    public Attack(Attack copia) {
-        this.buff = copia.buff;
-        this.debuff = copia.debuff;
-        this.atkCode = copia.atkCode;
-        this.cd = copia.cd;
-        this.main = copia.main;
-        this.sprite = copia.sprite;
+    public Attack(Attack copy) {
+        this.id = copy.id;
+        this.buff = copy.buff;
+        this.debuff = copy.debuff;
+        this.cd = copy.cd;
+        this.main = copy.main;
+        this.sprite = new ArrayList<>(copy.sprite);
     }
 
+    public String getId() {
+        return id;
+    }
 
     public int getBuff() {
         return buff;
@@ -51,14 +57,6 @@ public class Attack {
 
     public void setDebuff(int debuff) {
         this.debuff = debuff;
-    }
-
-    public int getAtkCode() {
-        return atkCode;
-    }
-
-    public void setAtkCode(int atkCode) {
-        this.atkCode = atkCode;
     }
 
     public int getCd() {
@@ -77,24 +75,12 @@ public class Attack {
         this.main = main;
     }
 
-    public String getSprite() {
+    public  List<String> getSprite() {
         return sprite;
     }
 
-    public void setSprite(String sprite) {
+    public void setSprite( List<String> sprite) {
         this.sprite = sprite;
     }
 
-
-    @Override
-    public String toString() {
-        return "Attack{" +
-                "buff=" + buff +
-                ", debuff=" + debuff +
-                ", atkCode=" + atkCode +
-                ", cd=" + cd +
-                ", main=" + main +
-                ", sprite='" + sprite + '\'' +
-                '}';
-    }
 }

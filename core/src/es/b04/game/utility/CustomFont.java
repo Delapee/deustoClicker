@@ -140,7 +140,6 @@ public class CustomFont {
                 '}';
     }
 
-
     //Metodo que recoje todas la fuentes guardadas en el directorio especificado
     private String takeFont(int i){
         fonts = new ArrayList<String>();

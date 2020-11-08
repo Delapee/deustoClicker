@@ -1,27 +1,29 @@
 package es.b04.game.log;
 
 import es.b04.game.character.Champion;
-
 import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 public class User {
-    protected static int id;
-    protected String name;
-    protected String pass;
-    protected String email;
-    protected String gender;
-    protected int age;
-    protected int level;
-    protected int expMax;
-    protected int expProgress;
-    protected int gold;
-    protected int autoClick;
-    protected String icon;
-    protected ArrayList<Champion> squad;
-    protected ArrayList<Champion> inventory;
+    private final String id;
+    private String name;
+    private String pass;
+    private String email;
+    private String gender;
+    private int age;
+    private int level;
+    private int expMax;
+    private int expProgress;
+    private int gold;
+    private int autoClick;
+    private String icon;
+    private List<Champion> squad;
+    private List<Champion> inventory;
 
     public User(String name, String pass, String email, String gender, int age, int level, int expMax, int expProgress,
                 int gold, int autoClick, String icon, ArrayList<Champion> squad, ArrayList<Champion> inventory) {
+        this.id = UUID.randomUUID().toString();
         this.name = name;
         this.pass = pass;
         this.email = email;
@@ -38,6 +40,7 @@ public class User {
     }
 
     public User(String name, String pass, String email, String gender, int age) {
+        this.id = UUID.randomUUID().toString();
         this.name = name;
         this.pass = pass;
         this.email = email;
@@ -49,11 +52,12 @@ public class User {
         this.gold = 0;
         this.autoClick = 0;
         this.icon = "";
-        this.squad = new ArrayList<Champion>();
+        this.squad = new ArrayList<Champion>(4);
         this.inventory = new ArrayList<Champion>();
     }
 
     public User() {
+        this.id = UUID.randomUUID().toString();
         this.name = "";
         this.pass = "";
         this.email = "";
@@ -65,11 +69,12 @@ public class User {
         this.gold = 0;
         this.autoClick = 0;
         this.icon = "";
-        this.squad = new ArrayList<Champion>();
+        this.squad = new ArrayList<Champion>(4);
         this.inventory = new ArrayList<Champion>();
     }
 
     public User(User copy) {
+        this.id = copy.id;
         this.name = copy.name;
         this.pass = copy.pass;
         this.email = copy.email;
@@ -85,12 +90,8 @@ public class User {
         this.inventory = new ArrayList<Champion>(copy.inventory);
     }
 
-    public static int getId() {
+    public String getId() {
         return id;
-    }
-
-    public static void setId(int id) {
-        User.id = id;
     }
 
     public String getName() {
@@ -181,7 +182,7 @@ public class User {
         this.icon = icon;
     }
 
-    public ArrayList<Champion> getSquad() {
+    public List<Champion> getSquad() {
         return squad;
     }
 
@@ -189,7 +190,7 @@ public class User {
         this.squad = squad;
     }
 
-    public ArrayList<Champion> getInventory() {
+    public List<Champion> getInventory() {
         return inventory;
     }
 
@@ -213,23 +214,4 @@ public class User {
         inventory.remove(c);
     }
 
-
-    @Override
-    public String toString() {
-        return "User{" +
-                "name='" + name + '\'' +
-                ", pass='" + pass + '\'' +
-                ", email='" + email + '\'' +
-                ", gender='" + gender + '\'' +
-                ", edad=" + age +
-                ", level=" + level +
-                ", expMax=" + expMax +
-                ", expProgress=" + expProgress +
-                ", gold=" + gold +
-                ", autoClick=" + autoClick +
-                ", icon=" + icon +
-                ", squad=" + squad +
-                ", inventory=" + inventory +
-                '}';
-    }
 }

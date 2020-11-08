@@ -1,12 +1,12 @@
 package es.b04.game.character;
 
 import es.b04.game.hud.IButton;
-
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 public class Champion {
-    private static int id;
+    private final String id;
     private List<String> texture;
     private String name;
     private int level;
@@ -22,7 +22,9 @@ public class Champion {
     private boolean onSquad;
 
     public Champion(List<String> texture, String name, int level, int rare, int dmg, double accuracy,
-                    double attackSpeed, double criticProb, double dodgeProb, Attack attackP, Attack attackS, boolean onSquad) {
+                    double attackSpeed, double criticProb, double dodgeProb, Attack attackP, Attack attackS,
+                    boolean onSquad) {
+        this.id = UUID.randomUUID().toString();
         this.texture = new ArrayList<>(texture);
         this.name = name;
         this.level = level;
@@ -39,6 +41,7 @@ public class Champion {
     }
 
     public Champion() {
+        this.id = UUID.randomUUID().toString();
         this.texture = new ArrayList<>();
         this.name = "";
         this.level = 1;
@@ -55,6 +58,7 @@ public class Champion {
     }
 
     public Champion(Champion copy) {
+        this.id = copy.id;
         this.texture = new ArrayList<>(copy.texture);
         this.name = copy.name;
         this.level = copy.level;
@@ -70,12 +74,8 @@ public class Champion {
         this.onSquad = copy.onSquad;
     }
 
-    public static int getId() {
+    public String getId() {
         return id;
-    }
-
-    public static void setId(int id) {
-        Champion.id = id;
     }
 
     public List<String> getTexture() {
