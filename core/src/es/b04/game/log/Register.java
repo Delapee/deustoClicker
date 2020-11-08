@@ -1,16 +1,23 @@
 package es.b04.game.log;
 
+import es.b04.game.dataBase.DBException;
+import es.b04.game.dataBase.DBManager;
+
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Register extends JFrame {
     private final Login l;
+    private DBManager db;
 
     public Register(final Login l){
         this.l = l;
+        db = new DBManager();
 
         setTitle("Dungeon clicker");
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
@@ -108,7 +115,19 @@ public class Register extends JFrame {
                     user.setBorder(new LineBorder(Color.RED, 2));
                     todoOk = false;
                 }else{
-                    user.setBorder(new LineBorder(Color.BLACK));
+                    try {
+                        List<String> usersNames = new ArrayList<>(db.getAllUserNames());
+                        for (String n: usersNames) {
+                            if (n.equals(user.getText())){
+                                user.setBorder(new LineBorder(Color.RED, 2));
+                                todoOk = false;
+                                break;
+                            }
+                            user.setBorder(new LineBorder(Color.BLACK));
+                        }
+                    } catch (DBException dbException) {
+                        dbException.printStackTrace();
+                    }
                 }
 
                 if (email.getText().equals("") && !email.getText().contains("@")){
@@ -150,6 +169,11 @@ public class Register extends JFrame {
                     User u = new User(user.getText(), String.valueOf(pass.getPassword()),
                                       email.getText(), String.valueOf(gender.getSelectedItem()),
                             (Integer) age.getValue());
+                    try {
+                        db.storeNewUser(u);
+                    } catch (DBException dbException) {
+                        dbException.printStackTrace();
+                    }
                     dispose();
                 }
 
