@@ -4,6 +4,7 @@ import es.b04.game.hud.IButton;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import java.util.Objects;
 
 public class Champion {
     private final String id;
@@ -180,6 +181,26 @@ public class Champion {
 
     public void setOnSquad(boolean onSquad) {
         this.onSquad = onSquad;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Champion champion = (Champion) o;
+        return level == champion.level &&
+                levelMax == champion.levelMax &&
+                rare == champion.rare &&
+                dmg == champion.dmg &&
+                Double.compare(champion.accuracy, accuracy) == 0 &&
+                Double.compare(champion.attackSpeed, attackSpeed) == 0 &&
+                Double.compare(champion.criticProb, criticProb) == 0 &&
+                Double.compare(champion.dodgeProb, dodgeProb) == 0 &&
+                onSquad == champion.onSquad &&
+                Objects.equals(texture, champion.texture) &&
+                Objects.equals(name, champion.name) &&
+                Objects.equals(attackP, champion.attackP) &&
+                Objects.equals(attackS, champion.attackS);
     }
 
     public IButton toButton(float x, float y){

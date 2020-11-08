@@ -28,6 +28,7 @@ public class SquadMenuScreen extends ScreenAdapter {
     private final AssetManager assetManager;
     private Stage stage;
     private User userl;
+    private IButton acept,equip,upgrade;
 
     private int inspect;
     private List<IButton> champButtons;
@@ -50,15 +51,11 @@ public class SquadMenuScreen extends ScreenAdapter {
         stage = new Stage(new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()));
         fontDung50 = new CustomFont(50,255,255,255,1.0f,0,
                 1.5f, Color.BLACK).getCustomFont();
-
         userl = game.getUser();
-        IButton acept = new IButton("B1.png","B2.png",53,
-                195, (ScreenAdapter) game.getScreens().get(0), game);
-        IButton equip = new IButton("B1.png","B2.png",1490, 280);
-        IButton upgrade = new IButton("B1.png","B2.png",1490, 195);
 
-        inspect = 1;
-        loadButtons();
+
+        loadInventoryButtons();
+        loadChampButtons();
 
         Gdx.input.setInputProcessor(stage);
         stage.addActor(acept);
@@ -106,8 +103,9 @@ public class SquadMenuScreen extends ScreenAdapter {
         super.dispose();
     }
 
-    // Cargador de Personajes
-    public void loadButtons(){
+    // Carga de Personajes
+    public void loadChampButtons(){
+        inspect = 0;
         final int nRow = 3, nColum = 5;
         int cont = 0;
 
@@ -118,6 +116,8 @@ public class SquadMenuScreen extends ScreenAdapter {
                 if (cont < userl.getInventory().size()) {
                     champButtons.add(userl.getInventory().get(cont).toButton(490 + 195 * j, 646 - 244 * i));
                     cont++;
+                }else{
+                    champButtons.add(new IButton("asdf.png","asdf.png",490 + 195 * j, 646 - 244 * i));
                 }
             }
         }
@@ -243,29 +243,67 @@ public class SquadMenuScreen extends ScreenAdapter {
         });
 
 
-        for (int i = 0; i < userl.getInventory().size(); i++) {
+        for (int i = 0; i < 15; i++) {
             stage.addActor(champButtons.get(i));
         }
 
     }
 
+    // Carga de Hud
+    public void loadInventoryButtons(){
+        acept = new IButton("B1.png","B2.png",53,
+                195, (ScreenAdapter) game.getScreens().get(0), game);
+        equip = new IButton("B1.png","B2.png",1490, 280);
+        upgrade = new IButton("B1.png","B2.png",1490, 195);
+
+        equip.addListener(new ActorGestureListener(){
+
+            @Override
+            public void tap(InputEvent event, float x, float y, int count, int button) {
+                super.tap(event, x, y, count, button);
+                if (userl.getInventory().get(inspect).isOnSquad()){
+                    userl.getSquad().remove(userl.getInventory().get(inspect));
+                    userl.getInventory().get(inspect).setOnSquad(false);
+                }else if (userl.getSquad().size() < 4 && inspect < userl.getInventory().size()){
+                    userl.getSquad().add(userl.getInventory().get(inspect));
+                    userl.getInventory().get(inspect).setOnSquad(true);
+                }
+            }
+        });
+
+    }
+
     // Metodos de Renderizacion
     public void renderChampions(){
+        int cont = 0,row= 0, colum = 0;
 
         // Renderizado del Squad
-        Batch.draw((Texture) assetManager.get(AssetEnum.PIRATE.getAsset()),70,530);
-        Batch.draw(new Texture("pirate.png"),255,530);
-        Batch.draw(new Texture("pirate.png"),70,297);
-        Batch.draw(new Texture("pirate.png"),255,297);
+        while (cont < userl.getSquad().size()){
+            Batch.draw(new Texture(userl.getSquad().get(cont).getTexture().get(0)),70 + 185*colum,530 - 233*row);
+            switch (cont) {
+                case 0:
+                case 2:
+                    colum++;
+                    break;
+                case 1:
+                    colum--;
+                    row++;
+                    break;
+            }
+            cont++;
+        }
 
         // Renderizado de las stats texto
-        fontDung50.draw(Batch,userl.getInventory().get(inspect).getName(),1600,920);
-        fontDung50.draw(Batch,"LVL " + userl.getInventory().get(inspect).getLevel(),1660,665);
-        fontDung50.draw(Batch,"" + userl.getInventory().get(inspect).getDmg(),1670,605);
-        fontDung50.draw(Batch,"" + userl.getInventory().get(inspect).getAttackSpeed(),1670,555);
-        fontDung50.draw(Batch,"" + userl.getInventory().get(inspect).getAccuracy(),1670,507);
-        fontDung50.draw(Batch,"" + userl.getInventory().get(inspect).getDodgeProb(),1670,460);
-        fontDung50.draw(Batch,"" + userl.getInventory().get(inspect).getCriticProb(),1670,410);
+
+        if(inspect < userl.getInventory().size()) {
+            fontDung50.draw(Batch, userl.getInventory().get(inspect).getName(), 1600, 920);
+            fontDung50.draw(Batch, "LVL " + userl.getInventory().get(inspect).getLevel(), 1660, 665);
+            fontDung50.draw(Batch, "" + userl.getInventory().get(inspect).getDmg(), 1670, 605);
+            fontDung50.draw(Batch, "" + userl.getInventory().get(inspect).getAttackSpeed(), 1670, 555);
+            fontDung50.draw(Batch, "" + userl.getInventory().get(inspect).getAccuracy(), 1670, 507);
+            fontDung50.draw(Batch, "" + userl.getInventory().get(inspect).getDodgeProb(), 1670, 460);
+            fontDung50.draw(Batch, "" + userl.getInventory().get(inspect).getCriticProb(), 1670, 410);
+        }
     }
 
 }

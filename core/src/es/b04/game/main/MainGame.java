@@ -97,19 +97,20 @@ public class MainGame extends Game {
 		sChampion.add("pirate.png");
 
 		Champion c1 = new Champion(sChampion,"El PIRATA",1,1,100,0.7,0.5,0.3,0.5,null,null,false);
-		Champion c2 = new Champion(sChampion,"El PERRATA",2,1,120,1.7,1.5,2.3,3.5,null,null,false);
-		ArrayList<Champion> squad = new ArrayList<>();
-		squad.add(new Champion(c1));
-		squad.add(new Champion(c1));
-		squad.add(new Champion(c1));
+		Champion c2 = new Champion(sChampion,"El PERRATA",2,1,120,1.7,1.5,5.3,3.5,null,null,false);
+		Champion c3 = new Champion(sChampion,"El TONTITO",1,1,100,2.7,1.5,2.3,1.5,null,null,false);
+		Champion c4 = new Champion(sChampion,"El CURATOR",2,1,120,3.7,1.5,1.3,2.5,null,null,false);
+		Champion c5 = new Champion(sChampion,"El PINOS",1,1,100,4.7,2.5,3.3,1.3,null,null,false);
 
 		ArrayList<Champion> invent = new ArrayList<>();
-		invent.add((new Champion(c2)));
-		for (int i = 0; i < 14; i++) {
-			invent.add((new Champion(c1)));
+		invent.add(c1);
+		invent.add(c2);
+		invent.add(c3);
+		invent.add(c4);
+		for (int i = 0; i < 5; i++) {
+			invent.add((new Champion(c5)));
 		}
 
-		user.setSquad(squad);
 		user.setInventory(invent);
 
 	}
