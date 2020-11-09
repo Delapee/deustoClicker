@@ -56,7 +56,8 @@ public class LoadingScreen extends ScreenAdapter {
         game.getAssetManager().load(AssetEnum.CENEMY2.getAsset(), Texture.class);
         game.getAssetManager().load(AssetEnum.CURSOR.getAsset(), Texture.class);
         game.getAssetManager().load(AssetEnum.MAINTITTLE.getAsset(), Texture.class);
-        game.getAssetManager().load(AssetEnum.PIRATE.getAsset(), Texture.class);
+        game.getAssetManager().load(AssetEnum.HPBAR1.getAsset(), Texture.class);
+        game.getAssetManager().load(AssetEnum.HPBAR2.getAsset(), Texture.class);
     }
 
     @Override
@@ -84,7 +85,7 @@ public class LoadingScreen extends ScreenAdapter {
         shapeRenderer.setTransformMatrix(camera.view);
         shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
         shapeRenderer.setColor(Color.WHITE);
-        shapeRenderer.rect((WORLD_WIDTH - PROGRESS_BAR_WIDTH) / 2, (WORLD_HEIGHT - PROGRESS_BAR_HEIGHT / 2),
+        shapeRenderer.rect((WORLD_WIDTH - PROGRESS_BAR_WIDTH) / 2, (WORLD_HEIGHT / 2),
                 progress * PROGRESS_BAR_WIDTH, PROGRESS_BAR_HEIGHT);
         shapeRenderer.end();
     }
@@ -95,11 +96,14 @@ public class LoadingScreen extends ScreenAdapter {
     }
 
     private void update() {
+        /*
         try {
             Thread.sleep(200);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+
+         */
         if (game.getAssetManager().update()) {
             game.setScreen(game.getScreens().get(0));
         } else {
