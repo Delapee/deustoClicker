@@ -11,6 +11,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.utils.ActorGestureListener;
+import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import es.b04.game.character.Champion;
 import es.b04.game.utility.AssetEnum;
@@ -23,7 +24,7 @@ import java.util.List;
 
 public class SquadMenuScreen extends ScreenAdapter {
     private Texture tittleBackground;
-    private SpriteBatch Batch;
+    private SpriteBatch batch;
     private final MainGame game;
     private final AssetManager assetManager;
     private Stage stage;
@@ -47,7 +48,7 @@ public class SquadMenuScreen extends ScreenAdapter {
 
         // Basicos
         tittleBackground = new Texture("BackgroundSquad.png");
-        Batch = new SpriteBatch();
+        batch = new SpriteBatch();
         stage = new Stage(new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()));
         fontDung50 = new CustomFont(50,255,255,255,1.0f,0,
                 1.5f, Color.BLACK).getCustomFont();
@@ -69,13 +70,13 @@ public class SquadMenuScreen extends ScreenAdapter {
         super.render(delta);
         Gdx.gl.glClearColor(1, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        Batch.begin();
-        Batch.draw(tittleBackground, 0, 0);
+        batch.begin();
+        batch.draw(tittleBackground, 0, 0);
         renderChampions();
-        Batch.end();
         stage.act(delta);
+        renderText();
         stage.draw();
-
+        batch.end();
     }
 
     @Override
@@ -275,11 +276,11 @@ public class SquadMenuScreen extends ScreenAdapter {
 
     // Metodos de Renderizacion
     public void renderChampions(){
-        int cont = 0,row= 0, colum = 0;
+        int cont = 0,row = 0, colum = 0;
 
         // Renderizado del Squad
         while (cont < userl.getSquad().size()){
-            Batch.draw(new Texture(userl.getSquad().get(cont).getTexture().get(0)),70 + 185*colum,530 - 233*row);
+            batch.draw(new Texture(userl.getSquad().get(cont).getTexture().get(0)),70 + 185*colum,530 - 233*row);
             switch (cont) {
                 case 0:
                 case 2:
@@ -293,17 +294,25 @@ public class SquadMenuScreen extends ScreenAdapter {
             cont++;
         }
 
-        // Renderizado de las stats texto
-
-        if(inspect < userl.getInventory().size()) {
-            fontDung50.draw(Batch, userl.getInventory().get(inspect).getName(), 1600, 920);
-            fontDung50.draw(Batch, "LVL " + userl.getInventory().get(inspect).getLevel(), 1660, 665);
-            fontDung50.draw(Batch, "" + userl.getInventory().get(inspect).getDmg(), 1670, 605);
-            fontDung50.draw(Batch, "" + userl.getInventory().get(inspect).getAttackSpeed(), 1670, 555);
-            fontDung50.draw(Batch, "" + userl.getInventory().get(inspect).getAccuracy(), 1670, 507);
-            fontDung50.draw(Batch, "" + userl.getInventory().get(inspect).getDodgeProb(), 1670, 460);
-            fontDung50.draw(Batch, "" + userl.getInventory().get(inspect).getCriticProb(), 1670, 410);
-        }
     }
 
+    public void renderText(){
+        final  int rowAling = 1680;
+        // Renderizado del User
+        fontDung50.draw(batch, userl.getName(), 150, 943);
+        fontDung50.draw(batch, Integer.toString(userl.getGold()), 150, 885);
+        fontDung50.draw(batch, Integer.toString(userl.getLevel()), 98, 827);
+        fontDung50.draw(batch, userl.getExpProgress() + "/" + userl.getExpMax() , 150, 827);
+
+        // Renderizado de los stats texto
+        if(inspect < userl.getInventory().size()) {
+            fontDung50.draw(batch, userl.getInventory().get(inspect).getName(), 1680, 920,0, Align.center,false);
+            fontDung50.draw(batch, "LVL " + userl.getInventory().get(inspect).getLevel(), 1630, 665);
+            fontDung50.draw(batch, "" + userl.getInventory().get(inspect).getDmg(), rowAling, 605);
+            fontDung50.draw(batch, "" + userl.getInventory().get(inspect).getAttackSpeed(), rowAling, 555);
+            fontDung50.draw(batch, "" + userl.getInventory().get(inspect).getAccuracy(), rowAling, 507);
+            fontDung50.draw(batch, "" + userl.getInventory().get(inspect).getDodgeProb(), rowAling, 460);
+            fontDung50.draw(batch, "" + userl.getInventory().get(inspect).getCriticProb(), rowAling, 410);
+        }
+    }
 }

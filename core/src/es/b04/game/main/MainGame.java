@@ -42,7 +42,6 @@ public class MainGame extends Game {
 	@Override
 	public void render() {
 		super.render();
-		customMouse.getMousePosition();
 		customMouse.mouseAct();
 		customMouse.getMousePosition();
 
@@ -107,9 +106,7 @@ public class MainGame extends Game {
 		invent.add(c2);
 		invent.add(c3);
 		invent.add(c4);
-		for (int i = 0; i < 5; i++) {
-			invent.add((new Champion(c5)));
-		}
+		invent.add(c5);
 
 		user.setInventory(invent);
 
