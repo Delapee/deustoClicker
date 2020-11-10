@@ -93,8 +93,8 @@ public class MainGameScreen extends ScreenAdapter {
     public void enemyHp(){
         hpAlgorithm = (dmgAvg*touchAvg + levelStage)*faseM;
         if(cEnemy.getHealth() <= 0 && levelStage == 6){
-            userL.setGold(userL.getGold() + cEnemy.getGoldXClick()*100);
-            userL.setExpProgress(userL.getExpProgress() + cEnemy.getExpXClick());
+            userL.setGold(userL.getGold() + cEnemy.getGoldDrop()*100);
+            userL.setExpProgress(userL.getExpProgress() + cEnemy.getExpDrop());
             fase++;
             cEnemy.setHealth(hpAlgorithm);
             cEnemy.setMaxhelth(hpAlgorithm);
@@ -104,14 +104,14 @@ public class MainGameScreen extends ScreenAdapter {
         else if(cEnemy.getHealth() <= 0 && levelStage == 5){
             levelStage++;
             time = 12f;
-            userL.setGold(userL.getGold() + cEnemy.getGoldXClick());
-            userL.setExpProgress(userL.getExpProgress() + cEnemy.getExpXClick());
+            userL.setGold(userL.getGold() + cEnemy.getGoldDrop());
+            userL.setExpProgress(userL.getExpProgress() + cEnemy.getExpDrop());
             cEnemy.setHealth(hpAlgorithm * 2);
             cEnemy.setMaxhelth(hpAlgorithm*2);
         }
         else if (cEnemy.getHealth() <= 0){
-            userL.setGold(userL.getGold() + cEnemy.getGoldXClick());
-            userL.setExpProgress(userL.getExpProgress() + cEnemy.getExpXClick());
+            userL.setGold(userL.getGold() + cEnemy.getGoldDrop());
+            userL.setExpProgress(userL.getExpProgress() + cEnemy.getExpDrop());
             cEnemy.setHealth(hpAlgorithm);
             cEnemy.setMaxhelth(hpAlgorithm);
             time = 12f;
