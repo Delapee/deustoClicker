@@ -20,9 +20,12 @@ public class User {
     private String icon;
     private List<Champion> squad;
     private List<Champion> inventory;
+    private int stage;
+    private int stageLevel;
 
     public User(String name, String pass, String email, String gender, int age, int level, int expMax, int expProgress,
-                int gold, int autoClick, String icon, ArrayList<Champion> squad, ArrayList<Champion> inventory) {
+                int gold, int autoClick, String icon, ArrayList<Champion> squad, ArrayList<Champion> inventory,
+                int stage, int stageLevel) {
         this.id = UUID.randomUUID().toString();
         this.name = name;
         this.pass = pass;
@@ -37,6 +40,9 @@ public class User {
         this.icon = icon;
         this.squad = new ArrayList<Champion>(squad);
         this.inventory = new ArrayList<Champion>(inventory);
+        this.stage = stage;
+        this.stageLevel = stageLevel;
+
     }
 
     public User(String name, String pass, String email, String gender, int age) {
@@ -47,13 +53,15 @@ public class User {
         this.gender = gender;
         this.age = age;
         this.level = 1;
-        this.expMax = 200;
+        this.expMax = 1100;
         this.expProgress = 0;
         this.gold = 0;
         this.autoClick = 0;
         this.icon = "";
         this.squad = new ArrayList<Champion>(4);
         this.inventory = new ArrayList<Champion>();
+        this.stage = 1;
+        this.stageLevel = 1;
     }
 
     public User() {
@@ -64,13 +72,15 @@ public class User {
         this.gender = "";
         this.age = 1;
         this.level = 1;
-        this.expMax = 200;
+        this.expMax = 1100;
         this.expProgress = 0;
         this.gold = 0;
         this.autoClick = 0;
         this.icon = "";
         this.squad = new ArrayList<Champion>(4);
         this.inventory = new ArrayList<Champion>();
+        this.stage = 1;
+        this.stageLevel = 1;
     }
 
     public User(User copy) {
@@ -88,6 +98,8 @@ public class User {
         this.icon = copy.icon;
         this.squad = new ArrayList<Champion>(copy.squad);
         this.inventory = new ArrayList<Champion>(copy.inventory);
+        this.stage = copy.stage;
+        this.stageLevel = copy.stageLevel;
     }
 
     public String getId() {
@@ -186,7 +198,7 @@ public class User {
         return squad;
     }
 
-    public void setSquad(ArrayList<Champion> squad) {
+    public void setSquad(List<Champion> squad) {
         this.squad = squad;
     }
 
@@ -194,7 +206,7 @@ public class User {
         return inventory;
     }
 
-    public void setInventory(ArrayList<Champion> inventory) {
+    public void setInventory(List<Champion> inventory) {
         this.inventory = inventory;
     }
 
@@ -212,6 +224,22 @@ public class User {
 
     public void removeChampionInventory(Champion c){
         inventory.remove(c);
+    }
+
+    public int getStage() {
+        return stage;
+    }
+
+    public void setStage(int stage) {
+        this.stage = stage;
+    }
+
+    public int getStageLevel() {
+        return stageLevel;
+    }
+
+    public void setStageLevel(int stageLevel) {
+        this.stageLevel = stageLevel;
     }
 
 }

@@ -29,7 +29,7 @@ public class Champion {
         this.texture = new ArrayList<>(texture);
         this.name = name;
         this.level = level;
-        this.levelMax = level * 10;
+        this.levelMax = rare * 10;
         this.rare = rare;
         this.dmg = dmg;
         this.accuracy = accuracy;
