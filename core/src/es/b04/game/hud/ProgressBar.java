@@ -28,11 +28,10 @@ public class ProgressBar {
     }
     public void draw(SpriteBatch batch, float p, float t){
         NinePatch changingFinal = new NinePatch(new TextureRegion(changingS, width, height));
+        batch.draw(backgroundS, x, y);
         changingFinal.draw(batch, x, y, (p/t)*width, height);
     }
     public float comp(){
-        System.out.println(progress);
-        System.out.println(total);
         return progress/total;
     }
 

@@ -38,38 +38,32 @@ public class MainGameScreen extends ScreenAdapter {
     private int levelStage = 1;
     private int fase = 1;
     private final int dmgAvg = 150;
-    private final int touchAvg = 2;
+    private final int touchAvg = 7;
     private int faseM = 5 * levelStage;
-    private int hpAlgorithm = (dmgAvg*touchAvg + levelStage)*faseM;
-    private ShapeRenderer vidaEnemigo;
-    private NinePatch hpbar;
-    private Texture hpbarBack;
+    private int hpAlgorithm;
     private ProgressBar enemyHpBar;
-
 
     public MainGameScreen(MainGame game) {
         this.game = game;
         this.assetManager = game.getAssetManager();
+        userL = game.getUser();
+        userL.setLevel(4);
+        hpAlgorithm = (dmgAvg*touchAvg*game.getUser().getLevel() + levelStage)*faseM;
     }
 
     @Override
     public void show() {
         super.show();
-
         //Texture hpbarMod = new Texture("hpbar1.png");
         //hpbarBack = new Texture("hpbar2.png");
         //hpbar = new NinePatch(new TextureRegion(hpbarMod,264, 35));
-
         batch = new SpriteBatch();
         stage = new Stage(new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()));
-        vidaEnemigo = new ShapeRenderer();
         cEnemy = new CEnemy("C1.png","C2.png",hpAlgorithm,10,50);
         IButton squadButton = new IButton("B1.png","B2.png",280,
                 37, (ScreenAdapter) game.getScreens().get(2), game);
         enemyHpBar = new ProgressBar("hpbar2.png", "hpbar1.png", (float)cEnemy.getMaxhelth(),
                 (float)cEnemy.getHealth(), 730, 590, 264, 35);
-
-        userL = game.getUser();
         Gdx.input.setInputProcessor(stage);
         background = assetManager.get(AssetEnum.GAMEBCK.getAsset());
 
@@ -142,7 +136,6 @@ public class MainGameScreen extends ScreenAdapter {
         batch.begin();
         renderText();
         stage.draw();
-        batch.draw(enemyHpBar.getBackgroundS(), enemyHpBar.getX(), enemyHpBar.getY());
         enemyHpBar.draw(batch, cEnemy.getHealth(), cEnemy.getMaxhelth());
         System.out.println(enemyHpBar.comp());
         //finalHpBar.draw(batch);
