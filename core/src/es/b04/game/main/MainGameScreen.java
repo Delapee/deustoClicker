@@ -13,6 +13,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.utils.ActorGestureListener;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import es.b04.game.character.Champion;
+import es.b04.game.character.MapSystem;
 import es.b04.game.utility.AssetEnum;
 import es.b04.game.hud.CEnemy;
 import es.b04.game.utility.CustomFont;
@@ -42,13 +43,13 @@ public class MainGameScreen extends ScreenAdapter {
     private int faseM = 5 * levelStage;
     private int hpAlgorithm;
     private ProgressBar enemyHpBar;
+    private MapSystem map;
 
     public MainGameScreen(MainGame game) {
         this.game = game;
         this.assetManager = game.getAssetManager();
         userL = game.getUser();
-        userL.setLevel(4);
-        hpAlgorithm = (dmgAvg*touchAvg*game.getUser().getLevel() + levelStage)*faseM;
+        hpAlgorithm = (dmgAvg*touchAvg*game.getUser().getLevel() * levelStage)*faseM;
     }
 
     @Override
@@ -75,6 +76,7 @@ public class MainGameScreen extends ScreenAdapter {
                 2.5f,Color.BLACK).getCustomFont();
         fontDung50 = new CustomFont(50,255,255,255,1.0f,0,
                 1.5f,Color.BLACK).getCustomFont();
+        map = new MapSystem(levelStage, fase, "boss.png", "lvl.png", "lvl.png");
 
         cEnemy.addListener( new ActorGestureListener(){
             @Override
@@ -91,7 +93,7 @@ public class MainGameScreen extends ScreenAdapter {
     }
 
     public void enemyHp(){
-        hpAlgorithm = (dmgAvg*touchAvg + levelStage)*faseM;
+        hpAlgorithm = (dmgAvg*touchAvg*game.getUser().getLevel() + levelStage)*faseM;
         if(cEnemy.getHealth() <= 0 && levelStage == 6){
             userL.setGold(userL.getGold() + cEnemy.getGoldXClick()*100);
             userL.setExpProgress(userL.getExpProgress() + cEnemy.getExpXClick());
@@ -100,6 +102,7 @@ public class MainGameScreen extends ScreenAdapter {
             cEnemy.setMaxhelth(hpAlgorithm);
             time = 12f;
             levelStage = 1;
+            map = new MapSystem(levelStage, fase, "boss.png", "lvl.png", "lvl.png");
         }
         else if(cEnemy.getHealth() <= 0 && levelStage == 5){
             levelStage++;
@@ -108,6 +111,7 @@ public class MainGameScreen extends ScreenAdapter {
             userL.setExpProgress(userL.getExpProgress() + cEnemy.getExpXClick());
             cEnemy.setHealth(hpAlgorithm * 2);
             cEnemy.setMaxhelth(hpAlgorithm*2);
+
         }
         else if (cEnemy.getHealth() <= 0){
             userL.setGold(userL.getGold() + cEnemy.getGoldXClick());
@@ -138,6 +142,7 @@ public class MainGameScreen extends ScreenAdapter {
         stage.draw();
         enemyHpBar.draw(batch, cEnemy.getHealth(), cEnemy.getMaxhelth());
         System.out.println(enemyHpBar.comp());
+        map.draw(batch, levelStage);
         //finalHpBar.draw(batch);
        // batch.draw(hpbarBack, 730, 580);
       //  hpbar.draw(batch, 730, 580, ((float)cEnemy.getHealth()/(float)cEnemy.getMaxhelth()) *264, 35);
