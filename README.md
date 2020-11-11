@@ -16,6 +16,7 @@ Running:
 - Select 'Run DesktopLauncher.main()'
       This should fail with missing assets, we need to hook up the assets folder
 - Open up Run Configurations
-- Edit the Run Configuration that was just created by running the desktop project and set the working directory to point to your core/assets folder.
+- Edit the Run Configuration that was just created by running the desktop project and set the working directory to 
+  point to your core/assets folder.
 - Run your application using the run button
 ```

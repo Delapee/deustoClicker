@@ -4,23 +4,23 @@ public class CEnemy extends IButton{
 
     private int health;
     private int Maxhelth;
-    private int goldXClick;
-    private int expXClick;
+    private int goldDrop;
+    private int expDrop;
 
-    public CEnemy(String normal, String press, int health, int goldXClick, int expXClick) {
+    public CEnemy(String normal, String press, int health, int goldDrop, int expDrop) {
         super(normal, press, 720, 500);
         this.health = health;
         this.Maxhelth = health;
-        this.goldXClick = goldXClick;
-        this.expXClick = expXClick;
+        this.goldDrop = goldDrop;
+        this.expDrop = expDrop;
     }
 
     public CEnemy() {
         super("", "", 0, 0);
         this.health = 0;
         this.Maxhelth = 0;
-        this.goldXClick = 0;
-        this.expXClick = 0;
+        this.goldDrop = 0;
+        this.expDrop = 0;
     }
 
     public int getHealth() {
@@ -30,23 +30,6 @@ public class CEnemy extends IButton{
     public void setHealth(int health) {
         this.health = health;
     }
-
-    public int getGoldXClick() {
-        return goldXClick;
-    }
-
-    public void setGoldXClick(int goldXClick) {
-        this.goldXClick = goldXClick;
-    }
-
-    public int getExpXClick() {
-        return expXClick;
-    }
-
-    public void setExpXClick(int expXClick) {
-        this.expXClick = expXClick;
-    }
-
     public int getMaxhelth() {
         return Maxhelth;
     }
@@ -54,4 +37,25 @@ public class CEnemy extends IButton{
     public void setMaxhelth(int maxhelth) {
         Maxhelth = maxhelth;
     }
+
+    public int getGoldDrop() {
+        return goldDrop;
+    }
+
+    public void setGoldDrop(int goldDrop) {
+        this.goldDrop = goldDrop;
+    }
+
+    public int getExpDrop() {
+        return expDrop;
+    }
+
+    public void setExpDrop(int expDrop) {
+        this.expDrop = expDrop;
+    }
+
+    public void update(int stage, int lvl){
+        this.expDrop = (int) (100 * stage * (1 + 0.2 * (lvl-1)));
+    }
+
 }
