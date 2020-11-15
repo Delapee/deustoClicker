@@ -1,6 +1,6 @@
 # DUNGEON CLICKER 
 <p align="center">
-  <img src="core/assets/icon/dragon.png" alt="deustoClicker" width="120px" height="120px"/>
+  <img src="core/assets/icon/dragon.png" alt="deustoClicker" width="128px" height="128px"/>
 </p>
 
 ## Requirements 
