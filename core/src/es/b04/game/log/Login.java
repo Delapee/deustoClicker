@@ -1,5 +1,7 @@
 package es.b04.game.log;
 
+import es.b04.game.dataBase.DBException;
+
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 import java.awt.*;
@@ -22,11 +24,17 @@ public class Login extends JFrame {
         return r;
     }
 
-    private Register creacionRegistro(){
+    private Register creacionRegistro() throws DBException {
         return r = new Register(this);
     }
 
     public Login(){
+        try {
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         JButton resgistro = new JButton("Registrarse");
         JButton iniciar = new JButton("Iniciar sesion");
 
@@ -43,7 +51,11 @@ public class Login extends JFrame {
                 SwingUtilities.invokeLater(new Runnable() {
                     @Override
                     public void run() {
-                        creacionRegistro();
+                        try {
+                            creacionRegistro();
+                        } catch (DBException dbException) {
+                            dbException.printStackTrace();
+                        }
                     }
                 });
             }

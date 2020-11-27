@@ -14,10 +14,12 @@ import java.util.List;
 public class Register extends JFrame {
     private final Login l;
     private DBManager db;
+    final List<String> usersNames;
 
-    public Register(final Login l){
+    public Register(final Login l) throws DBException {
         this.l = l;
         db = new DBManager();
+        usersNames = new ArrayList<>(db.getAllUserNames());
 
         setTitle("Dungeon clicker");
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
@@ -115,18 +117,11 @@ public class Register extends JFrame {
                     user.setBorder(new LineBorder(Color.RED, 2));
                     todoOk = false;
                 }else{
-                    try {
-                        List<String> usersNames = new ArrayList<>(db.getAllUserNames());
-                        for (String n: usersNames) {
-                            if (n.equals(user.getText())){
-                                user.setBorder(new LineBorder(Color.RED, 2));
-                                todoOk = false;
-                                break;
-                            }
-                            user.setBorder(new LineBorder(Color.BLACK));
-                        }
-                    } catch (DBException dbException) {
-                        dbException.printStackTrace();
+                    if (usersNames.contains(user.getText())){
+                        user.setBorder(new LineBorder(Color.RED, 2));
+                        todoOk = false;
+                    }else{
+                        user.setBorder(new LineBorder(Color.BLACK));
                     }
                 }
 
