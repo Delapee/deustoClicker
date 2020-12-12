@@ -14,16 +14,16 @@ public class Champion {
     private int levelMax;
     private int rare;
     private int dmg;
-    private double accuracy;
-    private double attackSpeed;
+    private int accuracy;
+    private int attackSpeed;
     private double criticProb;
-    private double dodgeProb;
+    private int dodgeProb;
     private Attack attackP;
     private Attack attackS;
     private boolean onSquad;
 
-    public Champion(List<String> texture, String name, int level, int rare, int dmg, double accuracy,
-                    double attackSpeed, double criticProb, double dodgeProb, Attack attackP, Attack attackS,
+    public Champion(List<String> texture, String name, int level, int rare, int dmg, int accuracy,
+                    int attackSpeed, int criticProb, int dodgeProb, Attack attackP, Attack attackS,
                     boolean onSquad) {
         this.id = UUID.randomUUID().toString();
         this.texture = new ArrayList<>(texture);
@@ -49,10 +49,10 @@ public class Champion {
         this.levelMax = 10;
         this.rare = 1;
         this.dmg = 0;
-        this.accuracy = 0.0;
-        this.attackSpeed = 0.0;
+        this.accuracy = 0;
+        this.attackSpeed = 0;
         this.criticProb = 0.0;
-        this.dodgeProb = 0.0;
+        this.dodgeProb = 0;
         this.attackP = new Attack();
         this.attackS = new Attack();
         this.onSquad = false;
@@ -127,19 +127,19 @@ public class Champion {
         this.dmg = dmg;
     }
 
-    public double getAccuracy() {
+    public int getAccuracy() {
         return accuracy;
     }
 
-    public void setAccuracy(double accuracy) {
+    public void setAccuracy(int accuracy) {
         this.accuracy = accuracy;
     }
 
-    public double getAttackSpeed() {
+    public int getAttackSpeed() {
         return attackSpeed;
     }
 
-    public void setAttackSpeed(double attackSpeed) {
+    public void setAttackSpeed(int attackSpeed) {
         this.attackSpeed = attackSpeed;
     }
 
@@ -151,11 +151,11 @@ public class Champion {
         this.criticProb = criticProb;
     }
 
-    public double getDodgeProb() {
+    public int getDodgeProb() {
         return dodgeProb;
     }
 
-    public void setDodgeProb(double dodgeProb) {
+    public void setDodgeProb(int dodgeProb) {
         this.dodgeProb = dodgeProb;
     }
 
@@ -201,6 +201,23 @@ public class Champion {
                 Objects.equals(name, champion.name) &&
                 Objects.equals(attackP, champion.attackP) &&
                 Objects.equals(attackS, champion.attackS);
+    }
+
+    public void upgrade(){
+        this.level++;
+        this.dmg = (int) (this.dmg * 1.5);
+        this.accuracy = (int) (this.accuracy * 1.5);
+        this.attackSpeed = (int) (this.attackSpeed * 1.5);
+        this.criticProb = (this.criticProb * 1.5);
+        this.dodgeProb = (int) (this.dodgeProb * 1.5);
+    }
+
+    public int getUpgradeGold(){
+        int result = 0;
+        for (int i = 1; i < 7; i++) {
+            result += 100 * this.level * (1 + 0.2 * (i-1)) * 2;
+        }
+        return result;
     }
 
     public IButton toButton(float x, float y){

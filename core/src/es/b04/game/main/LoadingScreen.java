@@ -22,7 +22,6 @@ public class LoadingScreen extends ScreenAdapter {
     public LoadingScreen(MainGame game) {
         super();
         this.game = game;
-
     }
 
     @Override

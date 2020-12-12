@@ -43,7 +43,7 @@ public class MainGame extends Game {
 	public void render() {
 		super.render();
 		customMouse.mouseAct();
-		customMouse.getMousePosition();
+		//customMouse.getMousePosition();
 
 	}
 
@@ -95,11 +95,11 @@ public class MainGame extends Game {
 		sChampion.add("pirate.png");
 		sChampion.add("pirate.png");
 
-		Champion c1 = new Champion(sChampion,"El PIRATA",1,1,100,0.7,0.5,0.3,0.5,null,null,false);
-		Champion c2 = new Champion(sChampion,"El PERRATA",2,1,120,1.7,1.5,5.3,3.5,null,null,false);
-		Champion c3 = new Champion(sChampion,"El TONTITO",1,1,100,2.7,1.5,2.3,1.5,null,null,false);
-		Champion c4 = new Champion(sChampion,"El CURATOR",2,1,120,3.7,1.5,1.3,2.5,null,null,false);
-		Champion c5 = new Champion(sChampion,"El PINOS",1,1,100,4.7,2.5,3.3,1.3,null,null,false);
+		Champion c1 = new Champion(sChampion,"El PIRATA",1,1,100,10,15,33,15,null,null,false);
+		Champion c2 = new Champion(sChampion,"El PERRATA",2,1,120,12,25,43,25,null,null,false);
+		Champion c3 = new Champion(sChampion,"El TONTITO",1,1,100,21,25,13,35,null,null,false);
+		Champion c4 = new Champion(sChampion,"El CURATOR",2,1,120,33,45,23,45,null,null,false);
+		Champion c5 = new Champion(sChampion,"El PINOS",1,1,100,41,15,33,13,null,null,false);
 
 		ArrayList<Champion> invent = new ArrayList<>();
 		invent.add(c1);

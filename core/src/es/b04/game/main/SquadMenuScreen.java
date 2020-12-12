@@ -272,6 +272,17 @@ public class SquadMenuScreen extends ScreenAdapter {
             }
         });
 
+        upgrade.addListener(new ActorGestureListener(){
+
+            @Override
+            public void tap(InputEvent event, float x, float y, int count, int button) {
+                super.tap(event, x, y, count, button);
+                if (userl.getGold() >= userl.getInventory().get(inspect).getUpgradeGold()){
+                    userl.setGold(userl.getGold()-userl.getInventory().get(inspect).getUpgradeGold());
+                    userl.getInventory().get(inspect).upgrade();
+                }
+            }
+        });
     }
 
     // Metodos de Renderizacion
@@ -301,18 +312,18 @@ public class SquadMenuScreen extends ScreenAdapter {
         // Renderizado del User
         fontDung50.draw(batch, userl.getName(), 150, 943);
         fontDung50.draw(batch, Integer.toString(userl.getGold()), 150, 885);
-        fontDung50.draw(batch, Integer.toString(userl.getLevel()), 98, 827);
+        fontDung50.draw(batch, Integer.toString(userl.getLevel()), 104, 828,0,Align.center,false);
         fontDung50.draw(batch, userl.getExpProgress() + "/" + userl.getExpMax() , 150, 827);
 
         // Renderizado de los stats texto
         if(inspect < userl.getInventory().size()) {
             fontDung50.draw(batch, userl.getInventory().get(inspect).getName(), 1680, 920,0, Align.center,false);
             fontDung50.draw(batch, "LVL " + userl.getInventory().get(inspect).getLevel(), 1630, 665);
-            fontDung50.draw(batch, "" + userl.getInventory().get(inspect).getDmg(), rowAling, 605);
-            fontDung50.draw(batch, "" + userl.getInventory().get(inspect).getAttackSpeed(), rowAling, 555);
-            fontDung50.draw(batch, "" + userl.getInventory().get(inspect).getAccuracy(), rowAling, 507);
-            fontDung50.draw(batch, "" + userl.getInventory().get(inspect).getDodgeProb(), rowAling, 460);
-            fontDung50.draw(batch, "" + userl.getInventory().get(inspect).getCriticProb(), rowAling, 410);
+            fontDung50.draw(batch, Integer.toString(userl.getInventory().get(inspect).getDmg()), rowAling, 605);
+            fontDung50.draw(batch, Integer.toString(userl.getInventory().get(inspect).getAttackSpeed()), rowAling, 555);
+            fontDung50.draw(batch, Integer.toString(userl.getInventory().get(inspect).getAccuracy()), rowAling, 507);
+            fontDung50.draw(batch, "" + userl.getInventory().get(inspect).getCriticProb(), rowAling, 460);
+            fontDung50.draw(batch, Integer.toString(userl.getInventory().get(inspect).getDodgeProb()), rowAling, 410);
         }
     }
 }

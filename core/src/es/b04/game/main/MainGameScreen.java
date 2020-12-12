@@ -144,8 +144,8 @@ public class MainGameScreen extends ScreenAdapter {
         System.out.println(enemyHpBar.comp());
         map.draw(batch, levelStage);
         //finalHpBar.draw(batch);
-       // batch.draw(hpbarBack, 730, 580);
-      //  hpbar.draw(batch, 730, 580, ((float)cEnemy.getHealth()/(float)cEnemy.getMaxhelth()) *264, 35);
+        // batch.draw(hpbarBack, 730, 580);
+        //  hpbar.draw(batch, 730, 580, ((float)cEnemy.getHealth()/(float)cEnemy.getMaxhelth()) *264, 35);
 
         batch.end();
 

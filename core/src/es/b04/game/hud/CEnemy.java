@@ -56,6 +56,7 @@ public class CEnemy extends IButton{
 
     public void update(int stage, int lvl){
         this.expDrop = (int) (100 * stage * (1 + 0.2 * (lvl-1)));
+        this.goldDrop = (int) (100 * stage * (1 + 0.2 * (lvl-1)) * 4);
     }
 
 }
