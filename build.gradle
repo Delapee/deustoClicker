@@ -62,7 +62,6 @@ project(":core") {
         api "com.badlogicgames.box2dlights:box2dlights:$box2DLightsVersion"
         api "com.badlogicgames.gdx:gdx-freetype:$gdxVersion"
         compile group: 'org.xerial', name: 'sqlite-jdbc', version: '3.32.3.2'
-        tetsCompile group: 'junit', name: 'junit', version: '4.12'
         
     }
 }

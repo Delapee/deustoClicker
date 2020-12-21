@@ -9,6 +9,7 @@ import es.b04.game.log.User;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
 public class MainGame extends Game {
 	private CustomMouse customMouse;

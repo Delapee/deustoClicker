@@ -22,7 +22,6 @@ public class ChampionTest {
 
     @Test
     public void testToButton() {
-        assertEquals(1,1);
         assertEquals(1800,testChamp.getUpgradeGold());
     }
 
