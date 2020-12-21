@@ -56,14 +56,13 @@ project(":desktop") {
 project(":core") {
     apply plugin: "java-library"
 
-
     dependencies {
         api "com.badlogicgames.gdx:gdx:$gdxVersion"
         api "com.badlogicgames.gdx:gdx-box2d:$gdxVersion"
         api "com.badlogicgames.box2dlights:box2dlights:$box2DLightsVersion"
         api "com.badlogicgames.gdx:gdx-freetype:$gdxVersion"
         compile group: 'org.xerial', name: 'sqlite-jdbc', version: '3.32.3.2'
-        testImplementation('junit:junit:4.13')
+        tetsCompile group: 'junit', name: 'junit', version: '4.12'
         
     }
 }
