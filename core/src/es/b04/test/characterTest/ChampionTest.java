@@ -1,6 +1,7 @@
 package es.b04.test.characterTest;
 
 import es.b04.game.character.Champion;
+import es.b04.game.hud.IButton;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -13,7 +14,7 @@ public class ChampionTest {
 
     private Champion testChamp;
     @Before
-    public void setUp() throws Exception {
+    public void setUp(){
         ArrayList<String> sChampion = new ArrayList<>();
         sChampion.add("pirate.png");
         sChampion.add("pirate.png");
@@ -22,7 +23,7 @@ public class ChampionTest {
 
     @Test
     public void testToButton() {
-        assertEquals(1800,testChamp.getUpgradeGold());
+        assertEquals(IButton.class,testChamp.toButton(0,0).getClass());
     }
 
     @Test
