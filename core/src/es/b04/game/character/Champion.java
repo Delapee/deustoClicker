@@ -22,6 +22,25 @@ public class Champion {
     private Attack attackS;
     private boolean onSquad;
 
+    public Champion(String id, List<String> texture, String name, int level, int rare, int dmg, int accuracy,
+                    int attackSpeed, int criticProb, int dodgeProb, Attack attackP, Attack attackS,
+                    boolean onSquad) {
+        this.id = id;
+        this.texture = new ArrayList<>(texture);
+        this.name = name;
+        this.level = level;
+        this.levelMax = rare * 10;
+        this.rare = rare;
+        this.dmg = dmg;
+        this.accuracy = accuracy;
+        this.attackSpeed = attackSpeed;
+        this.criticProb = criticProb;
+        this.dodgeProb = dodgeProb;
+        this.attackP = attackP;
+        this.attackS = attackS;
+        this.onSquad = onSquad;
+    }
+
     public Champion(List<String> texture, String name, int level, int rare, int dmg, int accuracy,
                     int attackSpeed, int criticProb, int dodgeProb, Attack attackP, Attack attackS,
                     boolean onSquad) {

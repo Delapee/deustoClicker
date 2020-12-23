@@ -1,6 +1,7 @@
 package es.b04.game.dataBase;
 
 
+import es.b04.game.character.Attack;
 import es.b04.game.character.Champion;
 import es.b04.game.log.User;
 import java.sql.*;
@@ -210,4 +211,106 @@ public class DBManager {
         }
     }
 
+    /**
+     * Metodo que extrae toda la info de un usuario de la BD
+     * @param name nombre de usuario
+     * @return User logeado
+     * @throws DBException gestor de excepciones de la la BD
+     */
+    public User getUser(String name) throws DBException {
+        try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM user WHERE name=?")) {
+            stmt.setString(1, name);
+
+            ResultSet rs = stmt.executeQuery();
+
+            User user = new User(rs.getString("id"), rs.getString("name"),
+                    rs.getString("pass"), rs.getString("email"),rs.getString("gender"),
+                    rs.getInt("age"), rs.getInt("level"), rs.getInt("expMax"),
+                    rs.getInt("expProgress"), rs.getInt("gold"), rs.getInt("autoClick"),
+                    rs.getString("icon"), new ArrayList<Champion>(), new ArrayList<Champion>(),
+                    rs.getInt("stage"), rs.getInt("stageLevel"));
+
+            List<List<Champion>> champions = getUserChampions(user.getId());
+            user.setSquad(champions.get(0));
+            user.setInventory(champions.get(1));
+
+            return user;
+        } catch (SQLException e) {
+            throw new DBException("Error obteniendo el usuario", e);
+        }
+    }
+
+    /**
+     * Metodo que extrae todos los champions de un usuario de la BD
+     * @param id_user id del usuario del que se quiere obtener los champions
+     * @return lista con la lista squad y la lista inventory
+     * @throws DBException Metodo que extrae toda la info de un usuario de la BD
+     */
+    public List<List<Champion>> getUserChampions(String id_user) throws DBException {
+        try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM champion WHERE id_user=?")) {
+            stmt.setString(1, id_user);
+
+            ResultSet rs = stmt.executeQuery();
+
+            List<List<Champion>> champions = new ArrayList<>();
+            List<Champion> squad = new ArrayList<>();
+            List<Champion> inventory = new ArrayList<>();
+
+            while(rs.next()) {
+                Champion champ = new Champion(rs.getString("id"), new ArrayList<String>(),
+                        rs.getString("name"), rs.getInt("level"),
+                        rs.getInt("rare"), rs.getInt("dmg"), rs.getInt("accuracy"),
+                        rs.getInt("attackSpeed"), rs.getInt("criticProb"),
+                        rs.getInt("dodgeProb"), new Attack(), new Attack(), rs.getBoolean("onSquad"));
+
+                inventory.add(champ);
+
+                if (champ.isOnSquad()){
+                    squad.add(champ);
+                }
+            }
+
+            champions.add(squad);
+            champions.add(inventory);
+
+            return champions;
+        } catch (SQLException e) {
+            throw new DBException("Error obteniendo el usuario", e);
+        }
+    }
+
+    public Champion getChampion(String id, String name) throws DBException {
+        try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM champion WHERE id=? and name=?")) {
+            stmt.setString(1, id);
+            stmt.setString(2, name);
+
+            ResultSet rs = stmt.executeQuery();
+
+            Champion champ = new Champion(rs.getString("id"), new ArrayList<String>(),
+                    rs.getString("name"), rs.getInt("level"), rs.getInt("rare"),
+                    rs.getInt("dmg"), rs.getInt("accuracy"), rs.getInt("attackSpeed"),
+                    rs.getInt("criticProb"), rs.getInt("dodgeProb"), new Attack(), new Attack(),
+                    rs.getBoolean("onSquad"));
+
+            return champ;
+        } catch (SQLException e) {
+            throw new DBException("Error obteniendo el usuario", e);
+        }
+    }
+
+    public Boolean isPassOk(String name, String pass) throws DBException {
+        try (PreparedStatement stmt = conn.prepareStatement("SELECT pass FROM user WHERE name=?")) {
+            stmt.setString(1, name);
+
+            ResultSet rs = stmt.executeQuery();
+
+            if(pass.equals(rs.getString("pass"))){
+                return true;
+            }
+
+            return false;
+        } catch (SQLException e) {
+            throw new DBException("Error obteniendo el usuario", e);
+        }
+    }
 }

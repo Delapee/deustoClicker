@@ -1,6 +1,7 @@
 package es.b04.game.log;
 
 import es.b04.game.dataBase.DBException;
+import es.b04.game.dataBase.DBManager;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;
@@ -11,6 +12,7 @@ import java.awt.event.ActionListener;
 public class Login extends JFrame {
     private boolean check = false;
     private Register r;
+    private DBManager db;
 
     public boolean getCheck(){
         return check;
@@ -34,6 +36,7 @@ public class Login extends JFrame {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        db = new DBManager();
 
         JButton resgistro = new JButton("Registrarse");
         JButton iniciar = new JButton("Iniciar sesion");
@@ -82,8 +85,22 @@ public class Login extends JFrame {
                 }
 
                 if (todoOk){
+                    /*
+                    try {
+                        if (db.isPassOk(usuario.getText(), String.valueOf(contrasena.getPassword()))){
+                            User user = db.getUser(usuario.getText());
+                            check = true;
+                            setVisible(false);
+                        }else{
+                            contrasena.setBorder(new LineBorder(Color.RED, 2));
+                            todoOk = false;
+                        }
+                    } catch (DBException dbException) {
+                        dbException.printStackTrace();
+                    }/*/
                     check = true;
                     setVisible(false);
+                    //*/
                 }
             }
         });

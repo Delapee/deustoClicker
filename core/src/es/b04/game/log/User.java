@@ -23,10 +23,11 @@ public class User {
     private int stage;
     private int stageLevel;
 
-    public User(String name, String pass, String email, String gender, int age, int level, int expMax, int expProgress,
+
+    public User(String id, String name, String pass, String email, String gender, int age, int level, int expMax, int expProgress,
                 int gold, int autoClick, String icon, ArrayList<Champion> squad, ArrayList<Champion> inventory,
                 int stage, int stageLevel) {
-        this.id = UUID.randomUUID().toString();
+        this.id = id;
         this.name = name;
         this.pass = pass;
         this.email = email;
