@@ -18,6 +18,8 @@ import es.b04.game.utility.AssetEnum;
 import es.b04.game.hud.IButton;
 import es.b04.game.log.User;
 import es.b04.game.utility.CustomFont;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,6 +32,7 @@ public class SquadMenuScreen extends ScreenAdapter {
     private Stage stage;
     private User userl;
     private IButton acept,equip,upgrade;
+    private static final Logger logger = LogManager.getLogger(SquadMenuScreen.class);
 
     private int inspect;
     private List<IButton> champButtons;
@@ -57,7 +60,7 @@ public class SquadMenuScreen extends ScreenAdapter {
 
         loadInventoryButtons();
         loadChampButtons();
-
+        logger.info("Personajes cargados correctamente.");
         Gdx.input.setInputProcessor(stage);
         stage.addActor(acept);
         stage.addActor(equip);

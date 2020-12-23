@@ -2,6 +2,9 @@ package es.b04.game.log;
 
 import es.b04.game.dataBase.DBException;
 import es.b04.game.dataBase.DBManager;
+import es.b04.game.main.GameMenuScreen;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;
@@ -13,7 +16,7 @@ public class Login extends JFrame {
     private boolean check = false;
     private Register r;
     private DBManager db;
-
+    private static final Logger logger = LogManager.getLogger(Login.class);
     public boolean getCheck(){
         return check;
     }
@@ -91,12 +94,17 @@ public class Login extends JFrame {
                             User user = db.getUser(usuario.getText());
                             check = true;
                             setVisible(false);
+                            logger.info("Inicio de sesion realizada correctamente");
+
                         }else{
                             contrasena.setBorder(new LineBorder(Color.RED, 2));
                             todoOk = false;
+
                         }
                     } catch (DBException dbException) {
                         dbException.printStackTrace();
+                        logger.error("Error al iniciar sesion.");
+
                     }/*/
                     check = true;
                     setVisible(false);

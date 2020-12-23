@@ -1,0 +1,77 @@
+2020-12-23 00:38:33,666 DEBUG e.b.g.m.MainGame [LWJGL Application] debug
+2020-12-23 00:38:33,675 INFO e.b.g.m.MainGame [LWJGL Application] Juego creado
+2020-12-23 00:38:33,682 INFO e.b.g.m.MainGame [LWJGL Application] user cargado
+2020-12-23 00:38:33,723 INFO e.b.g.m.GameMenuScreen [LWJGL Application] Menu cargado correctamente.
+2020-12-23 00:38:38,471 INFO e.b.g.m.LoadingScreen [LWJGL Application] Texturas cargadas correctamente.
+2020-12-23 00:38:38,672 INFO e.b.g.m.LoadingScreen [LWJGL Application] Texturas cargadas correctamente.
+2020-12-23 00:38:38,872 INFO e.b.g.m.LoadingScreen [LWJGL Application] Texturas cargadas correctamente.
+2020-12-23 00:38:39,072 INFO e.b.g.m.LoadingScreen [LWJGL Application] Texturas cargadas correctamente.
+2020-12-23 00:38:39,275 INFO e.b.g.m.LoadingScreen [LWJGL Application] Texturas cargadas correctamente.
+2020-12-23 00:38:39,477 INFO e.b.g.m.LoadingScreen [LWJGL Application] Texturas cargadas correctamente.
+2020-12-23 00:38:39,677 INFO e.b.g.m.LoadingScreen [LWJGL Application] Texturas cargadas correctamente.
+2020-12-23 00:38:39,881 INFO e.b.g.m.LoadingScreen [LWJGL Application] Texturas cargadas correctamente.
+2020-12-23 00:38:40,081 INFO e.b.g.m.LoadingScreen [LWJGL Application] Texturas cargadas correctamente.
+2020-12-23 00:38:40,282 INFO e.b.g.m.LoadingScreen [LWJGL Application] Texturas cargadas correctamente.
+2020-12-23 00:38:40,483 INFO e.b.g.m.LoadingScreen [LWJGL Application] Texturas cargadas correctamente.
+2020-12-23 00:38:40,683 INFO e.b.g.m.LoadingScreen [LWJGL Application] Texturas cargadas correctamente.
+2020-12-23 00:38:40,884 INFO e.b.g.m.LoadingScreen [LWJGL Application] Texturas cargadas correctamente.
+2020-12-23 00:38:41,084 INFO e.b.g.m.LoadingScreen [LWJGL Application] Texturas cargadas correctamente.
+2020-12-23 00:38:41,285 INFO e.b.g.m.LoadingScreen [LWJGL Application] Texturas cargadas correctamente.
+2020-12-23 00:38:41,488 INFO e.b.g.m.LoadingScreen [LWJGL Application] Texturas cargadas correctamente.
+2020-12-23 00:38:41,688 INFO e.b.g.m.LoadingScreen [LWJGL Application] Texturas cargadas correctamente.
+2020-12-23 00:38:41,888 INFO e.b.g.m.LoadingScreen [LWJGL Application] Texturas cargadas correctamente.
+2020-12-23 00:38:42,089 INFO e.b.g.m.LoadingScreen [LWJGL Application] Texturas cargadas correctamente.
+2020-12-23 00:38:42,290 INFO e.b.g.m.MainGameScreen [LWJGL Application] Juego contemplado.
+2020-12-23 00:38:51,265 INFO e.b.g.m.SquadMenuScreen [LWJGL Application] Personajes cargados correctamente.
+2020-12-23 00:47:51,749 DEBUG e.b.g.m.MainGame [LWJGL Application] debug
+2020-12-23 00:47:51,751 INFO e.b.g.m.MainGame [LWJGL Application] Juego creado
+2020-12-23 00:47:51,759 INFO e.b.g.m.MainGame [LWJGL Application] user cargado
+2020-12-23 00:47:51,820 INFO e.b.g.m.GameMenuScreen [LWJGL Application] Menu cargado correctamente.
+2020-12-23 00:48:05,745 INFO e.b.g.m.LoadingScreen [LWJGL Application] Textura cargada correctamente.
+2020-12-23 00:48:05,947 INFO e.b.g.m.LoadingScreen [LWJGL Application] Textura cargada correctamente.
+2020-12-23 00:48:06,148 INFO e.b.g.m.LoadingScreen [LWJGL Application] Textura cargada correctamente.
+2020-12-23 00:48:06,349 INFO e.b.g.m.LoadingScreen [LWJGL Application] Textura cargada correctamente.
+2020-12-23 00:48:06,549 INFO e.b.g.m.LoadingScreen [LWJGL Application] Textura cargada correctamente.
+2020-12-23 00:48:06,751 INFO e.b.g.m.LoadingScreen [LWJGL Application] Textura cargada correctamente.
+2020-12-23 00:48:06,952 INFO e.b.g.m.LoadingScreen [LWJGL Application] Textura cargada correctamente.
+2020-12-23 00:48:09,992 INFO e.b.g.m.LoadingScreen [LWJGL Application] Textura cargada correctamente.
+2020-12-23 00:48:10,193 INFO e.b.g.m.LoadingScreen [LWJGL Application] Textura cargada correctamente.
+2020-12-23 00:48:10,394 INFO e.b.g.m.LoadingScreen [LWJGL Application] Textura cargada correctamente.
+2020-12-23 00:48:10,595 INFO e.b.g.m.LoadingScreen [LWJGL Application] Textura cargada correctamente.
+2020-12-23 00:48:10,797 INFO e.b.g.m.LoadingScreen [LWJGL Application] Textura cargada correctamente.
+2020-12-23 00:48:10,998 INFO e.b.g.m.LoadingScreen [LWJGL Application] Textura cargada correctamente.
+2020-12-23 00:48:11,199 INFO e.b.g.m.LoadingScreen [LWJGL Application] Textura cargada correctamente.
+2020-12-23 00:48:11,399 INFO e.b.g.m.LoadingScreen [LWJGL Application] Textura cargada correctamente.
+2020-12-23 00:48:11,602 INFO e.b.g.m.LoadingScreen [LWJGL Application] Textura cargada correctamente.
+2020-12-23 00:48:11,802 INFO e.b.g.m.LoadingScreen [LWJGL Application] Textura cargada correctamente.
+2020-12-23 00:48:12,003 INFO e.b.g.m.LoadingScreen [LWJGL Application] Textura cargada correctamente.
+2020-12-23 00:48:12,204 INFO e.b.g.m.LoadingScreen [LWJGL Application] Textura cargada correctamente.
+2020-12-23 00:48:12,404 INFO e.b.g.m.MainGameScreen [LWJGL Application] Juego contemplado.
+2020-12-23 00:48:22,005 INFO e.b.g.m.SquadMenuScreen [LWJGL Application] Personajes cargados correctamente.
+2020-12-23 00:48:27,472 INFO e.b.g.m.MainGameScreen [LWJGL Application] Juego contemplado.
+2020-12-23 01:37:46,068 DEBUG e.b.g.m.MainGame [LWJGL Application] debug
+2020-12-23 01:37:46,070 INFO e.b.g.m.MainGame [LWJGL Application] Juego creado
+2020-12-23 01:37:46,078 INFO e.b.g.m.MainGame [LWJGL Application] user cargado
+2020-12-23 01:37:46,131 INFO e.b.g.m.GameMenuScreen [LWJGL Application] Menu cargado correctamente.
+2020-12-23 01:37:50,365 INFO e.b.g.m.LoadingScreen [LWJGL Application] Textura cargada correctamente.
+2020-12-23 01:37:50,567 INFO e.b.g.m.LoadingScreen [LWJGL Application] Textura cargada correctamente.
+2020-12-23 01:37:50,767 INFO e.b.g.m.LoadingScreen [LWJGL Application] Textura cargada correctamente.
+2020-12-23 01:37:50,968 INFO e.b.g.m.LoadingScreen [LWJGL Application] Textura cargada correctamente.
+2020-12-23 01:37:51,173 INFO e.b.g.m.LoadingScreen [LWJGL Application] Textura cargada correctamente.
+2020-12-23 01:37:51,375 INFO e.b.g.m.LoadingScreen [LWJGL Application] Textura cargada correctamente.
+2020-12-23 01:37:51,576 INFO e.b.g.m.LoadingScreen [LWJGL Application] Textura cargada correctamente.
+2020-12-23 01:37:51,778 INFO e.b.g.m.LoadingScreen [LWJGL Application] Textura cargada correctamente.
+2020-12-23 01:37:51,979 INFO e.b.g.m.LoadingScreen [LWJGL Application] Textura cargada correctamente.
+2020-12-23 01:37:52,179 INFO e.b.g.m.LoadingScreen [LWJGL Application] Textura cargada correctamente.
+2020-12-23 01:37:52,380 INFO e.b.g.m.LoadingScreen [LWJGL Application] Textura cargada correctamente.
+2020-12-23 01:37:52,581 INFO e.b.g.m.LoadingScreen [LWJGL Application] Textura cargada correctamente.
+2020-12-23 01:37:52,781 INFO e.b.g.m.LoadingScreen [LWJGL Application] Textura cargada correctamente.
+2020-12-23 01:37:52,993 INFO e.b.g.m.LoadingScreen [LWJGL Application] Textura cargada correctamente.
+2020-12-23 01:37:53,193 INFO e.b.g.m.LoadingScreen [LWJGL Application] Textura cargada correctamente.
+2020-12-23 01:37:53,396 INFO e.b.g.m.LoadingScreen [LWJGL Application] Textura cargada correctamente.
+2020-12-23 01:37:53,596 INFO e.b.g.m.LoadingScreen [LWJGL Application] Textura cargada correctamente.
+2020-12-23 01:37:53,796 INFO e.b.g.m.LoadingScreen [LWJGL Application] Textura cargada correctamente.
+2020-12-23 01:37:53,997 INFO e.b.g.m.LoadingScreen [LWJGL Application] Textura cargada correctamente.
+2020-12-23 01:37:54,197 INFO e.b.g.m.LoadingScreen [LWJGL Application] Fin de carga de texturas.
+2020-12-23 01:37:54,197 INFO e.b.g.m.MainGameScreen [LWJGL Application] Juego contemplado.
+2020-12-23 01:37:57,653 INFO e.b.g.m.SquadMenuScreen [LWJGL Application] Personajes cargados correctamente.

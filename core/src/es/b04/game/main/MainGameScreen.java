@@ -5,9 +5,7 @@ import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.*;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.NinePatch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.utils.ActorGestureListener;
@@ -20,6 +18,8 @@ import es.b04.game.utility.CustomFont;
 import es.b04.game.hud.IButton;
 import es.b04.game.log.User;
 import es.b04.game.hud.ProgressBar;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.text.DecimalFormat;
 
@@ -44,6 +44,7 @@ public class MainGameScreen extends ScreenAdapter {
     private int hpAlgorithm;
     private ProgressBar enemyHpBar;
     private MapSystem map;
+    private static final Logger logger = LogManager.getLogger(MainGameScreen.class);
 
     public MainGameScreen(MainGame game) {
         this.game = game;
@@ -55,9 +56,7 @@ public class MainGameScreen extends ScreenAdapter {
     @Override
     public void show() {
         super.show();
-        //Texture hpbarMod = new Texture("hpbar1.png");
-        //hpbarBack = new Texture("hpbar2.png");
-        //hpbar = new NinePatch(new TextureRegion(hpbarMod,264, 35));
+        logger.info("Juego contemplado.");
         batch = new SpriteBatch();
         stage = new Stage(new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()));
         cEnemy = new CEnemy("C1.png","C2.png",hpAlgorithm,10,50);
@@ -141,7 +140,6 @@ public class MainGameScreen extends ScreenAdapter {
         renderText();
         stage.draw();
         enemyHpBar.draw(batch, cEnemy.getHealth(), cEnemy.getMaxhelth());
-        System.out.println(enemyHpBar.comp());
         map.draw(batch, levelStage);
         //finalHpBar.draw(batch);
         // batch.draw(hpbarBack, 730, 580);

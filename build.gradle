@@ -62,6 +62,8 @@ project(":core") {
         api "com.badlogicgames.box2dlights:box2dlights:$box2DLightsVersion"
         api "com.badlogicgames.gdx:gdx-freetype:$gdxVersion"
         compile group: 'org.xerial', name: 'sqlite-jdbc', version: '3.32.3.2'
-        
+        compile group: 'org.apache.logging.log4j', name: 'log4j-api', version: '2.14.0'
+        compile group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.14.0'
+
     }
 }

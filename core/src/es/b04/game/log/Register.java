@@ -2,6 +2,9 @@ package es.b04.game.log;
 
 import es.b04.game.dataBase.DBException;
 import es.b04.game.dataBase.DBManager;
+import es.b04.game.main.GameMenuScreen;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;

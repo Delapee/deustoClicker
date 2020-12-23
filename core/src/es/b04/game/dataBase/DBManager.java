@@ -4,12 +4,17 @@ package es.b04.game.dataBase;
 import es.b04.game.character.Attack;
 import es.b04.game.character.Champion;
 import es.b04.game.log.User;
+import es.b04.game.main.GameMenuScreen;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class DBManager {
     private static Connection conn;
+    private static final Logger logger = LogManager.getLogger(DBManager.class);
 
     /**
      * Metodo de conecxión a la BD
@@ -20,7 +25,9 @@ public class DBManager {
         try {
             Class.forName("org.sqlite.JDBC");
             conn = DriverManager.getConnection("jdbc:sqlite:" + db);
+            logger.info("Conectado a base de datos correctamente.");
         } catch (ClassNotFoundException e) {
+            logger.error("Error al conectar con la BD.");
             throw new DBException("No se pudo cargar el driver de la base de datos", e);
         } catch (SQLException e) {
             throw new DBException("No se pudo conectar la base de datos", e);
@@ -34,7 +41,9 @@ public class DBManager {
     public void disconnection() throws DBException{
         try {
             conn.close();
+            logger.info("Desconexion realizada correctamente.");
         } catch (SQLException e) {
+            logger.error("Error al desconectar.");
             throw new DBException("No se pudo desconectar la base de datos", e);
         }
     }
@@ -57,7 +66,9 @@ public class DBManager {
             stmt.setString(7, u.getIcon());
 
             stmt.executeUpdate();
+            logger.info("Usuario creado correctamente en la BD.");
         } catch (SQLException e) {
+            logger.error("Error al cargar usuario en la BD.");
             throw new DBException("No se pudo guardar el usuario en la base de datos", e);
         }
     }
@@ -89,7 +100,9 @@ public class DBManager {
             stmt.setString(14, u.getId());
 
             stmt.executeUpdate();
+            logger.info("Usuario actualizado correctamente.");
         } catch (SQLException e) {
+            logger.error("Error al actualizar usuario.");
             throw new DBException("No se pudo actualizar el usuario en la base de datos", e);
         }
     }
@@ -120,7 +133,9 @@ public class DBManager {
             stmt.setString(13, idUser);
 
             stmt.executeUpdate();
+            logger.info("Campeón guardado correctamente.");
         } catch (SQLException e) {
+            logger.error("Error al guardar campeón.");
             throw new DBException("No se pudo guardar el campeon en la base de datos", e);
         }
     }
@@ -147,7 +162,9 @@ public class DBManager {
             stmt.setString(9, idUser);
 
             stmt.executeUpdate();
+            logger.info("Campeon actualizado correctamente.");
         } catch (SQLException e) {
+            logger.error("Error al actualizar campeón.");
             throw new DBException("No se pudo actualizar el campeon en la base de datos", e);
         }
     }
@@ -175,7 +192,7 @@ public class DBManager {
      */
 
     public List<String> getAllUserNames() throws DBException{
-        List<String> usersNames = new ArrayList<String>();
+        List<String> usersNames = new ArrayList<>();
 
         try (Statement stmt = conn.createStatement()){
             ResultSet rs = stmt.executeQuery("SELECT name FROM user");
@@ -191,12 +208,6 @@ public class DBManager {
         return usersNames;
     }
 
-    public User getLoginUser(String name, String pass){
-
-
-        return new User();
-    }
-
     /**
      * Metodo que elimina toda la informacion relacionada con el User
      * @param u User que se desea eliminar
@@ -206,7 +217,9 @@ public class DBManager {
         try (PreparedStatement stmt = conn.prepareStatement("DELETE FROM user WHERE id=?")) {
             stmt.setString(1, u.getId());
             stmt.executeUpdate();
+            logger.info("Usuario eliminado correctamente de la BD.");
         } catch (SQLException e) {
+            logger.error("Error al eliminar usuario de la BD.");
             throw new DBException("Error al eliminar un usuario de la base de datos", e);
         }
     }
@@ -234,8 +247,10 @@ public class DBManager {
             user.setSquad(champions.get(0));
             user.setInventory(champions.get(1));
 
+            logger.info("Usuario recogido correctamente.");
             return user;
         } catch (SQLException e) {
+            logger.error("Error al recoger usuario.");
             throw new DBException("Error obteniendo el usuario", e);
         }
     }
@@ -272,9 +287,10 @@ public class DBManager {
 
             champions.add(squad);
             champions.add(inventory);
-
+            logger.info("Campeones del usuario recogidos correctamente.");
             return champions;
         } catch (SQLException e) {
+            logger.error("Error al recoger campeones del usuario.");
             throw new DBException("Error obteniendo el usuario", e);
         }
     }
@@ -292,8 +308,10 @@ public class DBManager {
                     rs.getInt("criticProb"), rs.getInt("dodgeProb"), new Attack(), new Attack(),
                     rs.getBoolean("onSquad"));
 
+            logger.info("Campeon recogido correctamente.");
             return champ;
         } catch (SQLException e) {
+            logger.error("Error al recoger campeon");
             throw new DBException("Error obteniendo el usuario", e);
         }
     }

@@ -6,10 +6,14 @@ import com.badlogic.gdx.graphics.*;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import es.b04.game.log.Login;
 import es.b04.game.utility.AssetEnum;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class LoadingScreen extends ScreenAdapter {
     private static final float WORLD_WIDTH = Gdx.graphics.getWidth();
+    private static final Logger logger = LogManager.getLogger(LoadingScreen.class);
     private static final float WORLD_HEIGHT = Gdx.graphics.getHeight();
     private static final float PROGRESS_BAR_WIDTH = 400;
     private static final float PROGRESS_BAR_HEIGHT = 25;
@@ -95,17 +99,17 @@ public class LoadingScreen extends ScreenAdapter {
     }
 
     private void update() {
-        /*
         try {
             Thread.sleep(200);
         } catch (InterruptedException e) {
+            logger.warn("Error en la carga de texturas.");
             e.printStackTrace();
         }
-
-         */
         if (game.getAssetManager().update()) {
+            logger.info("Fin de carga de texturas.");
             game.setScreen(game.getScreens().get(0));
         } else {
+            logger.info("Textura cargada correctamente.");
             progress = game.getAssetManager().getProgress();
         }
     }

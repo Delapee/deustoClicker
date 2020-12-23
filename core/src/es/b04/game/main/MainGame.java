@@ -9,11 +9,14 @@ import es.b04.game.log.User;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Logger;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class MainGame extends Game {
 	private CustomMouse customMouse;
 	private final AssetManager assetManager = new AssetManager();
+	private static final Logger logger = LogManager.getLogger(MainGame.class);
 	private User user;
 	private List<Screen> screens;
 
@@ -65,6 +68,8 @@ public class MainGame extends Game {
 
 	@Override
 	public void create() {
+		logger.debug("debug");
+		logger.info("Juego creado");
 		customMouse = new CustomMouse("cursor.png");
 		user = new User();
 		loadUserA();
@@ -110,6 +115,7 @@ public class MainGame extends Game {
 		invent.add(c5);
 
 		user.setInventory(invent);
+		logger.info("user cargado");
 
 	}
 

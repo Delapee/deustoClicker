@@ -11,24 +11,23 @@ import com.badlogic.gdx.scenes.scene2d.utils.ActorGestureListener;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import es.b04.game.hud.IButton;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class GameMenuScreen extends ScreenAdapter {
     private Texture tittleBackground;
     private SpriteBatch menuBatch;
     private final MainGame mainGame;
+    private static final Logger logger = LogManager.getLogger(GameMenuScreen.class);
     private Stage stage;
-
-
 
     public GameMenuScreen(MainGame mainGame) {
         this.mainGame = mainGame;
-
     }
 
     @Override
     public void show() {
         super.show();
-
 
         tittleBackground = new Texture("mainTittle.png");
         menuBatch = new SpriteBatch();
@@ -48,7 +47,7 @@ public class GameMenuScreen extends ScreenAdapter {
             }
 
         });
-
+        logger.info("Menu cargado correctamente.");
         stage.addActor(play);
         stage.addActor(salir);
     }
@@ -61,14 +60,9 @@ public class GameMenuScreen extends ScreenAdapter {
         menuBatch.begin();
         menuBatch.draw(tittleBackground, 0, 0);
         menuBatch.end();
-
-
-
         stage.act(delta);
         stage.draw();
     }
-
-
 
     @Override
     public void resize(int width, int height) {
