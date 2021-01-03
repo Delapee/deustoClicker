@@ -12,6 +12,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ActorGestureListener;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import es.b04.game.character.Champion;
 import es.b04.game.character.MapSystem;
+import es.b04.game.character.Shop;
 import es.b04.game.utility.AssetEnum;
 import es.b04.game.hud.CEnemy;
 import es.b04.game.utility.CustomFont;
@@ -44,6 +45,7 @@ public class MainGameScreen extends ScreenAdapter {
     private int hpAlgorithm;
     private ProgressBar enemyHpBar;
     private MapSystem map;
+    private Shop shop;
     private static final Logger logger = LogManager.getLogger(MainGameScreen.class);
 
     public MainGameScreen(MainGame game) {
@@ -66,6 +68,8 @@ public class MainGameScreen extends ScreenAdapter {
                 (float)cEnemy.getHealth(), 730, 590, 264, 35);
         Gdx.input.setInputProcessor(stage);
         background = assetManager.get(AssetEnum.GAMEBCK.getAsset());
+        shop = new Shop();
+        shop.loadShop(stage, userL);
 
         stage.addActor(squadButton);
         stage.addActor(cEnemy);
