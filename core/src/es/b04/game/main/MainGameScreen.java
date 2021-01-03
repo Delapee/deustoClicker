@@ -31,6 +31,8 @@ public class MainGameScreen extends ScreenAdapter {
     private CEnemy cEnemy;
     private MainGame game;
     private float time = 15.f;
+    private float timeAuto = 0.f;
+    private boolean autoOn;
     private DecimalFormat timeFormat = new DecimalFormat("#.00");
     private BitmapFont fontDung70;
     private BitmapFont fontDung50;
@@ -47,12 +49,16 @@ public class MainGameScreen extends ScreenAdapter {
     private MapSystem map;
     private Shop shop;
     private static final Logger logger = LogManager.getLogger(MainGameScreen.class);
+    private IButton autoClicker;
+    private int timesPerLog;
 
     public MainGameScreen(MainGame game) {
         this.game = game;
         this.assetManager = game.getAssetManager();
         userL = game.getUser();
-        hpAlgorithm = (dmgAvg*touchAvg*game.getUser().getLevel() * levelStage)*faseM;
+        hpAlgorithm = (int) (Math.pow((dmgAvg*touchAvg*game.getUser().getLevel() + levelStage),1.05)*faseM);
+        autoClicker = new IButton("auto.png", "auto2.png", 1040, 500);
+        timesPerLog  = 1;
     }
 
     @Override
@@ -73,6 +79,7 @@ public class MainGameScreen extends ScreenAdapter {
 
         stage.addActor(squadButton);
         stage.addActor(cEnemy);
+        stage.addActor(autoClicker);
 
         // Declaracion de las Fuentes
         fontDung70 = new CustomFont(70,255,255,255,3.0f,0,
@@ -92,11 +99,22 @@ public class MainGameScreen extends ScreenAdapter {
                 enemyHp();
             }
         });
+        autoClicker.addListener(new ActorGestureListener(){
+            @Override
+            public void tap(InputEvent event, float x, float y, int count, int button) {
+                super.tap(event, x, y, count, button);
+                if(userL.getAutoClick() > 0 && !autoOn){
+                    timeAuto = 15f;
+                    userL.setAutoClick(userL.getAutoClick() -1);
+                    autoOn = true;
+                }
+            }
+        });
 
     }
 
     public void enemyHp(){
-        hpAlgorithm = (dmgAvg*touchAvg*game.getUser().getLevel() + levelStage)*faseM;
+        hpAlgorithm = (int) (Math.pow((dmgAvg*touchAvg*game.getUser().getLevel() + levelStage),1.05)*faseM);
         if(cEnemy.getHealth() <= 0 && levelStage == 6){
             userL.setGold(userL.getGold() + cEnemy.getGoldDrop()*100);
             userL.setExpProgress(userL.getExpProgress() + cEnemy.getExpDrop());
@@ -134,12 +152,23 @@ public class MainGameScreen extends ScreenAdapter {
             cEnemy.setMaxhelth(hpAlgorithm);
         }
     }
+    public void autoClickAction(){
+        timeAuto -= Gdx.graphics.getRawDeltaTime();
+        cEnemy.setHealth(cEnemy.getHealth() - getTotalDmg());
+        enemyHp();
+        if(timeAuto <= 0){
+            autoOn = false;
+        }
+    }
 
     @Override
     public void render(float delta) {
         super.render(delta);
         clearScreen();
         timer();
+        if(autoOn){
+            autoClickAction();
+        }
         batch.begin();
         renderText();
         stage.draw();
@@ -196,6 +225,7 @@ public class MainGameScreen extends ScreenAdapter {
         }
         fontDung70.draw(batch,userL.getExpProgress() + "/" + userL.getExpMax(),430,877);
         fontDung70.draw(batch,timeFormat.format(time),1289,1010);
+        fontDung70.draw(batch,timeFormat.format(timeAuto),1289,950);
 
         // Clicker
         fontDung70.draw(batch,Integer.toString(cEnemy.getHealth()),730,550);

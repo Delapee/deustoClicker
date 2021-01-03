@@ -99,12 +99,12 @@ public class LoadingScreen extends ScreenAdapter {
     }
 
     private void update() {
-        try {
-            Thread.sleep(200);
-        } catch (InterruptedException e) {
-            logger.warn("Error en la carga de texturas.");
-            e.printStackTrace();
-        }
+        //try {
+            //Thread.sleep(200);
+        //} catch (InterruptedException e) {
+         //   logger.warn("Error en la carga de texturas.");
+         //   e.printStackTrace();
+        //}
         if (game.getAssetManager().update()) {
             logger.info("Fin de carga de texturas.");
             game.setScreen(game.getScreens().get(0));
