@@ -14,9 +14,12 @@ public class Shop {
     private List<IButton> itemList = new ArrayList<>(6);
 
     public Shop() {
-        itemList.add(new IButton("ShopIten.png","ShopIten2.png",1650,850));
+        itemList.add(new IButton("ShopIten.png","ShopIten2.png",1620,850));
         itemList.add(new IButton("ShopIten.png","ShopIten2.png",1775,850));
+        itemList.add(new IButton("ShopIten.png","ShopIten2.png",1620,700));
         itemList.add(new IButton("ShopIten.png","ShopIten2.png",1775,700));
+        itemList.add(new IButton("ShopIten.png","ShopIten2.png",1620,550));
+        itemList.add(new IButton("ShopIten.png","ShopIten2.png",1775,550));
     }
 
 
@@ -53,14 +56,12 @@ public class Shop {
         });
 
         // Iniciar Raid
-
-        itemList.get(2).addListener(new ActorGestureListener(){
+        itemList.get(6).addListener(new ActorGestureListener(){
             @Override
             public void tap(InputEvent event, float x, float y, int count, int button) {
                 super.tap(event, x, y, count, button);
                 if (user.getGold() >= 1500) {
                     user.setGold(user.getGold() - 500);
-
 
 
                 }
