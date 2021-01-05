@@ -4,17 +4,23 @@ package es.b04.game.dataBase;
 import es.b04.game.character.Attack;
 import es.b04.game.character.Champion;
 import es.b04.game.log.User;
-import es.b04.game.main.GameMenuScreen;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
+import java.nio.charset.StandardCharsets;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.security.MessageDigest;
+import java.util.Arrays;
+import javax.crypto.Cipher;
+import javax.crypto.SecretKey;
+import javax.crypto.spec.SecretKeySpec;
+import org.apache.commons.codec.binary.Base64;
 
 public class DBManager {
     private static Connection conn;
     private static final Logger logger = LogManager.getLogger(DBManager.class);
+    private static final String secretKey = "enUnLugarDeLaMancha";
 
     /**
      * Metodo de conecxión a la BD
@@ -59,7 +65,7 @@ public class DBManager {
 
             stmt.setString(1, u.getId());
             stmt.setString(2, u.getName());
-            stmt.setString(3, u.getPass());
+            stmt.setString(3, encode(u.getPass()));
             stmt.setString(4, u.getEmail());
             stmt.setString(5, u.getGender());
             stmt.setInt(6, u.getAge());
@@ -322,13 +328,51 @@ public class DBManager {
 
             ResultSet rs = stmt.executeQuery();
 
-            if(pass.equals(rs.getString("pass"))){
-                return true;
-            }
-
-            return false;
+            return pass.equals(decode(rs.getString("pass")));
         } catch (SQLException e) {
-            throw new DBException("Error obteniendo el usuario", e);
+            throw new DBException("Error comprobando la contraseña", e);
         }
+    }
+
+    public String encode(String pass) throws DBException{
+        String encriptada = "";
+        try {
+            Cipher cifrado = Cipher.getInstance("DESede");
+            cifrado.init(Cipher.ENCRYPT_MODE, encripAlgKey());
+            byte[] plainTextBytes = pass.getBytes(StandardCharsets.UTF_8);
+            byte[] buf = cifrado.doFinal(plainTextBytes);
+            byte[] base64Bytes = Base64.encodeBase64(buf);
+            encriptada = new String(base64Bytes);
+        }catch (Exception e){
+            throw new DBException("Error encriptando la contraseña", e);
+        }
+        return encriptada;
+    }
+
+    public String decode(String pass) throws DBException{
+        String desencriptada = "";
+        try {
+            byte[] message = Base64.decodeBase64(pass.getBytes(StandardCharsets.UTF_8));
+            Cipher descifrado = Cipher.getInstance("DESede");
+            descifrado.init(Cipher.DECRYPT_MODE, encripAlgKey());
+            byte[] plainText = descifrado.doFinal(message);
+            desencriptada = new String(plainText, StandardCharsets.UTF_8);
+        }catch (Exception e){
+            throw new DBException("Error desencriptando la contraseña", e);
+        }
+        return desencriptada;
+    }
+
+    public SecretKey encripAlgKey() throws DBException {
+        SecretKey key = null;
+        try {
+            MessageDigest md5 = MessageDigest.getInstance("MD5");
+            byte[] passKey = md5.digest(secretKey.getBytes(StandardCharsets.UTF_8));
+            byte[] bytesKey = Arrays.copyOf(passKey, 24);
+            key = new SecretKeySpec(bytesKey, "DESede");
+        }catch (Exception e){
+            throw new DBException("Error con el algoritmo de encriptacion", e);
+        }
+        return key;
     }
 }
