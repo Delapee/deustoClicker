@@ -94,8 +94,8 @@ public class MainGame extends Game {
 		user.setName("UserPrueba");
 		user.setGold(8000000);
 		user.setLevel(1);
-		user.setExpMax(10000);
-		user.setExpProgress(200);
+		user.setExpMax(1000);
+		user.setExpProgress(500);
 
 		ArrayList<String> sChampion = new ArrayList<>();
 		sChampion.add("pirate.png");

@@ -46,6 +46,7 @@ public class MainGameScreen extends ScreenAdapter {
     private int faseM = 5 * levelStage;
     private int hpAlgorithm;
     private ProgressBar enemyHpBar;
+    private ProgressBar lvlBar;
     private MapSystem map;
     private Shop shop;
     private static final Logger logger = LogManager.getLogger(MainGameScreen.class);
@@ -72,6 +73,9 @@ public class MainGameScreen extends ScreenAdapter {
                 37, (ScreenAdapter) game.getScreens().get(2), game);
         enemyHpBar = new ProgressBar("hpbar2.png", "hpbar1.png", (float)cEnemy.getMaxhelth(),
                 (float)cEnemy.getHealth(), 730, 590, 264, 35);
+        lvlBar = new ProgressBar("hpbar2.png", "expbar.png", userL.getExpMax(),
+                userL.getExpProgress(), 430, 850, 264, 35);
+
         Gdx.input.setInputProcessor(stage);
         background = assetManager.get(AssetEnum.GAMEBCK.getAsset());
         shop = new Shop();
@@ -173,10 +177,8 @@ public class MainGameScreen extends ScreenAdapter {
         renderText();
         stage.draw();
         enemyHpBar.draw(batch, cEnemy.getHealth(), cEnemy.getMaxhelth());
+        lvlBar.draw(batch, userL.getExpProgress(),userL.getExpMax());
         map.draw(batch, levelStage);
-        //finalHpBar.draw(batch);
-        // batch.draw(hpbarBack, 730, 580);
-        //  hpbar.draw(batch, 730, 580, ((float)cEnemy.getHealth()/(float)cEnemy.getMaxhelth()) *264, 35);
 
         batch.end();
 

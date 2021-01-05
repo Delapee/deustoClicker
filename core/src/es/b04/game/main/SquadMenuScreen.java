@@ -14,6 +14,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ActorGestureListener;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import es.b04.game.character.Champion;
+import es.b04.game.hud.ProgressBar;
 import es.b04.game.utility.AssetEnum;
 import es.b04.game.hud.IButton;
 import es.b04.game.log.User;
@@ -31,9 +32,9 @@ public class SquadMenuScreen extends ScreenAdapter {
     private final AssetManager assetManager;
     private Stage stage;
     private User userl;
-    private IButton acept,equip,upgrade;
+    private IButton acept,equip,upgrade, sell, pageL, pageR;
     private static final Logger logger = LogManager.getLogger(SquadMenuScreen.class);
-
+    private ProgressBar lvlBar;
     private int inspect;
     private List<IButton> champButtons;
 
@@ -43,6 +44,7 @@ public class SquadMenuScreen extends ScreenAdapter {
         super();
         this.game = game;
         this.assetManager = game.getAssetManager();
+        inspect = 0;
     }
 
     @Override
@@ -57,7 +59,8 @@ public class SquadMenuScreen extends ScreenAdapter {
                 1.5f, Color.BLACK).getCustomFont();
         userl = game.getUser();
 
-
+        lvlBar = new ProgressBar("hpbar2.png", "expbar.png", userl.getExpMax(),
+                userl.getExpProgress(), 140, 810, 264, 35);
         loadInventoryButtons();
         loadChampButtons();
         logger.info("Personajes cargados correctamente.");
@@ -65,7 +68,9 @@ public class SquadMenuScreen extends ScreenAdapter {
         stage.addActor(acept);
         stage.addActor(equip);
         stage.addActor(upgrade);
-
+        stage.addActor(sell);
+        stage.addActor(pageR);
+        stage.addActor(pageL);
     }
 
     @Override
@@ -78,6 +83,7 @@ public class SquadMenuScreen extends ScreenAdapter {
         renderChampions();
         stage.act(delta);
         renderText();
+        lvlBar.draw(batch, userl.getExpProgress(),userl.getExpMax());
         stage.draw();
         batch.end();
     }
@@ -109,9 +115,8 @@ public class SquadMenuScreen extends ScreenAdapter {
 
     // Carga de Personajes
     public void loadChampButtons(){
-        inspect = 0;
         final int nRow = 3, nColum = 5;
-        int cont = 0;
+        int cont = 0 + inspect;
 
         champButtons = new ArrayList<>();
 
@@ -256,9 +261,22 @@ public class SquadMenuScreen extends ScreenAdapter {
     // Carga de Hud
     public void loadInventoryButtons(){
         acept = new IButton("B1.png","B2.png",53,
-                195, (ScreenAdapter) game.getScreens().get(0), game);
+                195);
         equip = new IButton("B1.png","B2.png",1490, 280);
         upgrade = new IButton("B1.png","B2.png",1490, 195);
+        sell = new IButton("B1.png","B2.png",775, 100);
+        pageL = new IButton("auto.png","auto2.png",500, 100);
+        pageR = new IButton("auto.png","auto2.png",1225, 100);
+
+        acept.addListener(new ActorGestureListener(){
+
+            @Override
+            public void tap(InputEvent event, float x, float y, int count, int button) {
+                super.tap(event, x, y, count, button);
+                inspect = 0;
+                game.setScreen( game.getScreens().get(0));
+            }
+        });
 
         equip.addListener(new ActorGestureListener(){
 
@@ -286,6 +304,44 @@ public class SquadMenuScreen extends ScreenAdapter {
                 }
             }
         });
+
+        sell.addListener(new ActorGestureListener(){
+
+            @Override
+            public void tap(InputEvent event, float x, float y, int count, int button) {
+                super.tap(event, x, y, count, button);
+                if (userl.getInventory().size() > 0) {
+                    if (!userl.getInventory().get(inspect).isOnSquad()) {
+                        userl.getInventory().remove(inspect);
+                        game.setScreen( game.getScreens().get(2));
+                    }
+                }
+            }
+        });
+
+        pageL.addListener(new ActorGestureListener(){
+            @Override
+            public void tap(InputEvent event, float x, float y, int count, int button) {
+                super.tap(event, x, y, count, button);
+                if(userl.getInventory().size() > 15 & inspect >= 15){
+                    inspect -= 15;
+                    game.setScreen( game.getScreens().get(2));
+                }
+
+            }
+        });
+
+        pageR.addListener(new ActorGestureListener(){
+            @Override
+            public void tap(InputEvent event, float x, float y, int count, int button) {
+                super.tap(event, x, y, count, button);
+                if(userl.getInventory().size() >= 15){
+                    inspect += 15;
+                    game.setScreen( game.getScreens().get(2));
+                }
+            }
+        });
+
     }
 
     // Metodos de Renderizacion

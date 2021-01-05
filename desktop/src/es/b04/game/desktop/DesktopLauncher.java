@@ -10,8 +10,10 @@ import es.b04.game.main.MainGame;
 
 public class DesktopLauncher {
 
+	static volatile boolean close;
+
 	public static void main (String[] arg) throws DBException {
-		boolean close = false;
+		close = false;
 		Login l = new Login();
 		DBManager db = new DBManager();
 		db.connection("dungeonClicker.db");
@@ -27,9 +29,7 @@ public class DesktopLauncher {
 			if (!l.isVisible()){
 				close = true;
 			}
-			System.out.println();
 			l.getCheck();
-			System.out.println();
 		}while (!l.getCheck() && !close);
 		l.dispose();
 
