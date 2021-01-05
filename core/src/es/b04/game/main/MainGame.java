@@ -93,19 +93,30 @@ public class MainGame extends Game {
 	public void loadUserA(){
 		user.setName("UserPrueba");
 		user.setGold(8000000);
-		user.setLevel(1);
+		user.setLevel(60);
 		user.setExpMax(1000);
 		user.setExpProgress(500);
 
-		ArrayList<String> sChampion = new ArrayList<>();
-		sChampion.add("pirate.png");
-		sChampion.add("pirate.png");
+		ArrayList<String> sPirate = new ArrayList<>();
+		sPirate.add("champ/pira/pira_n.png");
+		sPirate.add("champ/pira/pira_p.png");
+		sPirate.add("champ/pira/pira_f.png");
 
-		Champion c1 = new Champion(sChampion,"El PIRATA",1,1,100,10,15,33,15,null,null,false);
-		Champion c2 = new Champion(sChampion,"El PERRATA",2,1,120,12,25,43,25,null,null,false);
-		Champion c3 = new Champion(sChampion,"El TONTITO",1,1,100,21,25,13,35,null,null,false);
-		Champion c4 = new Champion(sChampion,"El CURATOR",2,1,120,33,45,23,45,null,null,false);
-		Champion c5 = new Champion(sChampion,"El PINOS",1,1,100,41,15,33,13,null,null,false);
+		ArrayList<String> sMed = new ArrayList<>();
+		sMed.add("champ/med/med_n.png");
+		sMed.add("champ/med/med_p.png");
+		sMed.add("champ/med/med_f.png");
+
+		ArrayList<String> sWar = new ArrayList<>();
+		sWar.add("champ/war/war_n.png");
+		sWar.add("champ/war/war_p.png");
+		sWar.add("champ/war/war_f.png");
+
+		Champion c1 = new Champion(sPirate,"El PIRATA",1,1,100,10,15,33,15,null,null,false);
+		Champion c2 = new Champion(sWar,"El PERRATA",2,1,120,12,25,43,25,null,null,false);
+		Champion c3 = new Champion(sWar,"El TONTITO",1,1,100,21,25,13,35,null,null,false);
+		Champion c4 = new Champion(sMed,"El CURATOR",2,1,120,33,45,23,45,null,null,false);
+		Champion c5 = new Champion(sMed,"El PINOS",1,1,100,41,15,33,13,null,null,false);
 
 		ArrayList<Champion> invent = new ArrayList<>();
 		invent.add(c1);

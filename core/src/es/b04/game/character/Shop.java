@@ -35,8 +35,9 @@ public class Shop {
                 if (user.getGold() >= 500){
                     user.setGold(user.getGold() - 500);
                     ArrayList<String> sChampion = new ArrayList<>();
-                    sChampion.add("pirate.png");
-                    sChampion.add("pirate.png");
+                    sChampion.add("champ/mag/mag_n.png");
+                    sChampion.add("champ/mag/mag_p.png");
+                    sChampion.add("champ/mag/mag_f.png");
                     user.addChampionInventory(new Champion(sChampion,"El Nuevo",1,randomChamp(user),100,41,15,33,13,null,null,false));
                     System.out.println(user.getInventory().get(user.getInventory().size()-1).getRare());
                 }

@@ -6,6 +6,7 @@ import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -37,6 +38,7 @@ public class SquadMenuScreen extends ScreenAdapter {
     private ProgressBar lvlBar;
     private int inspect;
     private List<IButton> champButtons;
+    private int page;
 
     private BitmapFont fontDung50;
 
@@ -50,6 +52,19 @@ public class SquadMenuScreen extends ScreenAdapter {
     @Override
     public void show() {
         super.show();
+
+        if (inspect < 15){
+            page = 1;
+            inspect = 0;
+        }
+        else if (inspect < 30){
+            page = 2;
+            inspect = 15;
+        }
+        else {
+            page = 3;
+            inspect = 30;
+        }
 
         // Basicos
         tittleBackground = new Texture("BackgroundSquad.png");
@@ -116,7 +131,7 @@ public class SquadMenuScreen extends ScreenAdapter {
     // Carga de Personajes
     public void loadChampButtons(){
         final int nRow = 3, nColum = 5;
-        int cont = 0 + inspect;
+        int cont = inspect;
 
         champButtons = new ArrayList<>();
 
@@ -323,7 +338,7 @@ public class SquadMenuScreen extends ScreenAdapter {
             @Override
             public void tap(InputEvent event, float x, float y, int count, int button) {
                 super.tap(event, x, y, count, button);
-                if(userl.getInventory().size() > 15 & inspect >= 15){
+                if(userl.getInventory().size() >= 15 & inspect >= 15){
                     inspect -= 15;
                     game.setScreen( game.getScreens().get(2));
                 }
@@ -335,7 +350,7 @@ public class SquadMenuScreen extends ScreenAdapter {
             @Override
             public void tap(InputEvent event, float x, float y, int count, int button) {
                 super.tap(event, x, y, count, button);
-                if(userl.getInventory().size() >= 15){
+                if(userl.getInventory().size() > 15){
                     inspect += 15;
                     game.setScreen( game.getScreens().get(2));
                 }
@@ -364,6 +379,40 @@ public class SquadMenuScreen extends ScreenAdapter {
             cont++;
         }
 
+        cont = 15*(page - 1);
+        final int nRow = 3, nColum = 5;
+        String rare = "";
+        // Renderizar Rarezas
+        for (int i = 0; i < nRow; i++) {
+            for (int j = 0; j < nColum; j++) {
+
+                try {
+                    switch (userl.getInventory().get(cont).getRare()){
+                        case 1:
+                            rare = "rarezas/1.png";
+                            break;
+                        case 2:
+                            rare = "rarezas/2.png";
+                            break;
+                        case 3:
+                            rare = "rarezas/3.png";
+                            break;
+                        case 4:
+                            rare = "rarezas/4.png";
+                            break;
+                        case 5:
+                            rare = "rarezas/5.png";
+                            break;
+                    }
+                    batch.draw(new Texture(rare),491 + 195 * j, 645 - 244 * i);
+                    cont++;
+                }catch (Exception e){
+
+                }
+
+            }
+        }
+
     }
 
     public void renderText(){
@@ -377,6 +426,7 @@ public class SquadMenuScreen extends ScreenAdapter {
         // Renderizado de los stats texto
         if(inspect < userl.getInventory().size()) {
             fontDung50.draw(batch, userl.getInventory().get(inspect).getName(), 1680, 920,0, Align.center,false);
+            batch.draw(new Texture(userl.getInventory().get(inspect).getTexture().get(2)),1545,688);
             fontDung50.draw(batch, "LVL " + userl.getInventory().get(inspect).getLevel(), 1630, 665);
             fontDung50.draw(batch, Integer.toString(userl.getInventory().get(inspect).getDmg()), rowAling, 605);
             fontDung50.draw(batch, Integer.toString(userl.getInventory().get(inspect).getAttackSpeed()), rowAling, 555);
