@@ -5,6 +5,10 @@ import es.b04.game.character.Champion;
 import es.b04.game.log.User;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.sql.*;
 import java.util.ArrayList;
@@ -20,6 +24,7 @@ public class DBManager {
     private static Connection conn;
     private static final Logger logger = LogManager.getLogger(DBManager.class);
     private static final String secretKey = "enUnLugarDeLaMancha";
+    private static final File textureChampDir = new File("champTexture.txt");
 
     /**
      * Metodo de conecxión a la BD
@@ -313,18 +318,18 @@ public class DBManager {
 
     public List<String> getChampionTexture(String champName) throws DBException{
         List<String>  champTexture = new ArrayList();
-
-        try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM textureChampion WHERE name=? ORDER BY tipo")) {
-            stmt.setString(1, champName);
-            ResultSet rs = stmt.executeQuery();
-
-            while(rs.next()) {
-                champTexture.add(rs.getString("img"));
+        try (BufferedReader reader = new BufferedReader(new FileReader(textureChampDir))){
+            String line = reader.readLine();
+            while (line != null){
+                String[] words = line.split(",");
+                if (words[0].equals(champName)){
+                    champTexture.add(words[2]);
+                }
+                line = reader.readLine();
             }
-        } catch (SQLException e) {
-            throw new DBException("Error obteniendo las texturas del campeon", e);
+        } catch (IOException e) {
+            throw new DBException("No se ha podido leer el archivo: " + textureChampDir, e);
         }
-
         return champTexture;
     }
 
