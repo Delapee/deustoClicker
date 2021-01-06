@@ -243,4 +243,25 @@ public class User {
         this.stageLevel = stageLevel;
     }
 
+    @Override
+    public String toString() {
+        return "User{" +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                ", pass='" + pass + '\'' +
+                ", email='" + email + '\'' +
+                ", gender='" + gender + '\'' +
+                ", age=" + age +
+                ", level=" + level +
+                ", expMax=" + expMax +
+                ", expProgress=" + expProgress +
+                ", gold=" + gold +
+                ", autoClick=" + autoClick +
+                ", icon='" + icon + '\'' +
+                ", squad=" + squad +
+                ", inventory=" + inventory +
+                ", stage=" + stage +
+                ", stageLevel=" + stageLevel +
+                '}';
+    }
 }

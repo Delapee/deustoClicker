@@ -5,8 +5,6 @@ public class Enemy {
     private double level;
     private String name;
     private int health;
-    private Attack attackP;
-    private Attack attackS;
     private int dmg;
     private int def;
     private double accuracy;
@@ -15,13 +13,11 @@ public class Enemy {
     private double dodgeProb;
 
     public Enemy(double level, String name,
-                 int health, Attack attackP, Attack attackS, int dmg, int def, double accuracy,
+                 int health, int dmg, int def, double accuracy,
                  double attackSpeed, double criticProb, double dodgeProb) {
         this.level = level;
         this.name = name;
         this.health = health;
-        this.attackP = attackP;
-        this.attackS = attackS;
         this.dmg = dmg;
         this.def = def;
         this.accuracy = accuracy;
@@ -34,8 +30,6 @@ public class Enemy {
         this.level = 0;
         this.name = "";
         this.health = 0;
-        this.attackP = new Attack();
-        this.attackS = new Attack();
         this.dmg = 0;
         this.def = 0;
         this.accuracy = 0.0;
@@ -48,8 +42,6 @@ public class Enemy {
         this.level = copia.level;
         this.name = copia.name;
         this.health = copia.health;
-        this.attackP = copia.attackP;
-        this.attackS = copia.attackS;
         this.dmg = copia.dmg;
         this.def = copia.def;
         this.accuracy = copia.accuracy;
@@ -89,22 +81,6 @@ public class Enemy {
 
     public void setHealth(int health) {
         this.health = health;
-    }
-
-    public Attack getAttackP() {
-        return attackP;
-    }
-
-    public void setAttackP(Attack attackP) {
-        this.attackP = attackP;
-    }
-
-    public Attack getAttackS() {
-        return attackS;
-    }
-
-    public void setAttackS(Attack attackS) {
-        this.attackS = attackS;
     }
 
     public int getDmg() {
