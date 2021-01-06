@@ -1,7 +1,6 @@
 package es.b04.game.dataBase;
 
 
-import es.b04.game.character.Attack;
 import es.b04.game.character.Champion;
 import es.b04.game.log.User;
 import org.apache.logging.log4j.LogManager;
@@ -121,8 +120,8 @@ public class DBManager {
      */
     public void storeNewChampion(Champion c, String idUser) throws DBException{
         try (PreparedStatement stmt = conn.prepareStatement("INSERT INTO champion (id, name, levelMax, " +
-                "rare, dmg, accuracy, attackSpeed, criticProb, dodgeProb, attackP_id, attackS_id, onSquad," +
-                "id_user) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)")){
+                "rare, dmg, accuracy, attackSpeed, criticProb, dodgeProb, onSquad, id_user) VALUES " +
+                "(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)")){
 
             stmt.setString(1, c.getId());
             stmt.setString(2, c.getName());
@@ -133,10 +132,8 @@ public class DBManager {
             stmt.setDouble(7, c.getAttackSpeed());
             stmt.setDouble(8, c.getCriticProb());
             stmt.setDouble(9, c.getDodgeProb());
-            stmt.setString(10, c.getAttackP().getId());
-            stmt.setString(11, c.getAttackS().getId());
-            stmt.setBoolean(12, c.isOnSquad());
-            stmt.setString(13, idUser);
+            stmt.setBoolean(10, c.isOnSquad());
+            stmt.setString(11, idUser);
 
             stmt.executeUpdate();
             logger.info("Campeón guardado correctamente.");
@@ -173,10 +170,6 @@ public class DBManager {
             logger.error("Error al actualizar campeón.");
             throw new DBException("No se pudo actualizar el campeon en la base de datos", e);
         }
-    }
-
-    public Champion getNewChampion(){
-        return new Champion();
     }
 
     /**
@@ -278,11 +271,11 @@ public class DBManager {
             List<Champion> inventory = new ArrayList<>();
 
             while(rs.next()) {
-                Champion champ = new Champion(rs.getString("id"), new ArrayList<String>(),
+                Champion champ = new Champion(rs.getString("id"), getChampionTexture(rs.getString("name")),
                         rs.getString("name"), rs.getInt("level"),
                         rs.getInt("rare"), rs.getInt("dmg"), rs.getInt("accuracy"),
                         rs.getInt("attackSpeed"), rs.getInt("criticProb"),
-                        rs.getInt("dodgeProb"), new Attack(), new Attack(), rs.getBoolean("onSquad"));
+                        rs.getInt("dodgeProb"), rs.getBoolean("onSquad"));
 
                 inventory.add(champ);
 
@@ -301,25 +294,38 @@ public class DBManager {
         }
     }
 
-    public Champion getChampion(String id, String name) throws DBException {
-        try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM champion WHERE id=? and name=?")) {
-            stmt.setString(1, id);
-            stmt.setString(2, name);
+    public Champion getChampionDrop(String name, int rare) throws DBException {
+        try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM champDrop WHERE name=?")) {
+            stmt.setString(1, name);
 
             ResultSet rs = stmt.executeQuery();
 
-            Champion champ = new Champion(rs.getString("id"), new ArrayList<String>(),
-                    rs.getString("name"), rs.getInt("level"), rs.getInt("rare"),
-                    rs.getInt("dmg"), rs.getInt("accuracy"), rs.getInt("attackSpeed"),
-                    rs.getInt("criticProb"), rs.getInt("dodgeProb"), new Attack(), new Attack(),
-                    rs.getBoolean("onSquad"));
-
             logger.info("Campeon recogido correctamente.");
-            return champ;
+            return new Champion(getChampionTexture(rs.getString("name")),
+                        rs.getString("name"), 1, rare,
+                        rs.getInt("dmg"), rs.getInt("accuracy"), rs.getInt("attackSpeed"),
+                        rs.getInt("criticProb"), rs.getInt("dodgeProb"), false);
         } catch (SQLException e) {
-            logger.error("Error al recoger campeon");
+            logger.error("Error al recoger campeon drop");
             throw new DBException("Error obteniendo el usuario", e);
         }
+    }
+
+    public List<String> getChampionTexture(String champName) throws DBException{
+        List<String>  champTexture = new ArrayList();
+
+        try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM textureChampion WHERE name=? ORDER BY tipo")) {
+            stmt.setString(1, champName);
+            ResultSet rs = stmt.executeQuery();
+
+            while(rs.next()) {
+                champTexture.add(rs.getString("img"));
+            }
+        } catch (SQLException e) {
+            throw new DBException("Error obteniendo las texturas del campeon", e);
+        }
+
+        return champTexture;
     }
 
     public Boolean isPassOk(String name, String pass) throws DBException {
