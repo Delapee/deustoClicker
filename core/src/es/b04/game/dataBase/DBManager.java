@@ -1,11 +1,14 @@
 package es.b04.game.dataBase;
 
 
-import es.b04.game.character.Attack;
 import es.b04.game.character.Champion;
 import es.b04.game.log.User;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.sql.*;
 import java.util.ArrayList;
@@ -21,6 +24,7 @@ public class DBManager {
     private static Connection conn;
     private static final Logger logger = LogManager.getLogger(DBManager.class);
     private static final String secretKey = "enUnLugarDeLaMancha";
+    private static final File textureChampDir = new File("champTexture.txt");
 
     /**
      * Metodo de conecxión a la BD
@@ -121,8 +125,8 @@ public class DBManager {
      */
     public void storeNewChampion(Champion c, String idUser) throws DBException{
         try (PreparedStatement stmt = conn.prepareStatement("INSERT INTO champion (id, name, levelMax, " +
-                "rare, dmg, accuracy, attackSpeed, criticProb, dodgeProb, attackP_id, attackS_id, onSquad," +
-                "id_user) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)")){
+                "rare, dmg, accuracy, attackSpeed, criticProb, dodgeProb, onSquad, id_user) VALUES " +
+                "(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)")){
 
             stmt.setString(1, c.getId());
             stmt.setString(2, c.getName());
@@ -133,10 +137,8 @@ public class DBManager {
             stmt.setDouble(7, c.getAttackSpeed());
             stmt.setDouble(8, c.getCriticProb());
             stmt.setDouble(9, c.getDodgeProb());
-            stmt.setString(10, c.getAttackP().getId());
-            stmt.setString(11, c.getAttackS().getId());
-            stmt.setBoolean(12, c.isOnSquad());
-            stmt.setString(13, idUser);
+            stmt.setBoolean(10, c.isOnSquad());
+            stmt.setString(11, idUser);
 
             stmt.executeUpdate();
             logger.info("Campeón guardado correctamente.");
@@ -173,10 +175,6 @@ public class DBManager {
             logger.error("Error al actualizar campeón.");
             throw new DBException("No se pudo actualizar el campeon en la base de datos", e);
         }
-    }
-
-    public Champion getNewChampion(){
-        return new Champion();
     }
 
     /**
@@ -278,11 +276,11 @@ public class DBManager {
             List<Champion> inventory = new ArrayList<>();
 
             while(rs.next()) {
-                Champion champ = new Champion(rs.getString("id"), new ArrayList<String>(),
+                Champion champ = new Champion(rs.getString("id"), getChampionTexture(rs.getString("name")),
                         rs.getString("name"), rs.getInt("level"),
                         rs.getInt("rare"), rs.getInt("dmg"), rs.getInt("accuracy"),
                         rs.getInt("attackSpeed"), rs.getInt("criticProb"),
-                        rs.getInt("dodgeProb"), new Attack(), new Attack(), rs.getBoolean("onSquad"));
+                        rs.getInt("dodgeProb"), rs.getBoolean("onSquad"));
 
                 inventory.add(champ);
 
@@ -301,25 +299,38 @@ public class DBManager {
         }
     }
 
-    public Champion getChampion(String id, String name) throws DBException {
-        try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM champion WHERE id=? and name=?")) {
-            stmt.setString(1, id);
-            stmt.setString(2, name);
+    public Champion getChampionDrop(String name, int rare) throws DBException {
+        try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM champDrop WHERE name=?")) {
+            stmt.setString(1, name);
 
             ResultSet rs = stmt.executeQuery();
 
-            Champion champ = new Champion(rs.getString("id"), new ArrayList<String>(),
-                    rs.getString("name"), rs.getInt("level"), rs.getInt("rare"),
-                    rs.getInt("dmg"), rs.getInt("accuracy"), rs.getInt("attackSpeed"),
-                    rs.getInt("criticProb"), rs.getInt("dodgeProb"), new Attack(), new Attack(),
-                    rs.getBoolean("onSquad"));
-
             logger.info("Campeon recogido correctamente.");
-            return champ;
+            return new Champion(getChampionTexture(rs.getString("name")),
+                        rs.getString("name"), 1, rare,
+                        rs.getInt("dmg"), rs.getInt("accuracy"), rs.getInt("attackSpeed"),
+                        rs.getInt("criticProb"), rs.getInt("dodgeProb"), false);
         } catch (SQLException e) {
-            logger.error("Error al recoger campeon");
+            logger.error("Error al recoger campeon drop");
             throw new DBException("Error obteniendo el usuario", e);
         }
+    }
+
+    public List<String> getChampionTexture(String champName) throws DBException{
+        List<String>  champTexture = new ArrayList();
+        try (BufferedReader reader = new BufferedReader(new FileReader(textureChampDir))){
+            String line = reader.readLine();
+            while (line != null){
+                String[] words = line.split(",");
+                if (words[0].equals(champName)){
+                    champTexture.add(words[2]);
+                }
+                line = reader.readLine();
+            }
+        } catch (IOException e) {
+            throw new DBException("No se ha podido leer el archivo: " + textureChampDir, e);
+        }
+        return champTexture;
     }
 
     public Boolean isPassOk(String name, String pass) throws DBException {

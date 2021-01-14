@@ -19,7 +19,7 @@ public class DesktopLauncher {
 		db.connection("dungeonClicker.db");
 
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
-		config.addIcon("icon/dragon.png", Files.FileType.Classpath);
+		config.addIcon("icon/dragonMini.png", Files.FileType.Classpath);
 		config.title = "Dungeon Clicker";
 		config.width = LwjglApplicationConfiguration.getDesktopDisplayMode().width;
 		config.height = LwjglApplicationConfiguration.getDesktopDisplayMode().height;

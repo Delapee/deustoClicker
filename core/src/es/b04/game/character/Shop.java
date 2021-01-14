@@ -1,9 +1,10 @@
 package es.b04.game.character;
 
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.utils.ActorGestureListener;
+import es.b04.game.dataBase.DBException;
+import es.b04.game.dataBase.DBManager;
 import es.b04.game.hud.IButton;
 import es.b04.game.log.User;
 import es.b04.game.main.MainGame;
@@ -13,6 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Shop {
+    private DBManager db;
     private List<IButton> itemList = new ArrayList<>(6);
     private MainGame game;
     private boolean expBoost = false;
@@ -44,6 +46,7 @@ public class Shop {
     }
 
     public void loadShop(Stage stage, final User user){
+        db = new DBManager();
 
         // Comprar Champ
         itemList.get(0).addListener(new ActorGestureListener(){
@@ -53,11 +56,16 @@ public class Shop {
 
                 if (user.getGold() >= 500){
                     user.setGold(user.getGold() - 500);
-                    ArrayList<String> sChampion = new ArrayList<>();
+                    /*ArrayList<String> sChampion = new ArrayList<>();
                     sChampion.add("champ/mag/mag_n.png");
                     sChampion.add("champ/mag/mag_p.png");
                     sChampion.add("champ/mag/mag_f.png");
-                    user.addChampionInventory(new Champion(sChampion,"El Nuevo",1,randomChamp(user),100,41,15,33,13,null,null,false));
+                    user.addChampionInventory(new Champion(sChampion,"El Nuevo",1, randomChampRare(user),100,41,15,33,13,false));
+                    */try {
+                        user.addChampionInventory(db.getChampionDrop(randomChampType(),randomChampRare(user)));
+                    } catch (DBException e) {
+                        e.printStackTrace();
+                    }
                     System.out.println(user.getInventory().get(user.getInventory().size()-1).getRare());
                 }
             }
@@ -112,7 +120,7 @@ public class Shop {
         }
     }
 
-    public int randomChamp(User user){
+    public int randomChampRare(User user){
         int random = (int)(Math.random()*100);
         if (user.getLevel() <= 9 ){
             if (random <= 80) return 1;
@@ -146,6 +154,16 @@ public class Shop {
             else return 5;
         }
         return 0;
+    }
+
+    public String randomChampType(){
+        int random = (int)(Math.random()*4);
+
+        if (random == 0) return "Pirata";
+        else if (random == 1) return "Mago";
+        else if (random == 2) return "Mercenario";
+        else if (random == 3) return "MPeste";
+        else return "";
     }
 
 }

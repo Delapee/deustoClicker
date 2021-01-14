@@ -1,0 +1,16 @@
+Mercenario,0,champ/war/war_n.png
+Mercenario,1,champ/war/war_p.png
+Mercenario,2,champ/war/war_f.png
+Mercenario,3,champ/war/war_s.png
+MPeste,0,champ/med/med_n.png
+MPeste,1,champ/med/med_p.png
+MPeste,2,champ/med/med_f.png
+MPeste,3,champ/med/med_s.png
+Pirata,0,champ/pira/pira_n.png
+Pirata,1,champ/pira/pira_p.png
+Pirata,2,champ/pira/pira_f.png
+Pirata,3,champ/pira/pira_s.png
+Mago,0,champ/mag/mag_n.png
+Mago,1,champ/mag/mag_p.png
+Mago,2,champ/mag/mag_f.png
+Mago,3,champ/mag/mag_s.png

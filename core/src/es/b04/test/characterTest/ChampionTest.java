@@ -18,7 +18,7 @@ public class ChampionTest {
         ArrayList<String> sChampion = new ArrayList<>();
         sChampion.add("pirate.png");
         sChampion.add("pirate.png");
-        testChamp = new Champion(sChampion,"El PIRATA",1,1,100,10,15,33,15,null,null,false);
+        testChamp = new Champion(sChampion,"El PIRATA",1,1,100,10,15,33,15,false);
     }
 
     @Test

@@ -115,11 +115,11 @@ public class MainGame extends Game {
 		sWar.add("champ/war/war_p.png");
 		sWar.add("champ/war/war_f.png");
 
-		Champion c1 = new Champion(sPirate,"El PIRATA",1,1,100,10,15,33,15,null,null,false);
-		Champion c2 = new Champion(sWar,"El PERRATA",2,1,120,12,25,43,25,null,null,false);
-		Champion c3 = new Champion(sWar,"El TONTITO",1,1,100,21,25,13,35,null,null,false);
-		Champion c4 = new Champion(sMed,"El CURATOR",2,1,120,33,45,23,45,null,null,false);
-		Champion c5 = new Champion(sMed,"El PINOS",1,1,100,41,15,33,13,null,null,false);
+		Champion c1 = new Champion(sPirate,"El PIRATA",1,1,100,10,15,33,15,false);
+		Champion c2 = new Champion(sWar,"El PERRATA",2,1,120,12,25,43,25,false);
+		Champion c3 = new Champion(sWar,"El TONTITO",1,1,100,21,25,13,35,false);
+		Champion c4 = new Champion(sMed,"El CURATOR",2,1,120,33,45,23,45,false);
+		Champion c5 = new Champion(sMed,"El PINOS",1,1,100,41,15,33,13,false);
 
 		ArrayList<Champion> invent = new ArrayList<>();
 		invent.add(c1);

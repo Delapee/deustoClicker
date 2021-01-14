@@ -18,13 +18,10 @@ public class Champion {
     private int attackSpeed;
     private double criticProb;
     private int dodgeProb;
-    private Attack attackP;
-    private Attack attackS;
     private boolean onSquad;
 
     public Champion(String id, List<String> texture, String name, int level, int rare, int dmg, int accuracy,
-                    int attackSpeed, int criticProb, int dodgeProb, Attack attackP, Attack attackS,
-                    boolean onSquad) {
+                    int attackSpeed, int criticProb, int dodgeProb, boolean onSquad) {
         this.id = id;
         this.texture = new ArrayList<>(texture);
         this.name = name;
@@ -36,14 +33,11 @@ public class Champion {
         this.attackSpeed = attackSpeed;
         this.criticProb = criticProb;
         this.dodgeProb = dodgeProb;
-        this.attackP = attackP;
-        this.attackS = attackS;
         this.onSquad = onSquad;
     }
 
     public Champion(List<String> texture, String name, int level, int rare, int dmg, int accuracy,
-                    int attackSpeed, int criticProb, int dodgeProb, Attack attackP, Attack attackS,
-                    boolean onSquad) {
+                    int attackSpeed, int criticProb, int dodgeProb, boolean onSquad) {
         this.id = UUID.randomUUID().toString();
         this.texture = new ArrayList<>(texture);
         this.name = name;
@@ -55,8 +49,6 @@ public class Champion {
         this.attackSpeed = attackSpeed;
         this.criticProb = criticProb;
         this.dodgeProb = dodgeProb;
-        this.attackP = attackP;
-        this.attackS = attackS;
         this.onSquad = onSquad;
     }
 
@@ -72,8 +64,6 @@ public class Champion {
         this.attackSpeed = 0;
         this.criticProb = 0.0;
         this.dodgeProb = 0;
-        this.attackP = new Attack();
-        this.attackS = new Attack();
         this.onSquad = false;
     }
 
@@ -89,8 +79,6 @@ public class Champion {
         this.attackSpeed = copy.attackSpeed;
         this.criticProb = copy.criticProb;
         this.dodgeProb = copy.dodgeProb;
-        this.attackP = copy.attackP;
-        this.attackS = copy.attackS;
         this.onSquad = copy.onSquad;
     }
 
@@ -178,28 +166,30 @@ public class Champion {
         this.dodgeProb = dodgeProb;
     }
 
-    public Attack getAttackP() {
-        return attackP;
-    }
-
-    public void setAttackP(Attack attackP) {
-        this.attackP = attackP;
-    }
-
-    public Attack getAttackS() {
-        return attackS;
-    }
-
-    public void setAttackS(Attack attackS) {
-        this.attackS = attackS;
-    }
-
     public boolean isOnSquad() {
         return onSquad;
     }
 
     public void setOnSquad(boolean onSquad) {
         this.onSquad = onSquad;
+    }
+
+    @Override
+    public String toString() {
+        return "Champion{" +
+                "id='" + id + '\'' +
+                ", texture=" + texture +
+                ", name='" + name + '\'' +
+                ", level=" + level +
+                ", levelMax=" + levelMax +
+                ", rare=" + rare +
+                ", dmg=" + dmg +
+                ", accuracy=" + accuracy +
+                ", attackSpeed=" + attackSpeed +
+                ", criticProb=" + criticProb +
+                ", dodgeProb=" + dodgeProb +
+                ", onSquad=" + onSquad +
+                '}';
     }
 
     @Override
@@ -217,9 +207,7 @@ public class Champion {
                 Double.compare(champion.dodgeProb, dodgeProb) == 0 &&
                 onSquad == champion.onSquad &&
                 Objects.equals(texture, champion.texture) &&
-                Objects.equals(name, champion.name) &&
-                Objects.equals(attackP, champion.attackP) &&
-                Objects.equals(attackS, champion.attackS);
+                Objects.equals(name, champion.name);
     }
 
     public void upgrade(){
