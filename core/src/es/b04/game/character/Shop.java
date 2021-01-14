@@ -6,23 +6,42 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.utils.ActorGestureListener;
 import es.b04.game.hud.IButton;
 import es.b04.game.log.User;
+import es.b04.game.main.MainGame;
+import es.b04.game.main.MainGameScreen;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class Shop {
     private List<IButton> itemList = new ArrayList<>(6);
-
-    public Shop() {
+    private MainGame game;
+    private boolean expBoost = false;
+    private boolean goldBoost = false;
+    public Shop(MainGame game) {
         itemList.add(new IButton("ShopIten.png","ShopIten2.png",1620,850));
         itemList.add(new IButton("ShopIten.png","ShopIten2.png",1775,850));
         itemList.add(new IButton("ShopIten.png","ShopIten2.png",1620,700));
         itemList.add(new IButton("ShopIten.png","ShopIten2.png",1775,700));
         itemList.add(new IButton("ShopIten.png","ShopIten2.png",1620,550));
         itemList.add(new IButton("ShopIten.png","ShopIten2.png",1775,550));
+        this.game = game;
     }
 
+    public boolean isExpBoost() {
+        return expBoost;
+    }
 
+    public void setExpBoost(boolean expBoost) {
+        this.expBoost = expBoost;
+    }
+
+    public boolean isGoldBoost() {
+        return goldBoost;
+    }
+
+    public void setGoldBoost(boolean goldBoost) {
+        this.goldBoost = goldBoost;
+    }
 
     public void loadShop(Stage stage, final User user){
 
@@ -44,7 +63,7 @@ public class Shop {
             }
         });
 
-        // Comprar Auticlick
+        // Comprar Autoclick
         itemList.get(1).addListener(new ActorGestureListener(){
             @Override
             public void tap(InputEvent event, float x, float y, int count, int button) {
@@ -55,7 +74,27 @@ public class Shop {
                 }
             }
         });
-
+        // Comprar boost exp
+        itemList.get(2).addListener(new ActorGestureListener(){
+            @Override
+            public void tap(InputEvent event, float x, float y, int count, int button) {
+                super.tap(event, x, y, count, button);
+                if (user.getGold() >= 500) {
+                    user.setGold(user.getGold() - 500);
+                    expBoost = true;
+                }
+            }
+        });
+        itemList.get(3).addListener(new ActorGestureListener(){
+            @Override
+            public void tap(InputEvent event, float x, float y, int count, int button) {
+                super.tap(event, x, y, count, button);
+                if (user.getGold() >= 500) {
+                    user.setGold(user.getGold() - 500);
+                    goldBoost = true;
+                }
+            }
+        });
         // Iniciar Raid
         itemList.get(5).addListener(new ActorGestureListener(){
             @Override
@@ -63,8 +102,7 @@ public class Shop {
                 super.tap(event, x, y, count, button);
                 if (user.getGold() >= 1500) {
                     user.setGold(user.getGold() - 500);
-
-
+                    game.setScreen(game.getScreens().get(3));
                 }
             }
         });

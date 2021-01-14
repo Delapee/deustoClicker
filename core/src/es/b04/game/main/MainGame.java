@@ -77,10 +77,13 @@ public class MainGame extends Game {
 		screens = new ArrayList<>();
 		MainGameScreen gameScreen = new MainGameScreen(this);
 		GameMenuScreen menuScreen = new GameMenuScreen(this);
+		Raid raidScreen = new Raid(this);
 		SquadMenuScreen squadScreen = new SquadMenuScreen(this);
+
 		screens.add(gameScreen);
 		screens.add(menuScreen);
 		screens.add(squadScreen);
+		screens.add(raidScreen);
 
 	}
 
@@ -93,7 +96,7 @@ public class MainGame extends Game {
 	public void loadUserA(){
 		user.setName("UserPrueba");
 		user.setGold(8000000);
-		user.setLevel(60);
+		user.setLevel(1);
 		user.setExpMax(1000);
 		user.setExpProgress(500);
 

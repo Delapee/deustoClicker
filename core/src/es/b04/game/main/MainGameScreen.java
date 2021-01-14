@@ -32,6 +32,8 @@ public class MainGameScreen extends ScreenAdapter {
     private MainGame game;
     private float time = 15.f;
     private float timeAuto = 0.f;
+    private float timeExpBoost = 60.f;
+    private float timeGoldBoost = 60.f;
     private boolean autoOn;
     private DecimalFormat timeFormat = new DecimalFormat("#.00");
     private BitmapFont fontDung70;
@@ -51,7 +53,7 @@ public class MainGameScreen extends ScreenAdapter {
     private Shop shop;
     private static final Logger logger = LogManager.getLogger(MainGameScreen.class);
     private IButton autoClicker;
-    private int timesPerLog;
+
 
     public MainGameScreen(MainGame game) {
         this.game = game;
@@ -59,7 +61,7 @@ public class MainGameScreen extends ScreenAdapter {
         userL = game.getUser();
         hpAlgorithm = (int) (Math.pow((dmgAvg*touchAvg*game.getUser().getLevel() + levelStage),1.05)*faseM);
         autoClicker = new IButton("auto.png", "auto2.png", 1040, 500);
-        timesPerLog  = 1;
+
     }
 
     @Override
@@ -78,7 +80,7 @@ public class MainGameScreen extends ScreenAdapter {
 
         Gdx.input.setInputProcessor(stage);
         background = assetManager.get(AssetEnum.GAMEBCK.getAsset());
-        shop = new Shop();
+        shop = new Shop(game);
         shop.loadShop(stage, userL);
 
         stage.addActor(squadButton);
@@ -114,13 +116,23 @@ public class MainGameScreen extends ScreenAdapter {
                 }
             }
         });
-
     }
-
+    public void levelUp(){
+        if(userL.getExpProgress() >= userL.getExpMax()){
+            userL.setLevel(userL.getLevel() + 1);
+            userL.setExpProgress(0);
+        }
+    }
     public void enemyHp(){
         hpAlgorithm = (int) (Math.pow((dmgAvg*touchAvg*game.getUser().getLevel() + levelStage),1.05)*faseM);
         if(cEnemy.getHealth() <= 0 && levelStage == 6){
+            if(shop.isGoldBoost()){
+                userL.setGold(userL.getGold() + cEnemy.getGoldDrop()*100*2);
+            }
             userL.setGold(userL.getGold() + cEnemy.getGoldDrop()*100);
+            if (shop.isExpBoost()){
+                userL.setExpProgress(userL.getExpProgress() + cEnemy.getExpDrop()*2);
+            }
             userL.setExpProgress(userL.getExpProgress() + cEnemy.getExpDrop());
             fase++;
             cEnemy.setHealth(hpAlgorithm);
@@ -132,14 +144,26 @@ public class MainGameScreen extends ScreenAdapter {
         else if(cEnemy.getHealth() <= 0 && levelStage == 5){
             levelStage++;
             time = 12f;
+            if(shop.isGoldBoost()){
+                userL.setGold(userL.getGold() + cEnemy.getGoldDrop()*2);
+            }
             userL.setGold(userL.getGold() + cEnemy.getGoldDrop());
+            if (shop.isExpBoost()){
+                userL.setExpProgress(userL.getExpProgress() + cEnemy.getExpDrop()*2);
+            }
             userL.setExpProgress(userL.getExpProgress() + cEnemy.getExpDrop());
             cEnemy.setHealth(hpAlgorithm * 2);
             cEnemy.setMaxhelth(hpAlgorithm*2);
 
         }
         else if (cEnemy.getHealth() <= 0){
+            if(shop.isGoldBoost()){
+                userL.setGold(userL.getGold() + cEnemy.getGoldDrop()*2);
+            }
             userL.setGold(userL.getGold() + cEnemy.getGoldDrop());
+            if (shop.isExpBoost()){
+                userL.setExpProgress(userL.getExpProgress() + cEnemy.getExpDrop()*2);
+            }
             userL.setExpProgress(userL.getExpProgress() + cEnemy.getExpDrop());
             cEnemy.setHealth(hpAlgorithm);
             cEnemy.setMaxhelth(hpAlgorithm);
@@ -161,7 +185,22 @@ public class MainGameScreen extends ScreenAdapter {
         cEnemy.setHealth(cEnemy.getHealth() - getTotalDmg());
         enemyHp();
         if(timeAuto <= 0){
+            timeAuto = 0;
             autoOn = false;
+        }
+    }
+    public void expBoostTimer(){
+        timeExpBoost -= Gdx.graphics.getRawDeltaTime();
+        if(timeExpBoost  <= 0){
+            timeExpBoost  = 60;
+            shop.setExpBoost(false);
+        }
+    }
+    public void goldBoostTimer(){
+        timeGoldBoost -= Gdx.graphics.getRawDeltaTime();
+        if(timeGoldBoost <= 0){
+            timeGoldBoost  = 60;
+            shop.setGoldBoost(false);
         }
     }
 
@@ -169,9 +208,16 @@ public class MainGameScreen extends ScreenAdapter {
     public void render(float delta) {
         super.render(delta);
         clearScreen();
+        levelUp();
         timer();
         if(autoOn){
             autoClickAction();
+        }
+        if(shop.isExpBoost()){
+            expBoostTimer();
+        }
+        if(shop.isGoldBoost()){
+            goldBoostTimer();
         }
         batch.begin();
         renderText();
@@ -179,7 +225,6 @@ public class MainGameScreen extends ScreenAdapter {
         enemyHpBar.draw(batch, cEnemy.getHealth(), cEnemy.getMaxhelth());
         lvlBar.draw(batch, userL.getExpProgress(),userL.getExpMax());
         map.draw(batch, levelStage);
-
         batch.end();
 
     }
@@ -228,11 +273,13 @@ public class MainGameScreen extends ScreenAdapter {
         fontDung70.draw(batch,userL.getExpProgress() + "/" + userL.getExpMax(),430,877);
         fontDung70.draw(batch,timeFormat.format(time),1289,1010);
         fontDung70.draw(batch,timeFormat.format(timeAuto),1289,950);
-
+        fontDung70.draw(batch,timeFormat.format(timeExpBoost),750,950);
+        fontDung70.draw(batch,timeFormat.format(timeGoldBoost),750,1000);
         // Clicker
         fontDung70.draw(batch,Integer.toString(cEnemy.getHealth()),730,550);
         fontDung70.draw(batch,fase +"-"+levelStage,738,800);
     }
+
     public int getTotalDmg(){
         totalDmg = 0;
         for(Champion c : userL.getSquad()){

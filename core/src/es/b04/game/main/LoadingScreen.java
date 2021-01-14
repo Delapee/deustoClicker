@@ -61,6 +61,8 @@ public class LoadingScreen extends ScreenAdapter {
         game.getAssetManager().load(AssetEnum.MAINTITTLE.getAsset(), Texture.class);
         game.getAssetManager().load(AssetEnum.HPBAR1.getAsset(), Texture.class);
         game.getAssetManager().load(AssetEnum.HPBAR2.getAsset(), Texture.class);
+        game.getAssetManager().load(AssetEnum.RAIDBCK.getAsset(), Texture.class);
+
     }
 
     @Override
