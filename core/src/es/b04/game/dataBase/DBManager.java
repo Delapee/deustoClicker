@@ -90,7 +90,7 @@ public class DBManager {
      */
     public void updateUser(User u) throws DBException{
         try (PreparedStatement stmt = conn.prepareStatement("UPDATE user SET name=?, pass=?, email=?, gender=?, " +
-                "age=?, level=?, expMax=?, expProgress=?, gold=?, autoClick=?, icon=?, stage=?, stageLevel=?" +
+                "age=?, level=?, expMax=?, expProgress=?, gold=?, autoClick=?, icon=?, stage=?, stageLevel=?, raidLevel=?" +
                 " WHERE id=?")) {
 
             stmt.setString(1, u.getName());
@@ -106,8 +106,9 @@ public class DBManager {
             stmt.setString(11, u.getIcon());
             stmt.setInt(12, u.getStage());
             stmt.setInt(13, u.getStageLevel());
+            stmt.setInt(14, u.getRaidLevel());
 
-            stmt.setString(14, u.getId());
+            stmt.setString(15, u.getId());
 
             stmt.executeUpdate();
             logger.info("Usuario actualizado correctamente.");
@@ -228,6 +229,18 @@ public class DBManager {
         }
     }
 
+    public void deleteChampion(String idUser, String idChampion) throws DBException{
+        try (PreparedStatement stmt = conn.prepareStatement("DELETE FROM champion WHERE id=? and id_user=?")) {
+            stmt.setString(1, idChampion);
+            stmt.setString(2, idUser);
+            stmt.executeUpdate();
+            logger.info("Champion eliminado correctamente de la BD.");
+        } catch (SQLException e) {
+            logger.error("Error al eliminar champion de la BD.");
+            throw new DBException("Error al eliminar un usuario de la base de datos", e);
+        }
+    }
+
     /**
      * Metodo que extrae toda la info de un usuario de la BD
      * @param name nombre de usuario
@@ -245,7 +258,7 @@ public class DBManager {
                     rs.getInt("age"), rs.getInt("level"), rs.getInt("expMax"),
                     rs.getInt("expProgress"), rs.getInt("gold"), rs.getInt("autoClick"),
                     rs.getString("icon"), new ArrayList<Champion>(), new ArrayList<Champion>(),
-                    rs.getInt("stage"), rs.getInt("stageLevel"));
+                    rs.getInt("stage"), rs.getInt("stageLevel"), rs.getInt("raidLevel"));
 
             List<List<Champion>> champions = getUserChampions(user.getId());
             user.setSquad(champions.get(0));
@@ -256,6 +269,36 @@ public class DBManager {
         } catch (SQLException e) {
             logger.error("Error al recoger usuario.");
             throw new DBException("Error obteniendo el usuario", e);
+        }
+    }
+
+    public List<User> getAllUsers() throws DBException {
+        try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM user")) {
+            ResultSet rs = stmt.executeQuery();
+
+            List<User> users = new ArrayList<>();
+
+            while (rs.next()){
+                User user = new User(rs.getString("id"), rs.getString("name"),
+                        rs.getString("pass"), rs.getString("email"),rs.getString("gender"),
+                        rs.getInt("age"), rs.getInt("level"), rs.getInt("expMax"),
+                        rs.getInt("expProgress"), rs.getInt("gold"), rs.getInt("autoClick"),
+                        rs.getString("icon"), new ArrayList<Champion>(), new ArrayList<Champion>(),
+                        rs.getInt("stage"), rs.getInt("stageLevel"), rs.getInt("raidLevel"));
+
+                List<List<Champion>> champions = getUserChampions(user.getId());
+                user.setSquad(champions.get(0));
+                user.setInventory(champions.get(1));
+
+                users.add(user);
+
+            }
+
+            logger.info("Usuarios recogidos correctamente.");
+            return users;
+        } catch (SQLException e) {
+            logger.error("Error al recoger los usuarios.");
+            throw new DBException("Error obteniendo los usuarios", e);
         }
     }
 
@@ -279,7 +322,7 @@ public class DBManager {
                 Champion champ = new Champion(rs.getString("id"), getChampionTexture(rs.getString("name")),
                         rs.getString("name"), rs.getInt("level"),
                         rs.getInt("rare"), rs.getInt("dmg"), rs.getInt("accuracy"),
-                        rs.getInt("attackSpeed"), rs.getInt("criticProb"),
+                        rs.getDouble("attackSpeed"), rs.getDouble("criticProb"),
                         rs.getInt("dodgeProb"), rs.getBoolean("onSquad"));
 
                 inventory.add(champ);
@@ -308,8 +351,8 @@ public class DBManager {
             logger.info("Campeon recogido correctamente.");
             return new Champion(getChampionTexture(rs.getString("name")),
                         rs.getString("name"), 1, rare,
-                        rs.getInt("dmg"), rs.getInt("accuracy"), rs.getInt("attackSpeed"),
-                        rs.getInt("criticProb"), rs.getInt("dodgeProb"), false);
+                        rs.getInt("dmg"), rs.getInt("accuracy"), rs.getDouble("attackSpeed"),
+                        rs.getDouble("criticProb"), rs.getInt("dodgeProb"), false);
         } catch (SQLException e) {
             logger.error("Error al recoger campeon drop");
             throw new DBException("Error obteniendo el usuario", e);
