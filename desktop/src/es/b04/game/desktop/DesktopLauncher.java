@@ -8,14 +8,21 @@ import es.b04.game.dataBase.DBManager;
 import es.b04.game.log.Login;
 import es.b04.game.main.MainGame;
 
+import javax.swing.*;
+
 public class DesktopLauncher {
 
-	static volatile boolean close;
 	private static final String dbPath = "dungeonClicker.db";
 
 	public static void main (String[] arg) throws DBException {
-		close = false;
-		Login l = new Login();
+
+		SwingUtilities.invokeLater(new Runnable() {
+			@Override
+			public void run() {
+				new Login();
+			}
+		});
+
 		DBManager db = new DBManager();
 		db.connection(dbPath);
 
@@ -26,15 +33,9 @@ public class DesktopLauncher {
 		config.height = LwjglApplicationConfiguration.getDesktopDisplayMode().height;
 		config.fullscreen = true;
 
-		do {
-			if (!l.isVisible()){
-				close = true;
-			}
-			l.getCheck();
-		}while (!l.getCheck() && !close);
-		l.dispose();
+		while (!Login.close);
 
-		if (!close){
+		if (Login.close){
 			new LwjglApplication(new MainGame(), config);
 		}
 	}

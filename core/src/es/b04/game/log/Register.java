@@ -15,12 +15,10 @@ import java.util.regex.Pattern;
 public class Register extends JFrame {
     public static final Pattern emailValidRegex =
             Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
-    private final Login l;
     private DBManager db;
     final List<String> usersNames;
 
-    public Register(final Login l) throws DBException {
-        this.l = l;
+    public Register() throws DBException {
         db = new DBManager();
         usersNames = new ArrayList<>(db.getAllUserNames());
 
@@ -102,10 +100,10 @@ public class Register extends JFrame {
         add(BorderLayout.PAGE_END,bott);
 
 
-        //Action Listener
         cancel.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                loginWindow();
                 dispose();
             }
         });
@@ -161,6 +159,7 @@ public class Register extends JFrame {
                     } catch (DBException dbException) {
                         dbException.printStackTrace();
                     }
+                    loginWindow();
                     dispose();
                 }
 
@@ -171,5 +170,14 @@ public class Register extends JFrame {
     public static boolean validate(String email) {
         Matcher matcher = emailValidRegex.matcher(email);
         return matcher.find();
+    }
+
+    private void loginWindow(){
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                new Login();
+            }
+        });
     }
 }

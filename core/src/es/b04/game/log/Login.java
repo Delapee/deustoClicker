@@ -1,8 +1,8 @@
 package es.b04.game.log;
 
+import es.b04.game.adminTables.UserViewer;
 import es.b04.game.dataBase.DBException;
 import es.b04.game.dataBase.DBManager;
-import es.b04.game.main.GameMenuScreen;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -13,25 +13,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class Login extends JFrame {
-    private boolean check = false;
-    private Register r;
+
+    public static volatile boolean close = false;
     private DBManager db;
     private static final Logger logger = LogManager.getLogger(Login.class);
-    public boolean getCheck(){
-        return check;
-    }
-
-    public void setCheck(boolean check) {
-        this.check = check;
-    }
-
-    public Register getR() {
-        return r;
-    }
-
-    private Register creacionRegistro() throws DBException {
-        return r = new Register(this);
-    }
 
     public Login(){
         try {
@@ -54,11 +39,12 @@ public class Login extends JFrame {
         resgistro.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                dispose();
                 SwingUtilities.invokeLater(new Runnable() {
                     @Override
                     public void run() {
                         try {
-                            creacionRegistro();
+                            new Register();
                         } catch (DBException dbException) {
                             dbException.printStackTrace();
                         }
@@ -70,7 +56,6 @@ public class Login extends JFrame {
         iniciar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //Hay que implementar la BD
                 boolean todoOk = true;
 
                 if (usuario.getText().equals("")){
@@ -90,15 +75,26 @@ public class Login extends JFrame {
                 if (todoOk){
                     try {
                         if (db.isPassOk(usuario.getText(), String.valueOf(contrasena.getPassword()))){
-                            User user = db.getUser(usuario.getText());
-                            check = true;
-                            setVisible(false);
-                            logger.info("Inicio de sesion realizada correctamente");
-
+                            if (usuario.getText().equals("admin")){
+                                SwingUtilities.invokeLater(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        try {
+                                            new UserViewer();
+                                        } catch (DBException dbException) {
+                                            dbException.printStackTrace();
+                                        }
+                                    }
+                                });
+                            }else{
+                                User user = db.getUser(usuario.getText());
+                                close = true;
+                                logger.info("Inicio de sesion realizada correctamente");
+                            }
+                            dispose();
                         }else{
+                            usuario.setBorder(new LineBorder(Color.RED, 2));
                             contrasena.setBorder(new LineBorder(Color.RED, 2));
-                            todoOk = false;
-
                         }
                     } catch (DBException dbException) {
                         dbException.printStackTrace();
@@ -134,7 +130,7 @@ public class Login extends JFrame {
 
         this.add(mainPanel);
 
-        this.setDefaultCloseOperation(HIDE_ON_CLOSE);
+        this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         this.setTitle("Dungeon Clicker");
         this.setIconImage(Toolkit.getDefaultToolkit().getImage("core/assets/icon/dragon.png"));
         this.setSize(400, 250);
