@@ -88,7 +88,6 @@ public class Login extends JFrame {
                 }
 
                 if (todoOk){
-                    /*
                     try {
                         if (db.isPassOk(usuario.getText(), String.valueOf(contrasena.getPassword()))){
                             User user = db.getUser(usuario.getText());
@@ -105,10 +104,7 @@ public class Login extends JFrame {
                         dbException.printStackTrace();
                         logger.error("Error al iniciar sesion.");
 
-                    }/*/
-                    check = true;
-                    setVisible(false);
-                    //*/
+                    }
                 }
             }
         });
