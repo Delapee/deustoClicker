@@ -15,13 +15,13 @@ public class Champion {
     private int rare;
     private int dmg;
     private int accuracy;
-    private int attackSpeed;
+    private double attackSpeed;
     private double criticProb;
     private int dodgeProb;
     private boolean onSquad;
 
     public Champion(String id, List<String> texture, String name, int level, int rare, int dmg, int accuracy,
-                    int attackSpeed, int criticProb, int dodgeProb, boolean onSquad) {
+                    double attackSpeed, double criticProb, int dodgeProb, boolean onSquad) {
         this.id = id;
         this.texture = new ArrayList<>(texture);
         this.name = name;
@@ -37,7 +37,7 @@ public class Champion {
     }
 
     public Champion(List<String> texture, String name, int level, int rare, int dmg, int accuracy,
-                    int attackSpeed, int criticProb, int dodgeProb, boolean onSquad) {
+                    double attackSpeed, double criticProb, int dodgeProb, boolean onSquad) {
         this.id = UUID.randomUUID().toString();
         this.texture = new ArrayList<>(texture);
         this.name = name;
@@ -142,11 +142,11 @@ public class Champion {
         this.accuracy = accuracy;
     }
 
-    public int getAttackSpeed() {
+    public double getAttackSpeed() {
         return attackSpeed;
     }
 
-    public void setAttackSpeed(int attackSpeed) {
+    public void setAttackSpeed(double attackSpeed) {
         this.attackSpeed = attackSpeed;
     }
 
@@ -201,10 +201,10 @@ public class Champion {
                 levelMax == champion.levelMax &&
                 rare == champion.rare &&
                 dmg == champion.dmg &&
-                Double.compare(champion.accuracy, accuracy) == 0 &&
+                champion.accuracy == accuracy &&
                 Double.compare(champion.attackSpeed, attackSpeed) == 0 &&
                 Double.compare(champion.criticProb, criticProb) == 0 &&
-                Double.compare(champion.dodgeProb, dodgeProb) == 0 &&
+                champion.dodgeProb == dodgeProb &&
                 onSquad == champion.onSquad &&
                 Objects.equals(texture, champion.texture) &&
                 Objects.equals(name, champion.name);
@@ -214,7 +214,7 @@ public class Champion {
         this.level++;
         this.dmg = (int) (this.dmg * 1.5);
         this.accuracy = (int) (this.accuracy * 1.5);
-        this.attackSpeed = (int) (this.attackSpeed * 1.5);
+        this.attackSpeed = (this.attackSpeed * 1.5);
         this.criticProb = (this.criticProb * 1.5);
         this.dodgeProb = (int) (this.dodgeProb * 1.5);
     }

@@ -14,7 +14,8 @@ CREATE TABLE user(
 	autoClick INT(2) NOT NULL,
 	icon VARCHAR(50) NOT NULL,
     stage INT(2) DEFAULT 1 NOT NULL,
-    stageLevel INT(2) DEFAULT 1 NOT NULL);
+    stageLevel INT(2) DEFAULT 1 NOT NULL,
+    raidLevel INT(2) DEFAULT 1 NOT NULL);
 
 CREATE TABLE champion(
 	id VARCHAR(36) PRIMARY KEY NOT NULL,
@@ -44,7 +45,7 @@ CREATE TABLE champDrop(
     dodgeProb DEC(3,2) NOT NULL);
 
 INSERT INTO user values ('df9ad349-5936-4fb0-9cfc-d94366c6e7e3', 'admin', 'JXMTnpd9uNk=', 'admin@admin.es', 'Hombre', 99, 50,
-                         0, 0, 9999999, 4, 'icon.png', 1, 1);
+                         0, 0, 9999999, 4, 'icon.png', 1, 1, 1);
 
 INSERT INTO champDrop values ('73913408-ded2-4d01-8665-8ceb735f51e2', 'Mercenario', 200, 75, 1,   0.5,  25);
 INSERT INTO champDrop values ('efabd12c-10c2-4093-96ed-eeaf42c49927', 'MPeste',      50, 90, 1,   0.25, 50);

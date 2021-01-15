@@ -2,10 +2,6 @@ package es.b04.game.log;
 
 import es.b04.game.dataBase.DBException;
 import es.b04.game.dataBase.DBManager;
-import es.b04.game.main.GameMenuScreen;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 import java.awt.*;
@@ -13,8 +9,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Register extends JFrame {
+    public static final Pattern emailValidRegex =
+            Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
     private final Login l;
     private DBManager db;
     final List<String> usersNames;
@@ -128,22 +128,11 @@ public class Register extends JFrame {
                     }
                 }
 
-                if (email.getText().equals("") && !email.getText().contains("@")){
+                if (!validate(email.getText())){
                     email.setBorder(new LineBorder(Color.RED, 2));
                     todoOk = false;
                 }else{
-                    String mail = email.getText();
-                    String[] mailParts = mail.split("@");
-                    if (mailParts.length != 2){
-                        email.setBorder(new LineBorder(Color.RED, 2));
-                        todoOk = false;
-                    }else if(!mailParts[1].contains(".") ){
-                        email.setBorder(new LineBorder(Color.RED, 2));
-                        todoOk = false;
-                    } else {
-                        email.setBorder(new LineBorder(Color.BLACK));
-                    }
-
+                    email.setBorder(new LineBorder(Color.BLACK));
                 }
 
                 if (String.valueOf(pass.getPassword()).equals("")){
@@ -177,5 +166,10 @@ public class Register extends JFrame {
 
             }
         });
+    }
+
+    public static boolean validate(String email) {
+        Matcher matcher = emailValidRegex.matcher(email);
+        return matcher.find();
     }
 }

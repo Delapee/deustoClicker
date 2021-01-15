@@ -22,11 +22,12 @@ public class User {
     private List<Champion> inventory;
     private int stage;
     private int stageLevel;
+    private int raidLevel;
 
 
     public User(String id, String name, String pass, String email, String gender, int age, int level, int expMax, int expProgress,
                 int gold, int autoClick, String icon, ArrayList<Champion> squad, ArrayList<Champion> inventory,
-                int stage, int stageLevel) {
+                int stage, int stageLevel, int raidLevel) {
         this.id = id;
         this.name = name;
         this.pass = pass;
@@ -43,6 +44,7 @@ public class User {
         this.inventory = new ArrayList<Champion>(inventory);
         this.stage = stage;
         this.stageLevel = stageLevel;
+        this.raidLevel = raidLevel;
 
     }
 
@@ -56,13 +58,14 @@ public class User {
         this.level = 1;
         this.expMax = 1100;
         this.expProgress = 0;
-        this.gold = 0;
+        this.gold = 500;
         this.autoClick = 0;
         this.icon = "";
         this.squad = new ArrayList<Champion>(4);
         this.inventory = new ArrayList<Champion>();
         this.stage = 1;
         this.stageLevel = 1;
+        this.raidLevel = 1;
     }
 
     public User() {
@@ -75,13 +78,14 @@ public class User {
         this.level = 1;
         this.expMax = 1100;
         this.expProgress = 0;
-        this.gold = 0;
+        this.gold = 500;
         this.autoClick = 0;
         this.icon = "";
         this.squad = new ArrayList<Champion>(4);
         this.inventory = new ArrayList<Champion>();
         this.stage = 1;
         this.stageLevel = 1;
+        this.raidLevel = 1;
     }
 
     public User(User copy) {
@@ -101,6 +105,7 @@ public class User {
         this.inventory = new ArrayList<Champion>(copy.inventory);
         this.stage = copy.stage;
         this.stageLevel = copy.stageLevel;
+        this.raidLevel = copy.raidLevel;
     }
 
     public String getId() {
@@ -243,6 +248,14 @@ public class User {
         this.stageLevel = stageLevel;
     }
 
+    public int getRaidLevel() {
+        return raidLevel;
+    }
+
+    public void setRaidLevel(int raidLevel) {
+        this.raidLevel = raidLevel;
+    }
+
     @Override
     public String toString() {
         return "User{" +
@@ -262,6 +275,7 @@ public class User {
                 ", inventory=" + inventory +
                 ", stage=" + stage +
                 ", stageLevel=" + stageLevel +
+                ", raidLevel=" + raidLevel +
                 '}';
     }
 }

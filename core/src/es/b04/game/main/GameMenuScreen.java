@@ -10,6 +10,8 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.utils.ActorGestureListener;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.FitViewport;
+import es.b04.game.dataBase.DBException;
+import es.b04.game.dataBase.DBManager;
 import es.b04.game.hud.IButton;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -20,6 +22,7 @@ public class GameMenuScreen extends ScreenAdapter {
     private final MainGame mainGame;
     private static final Logger logger = LogManager.getLogger(GameMenuScreen.class);
     private Stage stage;
+    private DBManager db;
 
     public GameMenuScreen(MainGame mainGame) {
         this.mainGame = mainGame;
@@ -32,6 +35,7 @@ public class GameMenuScreen extends ScreenAdapter {
         tittleBackground = new Texture("mainTittle.png");
         menuBatch = new SpriteBatch();
         stage = new Stage(new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()));
+        db = new DBManager();
         Gdx.input.setInputProcessor(stage);
 
         IButton play = new IButton("B1.png","B2.png",Gdx.graphics.getWidth() / 2f,
@@ -43,6 +47,11 @@ public class GameMenuScreen extends ScreenAdapter {
             @Override
             public void tap(InputEvent event, float x, float y, int count, int button) {
                 super.tap(event, x, y, count, button);
+                try {
+                    db.disconnection();
+                } catch (DBException e) {
+                    e.printStackTrace();
+                }
                 Gdx.app.exit();
             }
 

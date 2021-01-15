@@ -11,12 +11,13 @@ import es.b04.game.main.MainGame;
 public class DesktopLauncher {
 
 	static volatile boolean close;
+	private static final String dbPath = "dungeonClicker.db";
 
 	public static void main (String[] arg) throws DBException {
 		close = false;
 		Login l = new Login();
 		DBManager db = new DBManager();
-		db.connection("dungeonClicker.db");
+		db.connection(dbPath);
 
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
 		config.addIcon("icon/dragonMini.png", Files.FileType.Classpath);

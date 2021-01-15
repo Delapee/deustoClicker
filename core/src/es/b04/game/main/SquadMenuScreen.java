@@ -429,7 +429,7 @@ public class SquadMenuScreen extends ScreenAdapter {
             batch.draw(new Texture(userl.getInventory().get(inspect).getTexture().get(2)),1545,688);
             fontDung50.draw(batch, "LVL " + userl.getInventory().get(inspect).getLevel(), 1630, 665);
             fontDung50.draw(batch, Integer.toString(userl.getInventory().get(inspect).getDmg()), rowAling, 605);
-            fontDung50.draw(batch, Integer.toString(userl.getInventory().get(inspect).getAttackSpeed()), rowAling, 555);
+            fontDung50.draw(batch, Double.toString(userl.getInventory().get(inspect).getAttackSpeed()), rowAling, 555);
             fontDung50.draw(batch, Integer.toString(userl.getInventory().get(inspect).getAccuracy()), rowAling, 507);
             fontDung50.draw(batch, "" + userl.getInventory().get(inspect).getCriticProb(), rowAling, 460);
             fontDung50.draw(batch, Integer.toString(userl.getInventory().get(inspect).getDodgeProb()), rowAling, 410);
