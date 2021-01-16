@@ -20,12 +20,12 @@ public class Shop {
     private boolean expBoost = false;
     private boolean goldBoost = false;
     public Shop(MainGame game) {
-        itemList.add(new IButton("ShopIten.png","ShopIten2.png",1620,850));
-        itemList.add(new IButton("ShopIten.png","ShopIten2.png",1775,850));
-        itemList.add(new IButton("ShopIten.png","ShopIten2.png",1620,700));
-        itemList.add(new IButton("ShopIten.png","ShopIten2.png",1775,700));
+        itemList.add(new IButton("shop/ShopIten1_n.png","shop/ShopIten1_p.png",1620,850));
+        itemList.add(new IButton("shop/ShopIten2_n.png","shop/ShopIten2_p.png",1775,850));
+        itemList.add(new IButton("shop/ShopIten3_n.png","shop/ShopIten3_p.png",1620,700));
+        itemList.add(new IButton("shop/ShopIten4_n.png","shop/ShopIten4_p.png",1775,700));
         itemList.add(new IButton("ShopIten.png","ShopIten2.png",1620,550));
-        itemList.add(new IButton("ShopIten.png","ShopIten2.png",1775,550));
+        itemList.add(new IButton("shop/ShopIten6_n.png","shop/ShopIten6_p.png",1775,550));
         this.game = game;
     }
 

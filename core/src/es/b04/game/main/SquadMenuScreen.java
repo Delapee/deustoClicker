@@ -146,126 +146,16 @@ public class SquadMenuScreen extends ScreenAdapter {
             }
         }
 
-        champButtons.get(0).addListener(new ActorGestureListener(){
-            @Override
-            public void tap(InputEvent event, float x, float y, int count, int button) {
-                super.tap(event, x, y, count, button);
-                inspect = 0;
-            }
-        });
-
-        champButtons.get(1).addListener(new ActorGestureListener(){
-            @Override
-            public void tap(InputEvent event, float x, float y, int count, int button) {
-                super.tap(event, x, y, count, button);
-                inspect = 1;
-            }
-        });
-
-        champButtons.get(2).addListener(new ActorGestureListener(){
-            @Override
-            public void tap(InputEvent event, float x, float y, int count, int button) {
-                super.tap(event, x, y, count, button);
-                inspect = 2;
-            }
-        });
-
-        champButtons.get(3).addListener(new ActorGestureListener(){
-            @Override
-            public void tap(InputEvent event, float x, float y, int count, int button) {
-                super.tap(event, x, y, count, button);
-                inspect = 3;
-            }
-        });
-
-        champButtons.get(4).addListener(new ActorGestureListener(){
-            @Override
-            public void tap(InputEvent event, float x, float y, int count, int button) {
-                super.tap(event, x, y, count, button);
-                inspect = 4;
-            }
-        });
-
-        champButtons.get(5).addListener(new ActorGestureListener(){
-            @Override
-            public void tap(InputEvent event, float x, float y, int count, int button) {
-                super.tap(event, x, y, count, button);
-                inspect = 5;
-            }
-        });
-
-        champButtons.get(6).addListener(new ActorGestureListener(){
-            @Override
-            public void tap(InputEvent event, float x, float y, int count, int button) {
-                super.tap(event, x, y, count, button);
-                inspect = 6;
-            }
-        });
-
-        champButtons.get(7).addListener(new ActorGestureListener(){
-            @Override
-            public void tap(InputEvent event, float x, float y, int count, int button) {
-                super.tap(event, x, y, count, button);
-                inspect = 7;
-            }
-        });
-
-        champButtons.get(8).addListener(new ActorGestureListener(){
-            @Override
-            public void tap(InputEvent event, float x, float y, int count, int button) {
-                super.tap(event, x, y, count, button);
-                inspect = 8;
-            }
-        });
-
-        champButtons.get(9).addListener(new ActorGestureListener(){
-            @Override
-            public void tap(InputEvent event, float x, float y, int count, int button) {
-                super.tap(event, x, y, count, button);
-                inspect = 9;
-            }
-        });
-
-        champButtons.get(10).addListener(new ActorGestureListener(){
-            @Override
-            public void tap(InputEvent event, float x, float y, int count, int button) {
-                super.tap(event, x, y, count, button);
-                inspect = 10;
-            }
-        });
-
-        champButtons.get(11).addListener(new ActorGestureListener(){
-            @Override
-            public void tap(InputEvent event, float x, float y, int count, int button) {
-                super.tap(event, x, y, count, button);
-                inspect = 11;
-            }
-        });
-
-        champButtons.get(12).addListener(new ActorGestureListener(){
-            @Override
-            public void tap(InputEvent event, float x, float y, int count, int button) {
-                super.tap(event, x, y, count, button);
-                inspect = 12;
-            }
-        });
-
-        champButtons.get(13).addListener(new ActorGestureListener(){
-            @Override
-            public void tap(InputEvent event, float x, float y, int count, int button) {
-                super.tap(event, x, y, count, button);
-                inspect = 13;
-            }
-        });
-
-        champButtons.get(14).addListener(new ActorGestureListener(){
-            @Override
-            public void tap(InputEvent event, float x, float y, int count, int button) {
-                super.tap(event, x, y, count, button);
-                inspect = 14;
-            }
-        });
-
+        for (int i = 0; i < 15; i++) {
+            final int finalNum = i;
+            champButtons.get(i).addListener(new ActorGestureListener() {
+                @Override
+                public void tap(InputEvent event, float x, float y, int count, int button) {
+                    super.tap(event, x, y, count, button);
+                    inspect = finalNum;
+                }
+            });
+        }
 
         for (int i = 0; i < 15; i++) {
             stage.addActor(champButtons.get(i));
@@ -275,13 +165,13 @@ public class SquadMenuScreen extends ScreenAdapter {
 
     // Carga de Hud
     public void loadInventoryButtons(){
-        acept = new IButton("B1.png","B2.png",53,
+        acept = new IButton("boton/b_aceptarN.png","boton/b_aceptarP.png",53,
                 195);
-        equip = new IButton("B1.png","B2.png",1490, 280);
-        upgrade = new IButton("B1.png","B2.png",1490, 195);
-        sell = new IButton("B1.png","B2.png",775, 100);
-        pageL = new IButton("auto.png","auto2.png",500, 100);
-        pageR = new IButton("auto.png","auto2.png",1225, 100);
+        equip = new IButton("boton/b_equiparN.png","boton/b_equiparP.png",1490, 280);
+        upgrade = new IButton("boton/b_mejorarN.png","boton/b_mejorarP.png",1490, 195);
+        sell = new IButton("boton/b_venderN.png","boton/b_venderP.png",775, 100);
+        pageL = new IButton("flecha/arrowr_n.png","flecha/arrowr_p.png",500, 100);
+        pageR = new IButton("flecha/arrowl_n.png","flecha/arrowl_p.png",1225, 100);
 
         acept.addListener(new ActorGestureListener(){
 

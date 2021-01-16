@@ -92,7 +92,7 @@ public class MainGameScreen extends ScreenAdapter {
                 2.5f,Color.BLACK).getCustomFont();
         fontDung50 = new CustomFont(50,255,255,255,1.0f,0,
                 1.5f,Color.BLACK).getCustomFont();
-        map = new MapSystem(levelStage, fase, "boss.png", "lvl.png", "lvl.png");
+        map = new MapSystem(levelStage, fase, "boss.png", "lvlpointer.png", "lvl.png");
 
         cEnemy.addListener( new ActorGestureListener(){
             @Override
@@ -139,7 +139,7 @@ public class MainGameScreen extends ScreenAdapter {
             cEnemy.setMaxhelth(hpAlgorithm);
             time = 12f;
             levelStage = 1;
-            map = new MapSystem(levelStage, fase, "boss.png", "lvl.png", "lvl.png");
+            map = new MapSystem(levelStage, fase, "boss.png", "lvlpointer.png", "lvl.png");
         }
         else if(cEnemy.getHealth() <= 0 && levelStage == 5){
             levelStage++;
