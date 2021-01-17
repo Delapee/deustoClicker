@@ -40,7 +40,7 @@ public class GameMenuScreen extends ScreenAdapter {
 
         IButton play = new IButton("B1.png","B2.png",Gdx.graphics.getWidth() / 2f,
                 Gdx.graphics.getHeight() / 4f,Align.center, new LoadingScreen(mainGame), mainGame);
-        IButton salir = new IButton("B1.png","B2.png",Gdx.graphics.getWidth() /
+        IButton salir = new IButton("boton/b_cerrarN.png","boton/b_cerrarP.png",Gdx.graphics.getWidth() /
                 2f, Gdx.graphics.getHeight() / 6f,Align.center);
 
         salir.addListener( new ActorGestureListener(){

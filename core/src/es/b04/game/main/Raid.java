@@ -137,7 +137,7 @@ public class Raid extends ScreenAdapter {
     public void team(){
         int countX = 0;
         for(Champion c : userL.getSquad()){
-           IButton championB = new IButton(c, 153 + countX, 151);
+           IButton championB = new IButton(c, 100 + countX, 160);
            stage.addActor(championB);
            countX += 170;
         }
@@ -249,9 +249,7 @@ public class Raid extends ScreenAdapter {
 
 
     }
-    public void enemyDmg(){
 
-    }
     public void endRaid(){
         if(leftProgess == 0 && rightProgress == 0 && bottonRight == 0 && bottonLeft == 0 && upProgress == 0){
             userL.setGold(userL.getGold() + 25000 * userL.getRaidLevel());
