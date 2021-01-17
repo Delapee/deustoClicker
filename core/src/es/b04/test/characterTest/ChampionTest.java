@@ -22,11 +22,6 @@ public class ChampionTest {
     }
 
     @Test
-    public void testToButton() {
-        assertEquals(IButton.class,testChamp.toButton(0,0).getClass());
-    }
-
-    @Test
     public void testUpgradeGold() {
         assertEquals(1800,testChamp.getUpgradeGold());
     }
@@ -37,7 +32,7 @@ public class ChampionTest {
         assertEquals(2, testChamp.getLevel());
         assertEquals((int)(100 * 1.5), testChamp.getDmg());
         assertEquals((int)(10 * 1.5), testChamp.getAccuracy());
-        assertEquals((int)(15 * 1.5), testChamp.getAttackSpeed());
+        assertEquals(15 * 1.5, testChamp.getAttackSpeed(), 0);
         assertEquals(33 * 1.5, testChamp.getCriticProb(),0);
         assertEquals((int)(15 * 1.5), testChamp.getDodgeProb(),0);
     }
