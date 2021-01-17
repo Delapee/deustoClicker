@@ -1,12 +1,16 @@
 package es.b04.game.utility;
 
+import com.badlogic.gdx.Files;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator.FreeTypeFontParameter;
+import com.sun.org.apache.bcel.internal.util.ClassPath;
 
 import java.io.File;
+import java.net.URI;
 import java.util.ArrayList;
 
 public class CustomFont {
@@ -27,7 +31,7 @@ public class CustomFont {
         this.g = g/255f;
         this.b = b/255f;
         this.a = a;
-        this.fontDir = takeFont(fontIndex);
+        this.fontDir = String.valueOf(fontIndex);
         this.borderWidth = borderWidth;
         this.borderColor = borderColor;
     }
@@ -141,7 +145,7 @@ public class CustomFont {
     }
 
     //Metodo que recoje todas la fuentes guardadas en el directorio especificado
-    private String takeFont(int i){
+    /*private String takeFont(int i){
         fonts = new ArrayList<String>();
         File dir = new File("core/assets/fonts");
 
@@ -155,11 +159,11 @@ public class CustomFont {
         }
 
         return fonts.get(i);
-    }
+    }*/
 
     //Metodo que te crea la fuente a tu gusto y te la devuelve en un formato con la que GDX sabe tabajar
     public BitmapFont getCustomFont(){
-        FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal(fontDir));
+        FreeTypeFontGenerator generator = new FreeTypeFontGenerator(new FileHandle(new File("1_dung.ttf")));
         FreeTypeFontParameter parameter = new FreeTypeFontParameter();
         parameter.size = size;
         parameter.color = new Color(r,g,b,a);
