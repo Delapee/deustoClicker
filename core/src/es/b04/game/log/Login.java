@@ -13,6 +13,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.net.URL;
 
 public class Login extends JFrame {
 
@@ -150,7 +151,8 @@ public class Login extends JFrame {
 
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         this.setTitle("Dungeon Clicker");
-        this.setIconImage(Toolkit.getDefaultToolkit().getImage("core/assets/icon/dragon.png"));
+        URL iconURL = getClass().getResource("/icon/dragon.png");
+        this.setIconImage(new ImageIcon(iconURL).getImage());
         this.setSize(400, 250);
         this.setResizable(false);
         this.setVisible(true);

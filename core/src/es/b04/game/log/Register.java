@@ -10,6 +10,7 @@ import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -28,7 +29,8 @@ public class Register extends JFrame {
 
         setTitle("Dungeon Clicker");
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-        setIconImage(Toolkit.getDefaultToolkit().getImage("core/assets/icon/dragon.png"));
+        URL iconURL = getClass().getResource("/icon/dragon.png");
+        setIconImage(new ImageIcon(iconURL).getImage());
         setSize(500,350);
         setVisible(true);
         setResizable(false);
