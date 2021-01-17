@@ -9,6 +9,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.utils.ActorGestureListener;
+import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import es.b04.game.character.Champion;
 import es.b04.game.character.MapSystem;
@@ -86,11 +87,28 @@ public class MainGameScreen extends ScreenAdapter {
         lvlBar = new ProgressBar("hpbar2.png", "expbar.png", userL.getExpMax(),
                 userL.getExpProgress(), 430, 850, 264, 35);
 
+        IButton salir = new IButton("boton/b_salirN.png","boton/b_salirN.png",1850, 20);
+
+        salir.addListener( new ActorGestureListener(){
+            @Override
+            public void tap(InputEvent event, float x, float y, int count, int button) {
+                super.tap(event, x, y, count, button);
+                try {
+                    db.disconnection();
+                } catch (DBException e) {
+                    e.printStackTrace();
+                }
+                Gdx.app.exit();
+            }
+
+        });
+
         Gdx.input.setInputProcessor(stage);
         background = assetManager.get(AssetEnum.GAMEBCK.getAsset());
         shop = new Shop(game);
         shop.loadShop(stage, userL);
 
+        stage.addActor(salir);
         stage.addActor(squadButton);
         stage.addActor(cEnemy);
         stage.addActor(autoClicker);
