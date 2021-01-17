@@ -3,19 +3,19 @@ USE dungeonClicker;
 CREATE TABLE user(
 	id VARCHAR(36) PRIMARY KEY NOT NULL,
 	name VARCHAR(50) UNIQUE NOT NULL,
-	pass VARCHAR(100) NOT NULL,
-	email VARCHAR(50) NOT NULL,
-	gender VARCHAR(10) NOT NULL,
-	age INT(3) NOT NULL,
-	level INT(3) DEFAULT 1 NOT NULL,
-	expMax INT(10) DEFAULT 1100 NOT NULL,
-	expProgress INT(10) DEFAULT 0 NOT NULL,
-	gold INT(10) DEFAULT 500 NOT NULL,
-	autoClick INT(2) DEFAULT 0 NOT NULL,
-	icon VARCHAR(50) NOT NULL,
-    stage INT(2) DEFAULT 1 NOT NULL,
-    stageLevel INT(2) DEFAULT 1 NOT NULL,
-    raidLevel INT(2) DEFAULT 1 NOT NULL);
+	pass VARCHAR(100),
+	email VARCHAR(50),
+	gender VARCHAR(10),
+	age INT(3),
+	level INT(3) DEFAULT 1,
+	expMax INT(10) DEFAULT 1100,
+	expProgress INT(10) DEFAULT 0,
+	gold INT(10) DEFAULT 500,
+	autoClick INT(2) DEFAULT 0,
+	icon VARCHAR(50),
+    stage INT(2) DEFAULT 1,
+    stageLevel INT(2) DEFAULT 1,
+    raidLevel INT(2) DEFAULT 1);
 
 CREATE TABLE champion(
 	id VARCHAR(36) PRIMARY KEY NOT NULL,

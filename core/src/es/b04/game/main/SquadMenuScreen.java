@@ -18,6 +18,7 @@ import es.b04.game.character.Champion;
 import es.b04.game.dataBase.DBException;
 import es.b04.game.dataBase.DBManager;
 import es.b04.game.hud.ProgressBar;
+import es.b04.game.log.Login;
 import es.b04.game.utility.AssetEnum;
 import es.b04.game.hud.IButton;
 import es.b04.game.log.User;
@@ -47,6 +48,7 @@ public class SquadMenuScreen extends ScreenAdapter {
 
     public SquadMenuScreen(MainGame game) {
         super();
+        userl = Login.userPlaying;
         this.game = game;
         this.assetManager = game.getAssetManager();
         inspect = 0;

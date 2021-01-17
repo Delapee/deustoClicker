@@ -89,26 +89,25 @@ public class DBManager {
      * @throws DBException gestor de excepciones de la la BD
      */
     public void updateUser(User u) throws DBException{
-        try (PreparedStatement stmt = conn.prepareStatement("UPDATE user SET name=?, pass=?, email=?, gender=?, " +
+        try (PreparedStatement stmt = conn.prepareStatement("UPDATE user SET pass=?, email=?, gender=?, " +
                 "age=?, level=?, expMax=?, expProgress=?, gold=?, autoClick=?, icon=?, stage=?, stageLevel=?, raidLevel=?" +
                 " WHERE id=?")) {
 
-            stmt.setString(1, u.getName());
-            stmt.setString(2, u.getPass());
-            stmt.setString(3, u.getEmail());
-            stmt.setString(4, u.getGender());
-            stmt.setInt(5, u.getAge());
-            stmt.setInt(6, u.getLevel());
-            stmt.setInt(7, u.getExpMax());
-            stmt.setInt(8, u.getExpProgress());
-            stmt.setInt(9, u.getGold());
-            stmt.setInt(10, u.getAutoClick());
-            stmt.setString(11, u.getIcon());
-            stmt.setInt(12, u.getStage());
-            stmt.setInt(13, u.getStageLevel());
-            stmt.setInt(14, u.getRaidLevel());
+            stmt.setString(1, u.getPass());
+            stmt.setString(2, u.getEmail());
+            stmt.setString(3, u.getGender());
+            stmt.setInt(4, u.getAge());
+            stmt.setInt(5, u.getLevel());
+            stmt.setInt(6, u.getExpMax());
+            stmt.setInt(7, u.getExpProgress());
+            stmt.setInt(8, u.getGold());
+            stmt.setInt(9, u.getAutoClick());
+            stmt.setString(10, u.getIcon());
+            stmt.setInt(11, u.getStage());
+            stmt.setInt(12, u.getStageLevel());
+            stmt.setInt(13, u.getRaidLevel());
 
-            stmt.setString(15, u.getId());
+            stmt.setString(14, u.getId());
 
             stmt.executeUpdate();
             logger.info("Usuario actualizado correctamente.");
