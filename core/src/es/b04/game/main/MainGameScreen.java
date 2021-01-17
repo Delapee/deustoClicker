@@ -87,6 +87,8 @@ public class MainGameScreen extends ScreenAdapter {
         stage.addActor(cEnemy);
         stage.addActor(autoClicker);
 
+
+
         // Declaracion de las Fuentes
         fontDung70 = new CustomFont(70,255,255,255,3.0f,0,
                 2.5f,Color.BLACK).getCustomFont();
@@ -221,6 +223,7 @@ public class MainGameScreen extends ScreenAdapter {
         batch.begin();
         renderText();
         stage.draw();
+        renderSquad();
         enemyHpBar.draw(batch, cEnemy.getHealth(), cEnemy.getMaxhelth());
         lvlBar.draw(batch, userL.getExpProgress(),userL.getExpMax());
         map.draw(batch, levelStage);
@@ -269,7 +272,6 @@ public class MainGameScreen extends ScreenAdapter {
         }else{
             fontDung50.draw(batch,Integer.toString(userL.getLevel()),376,877);
         }
-        fontDung70.draw(batch,userL.getExpProgress() + "/" + userL.getExpMax(),430,877);
         fontDung70.draw(batch,timeFormat.format(time),1289,1010);
         fontDung70.draw(batch,timeFormat.format(timeAuto),1289,950);
         fontDung70.draw(batch,timeFormat.format(timeExpBoost),750,950);
@@ -277,6 +279,15 @@ public class MainGameScreen extends ScreenAdapter {
         // Clicker
         fontDung70.draw(batch,Integer.toString(cEnemy.getHealth()),730,550);
         fontDung70.draw(batch,fase +"-"+levelStage,738,800);
+    }
+
+
+    public void renderSquad(){
+        int countX = 0;
+        for(Champion c : userL.getSquad()){
+            batch.draw(new Texture(c.getTexture().get(0)), 100 + countX, 160);
+            countX += 170;
+        }
     }
 
     public int getTotalDmg(){

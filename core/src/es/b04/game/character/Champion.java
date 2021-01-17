@@ -1,6 +1,8 @@
 package es.b04.game.character;
 
 import es.b04.game.hud.IButton;
+
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -211,11 +213,12 @@ public class Champion {
     }
 
     public void upgrade(){
+        DecimalFormat df = new DecimalFormat("#.00");
         this.level++;
         this.dmg = (int) (this.dmg * 1.5);
         this.accuracy = (int) (this.accuracy * 1.5);
-        this.attackSpeed = (this.attackSpeed * 1.5);
-        this.criticProb = (this.criticProb * 1.5);
+        this.attackSpeed = (double)Math.round((this.attackSpeed * 1.5 * 100d) / 100d);
+        this.criticProb = (double)Math.round((this.criticProb * 1.5* 100d) / 100d);
         this.dodgeProb = (int) (this.dodgeProb * 1.5);
     }
 

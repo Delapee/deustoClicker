@@ -311,7 +311,6 @@ public class SquadMenuScreen extends ScreenAdapter {
         fontDung50.draw(batch, userl.getName(), 150, 943);
         fontDung50.draw(batch, Integer.toString(userl.getGold()), 150, 885);
         fontDung50.draw(batch, Integer.toString(userl.getLevel()), 104, 828,0,Align.center,false);
-        fontDung50.draw(batch, userl.getExpProgress() + "/" + userl.getExpMax() , 150, 827);
 
         // Renderizado de los stats texto
         if(inspect < userl.getInventory().size()) {
