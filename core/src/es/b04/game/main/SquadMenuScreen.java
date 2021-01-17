@@ -48,7 +48,7 @@ public class SquadMenuScreen extends ScreenAdapter {
 
     public SquadMenuScreen(MainGame game) {
         super();
-        userl = Login.userPlaying;
+        userl = game.getUser();
         this.game = game;
         this.assetManager = game.getAssetManager();
         inspect = 0;
