@@ -77,6 +77,11 @@ public class Shop {
                 if (user.getGold() >= 500) {
                     user.setGold(user.getGold() - 500);
                     user.setAutoClick(user.getAutoClick() + 1);
+                    try {
+                        db.uptadeAllUserData(user);
+                    } catch (DBException e) {
+                        e.printStackTrace();
+                    }
                 }
             }
         });
@@ -88,6 +93,11 @@ public class Shop {
                 if (user.getGold() >= 500) {
                     user.setGold(user.getGold() - 500);
                     expBoost = true;
+                    try {
+                        db.uptadeAllUserData(user);
+                    } catch (DBException e) {
+                        e.printStackTrace();
+                    }
                 }
             }
         });
@@ -98,6 +108,11 @@ public class Shop {
                 if (user.getGold() >= 500) {
                     user.setGold(user.getGold() - 500);
                     goldBoost = true;
+                    try {
+                        db.uptadeAllUserData(user);
+                    } catch (DBException e) {
+                        e.printStackTrace();
+                    }
                 }
             }
         });
@@ -109,6 +124,11 @@ public class Shop {
                 if (user.getGold() >= 1500) {
                     user.setGold(user.getGold() - 500);
                     game.setScreen(game.getScreens().get(3));
+                    try {
+                        db.uptadeAllUserData(user);
+                    } catch (DBException e) {
+                        e.printStackTrace();
+                    }
                 }
             }
         });

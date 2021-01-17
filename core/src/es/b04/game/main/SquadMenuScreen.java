@@ -15,6 +15,8 @@ import com.badlogic.gdx.scenes.scene2d.utils.ActorGestureListener;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import es.b04.game.character.Champion;
+import es.b04.game.dataBase.DBException;
+import es.b04.game.dataBase.DBManager;
 import es.b04.game.hud.ProgressBar;
 import es.b04.game.utility.AssetEnum;
 import es.b04.game.hud.IButton;
@@ -27,6 +29,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SquadMenuScreen extends ScreenAdapter {
+    private static DBManager db = new DBManager();
     private Texture tittleBackground;
     private SpriteBatch batch;
     private final MainGame game;
@@ -52,6 +55,11 @@ public class SquadMenuScreen extends ScreenAdapter {
     @Override
     public void show() {
         super.show();
+        try {
+            db.uptadeAllUserData(userl);
+        } catch (DBException e) {
+            e.printStackTrace();
+        }
 
         if (inspect < 15){
             page = 1;

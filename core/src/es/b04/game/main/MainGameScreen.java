@@ -13,6 +13,8 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import es.b04.game.character.Champion;
 import es.b04.game.character.MapSystem;
 import es.b04.game.character.Shop;
+import es.b04.game.dataBase.DBException;
+import es.b04.game.dataBase.DBManager;
 import es.b04.game.utility.AssetEnum;
 import es.b04.game.hud.CEnemy;
 import es.b04.game.utility.CustomFont;
@@ -25,6 +27,7 @@ import org.apache.logging.log4j.Logger;
 import java.text.DecimalFormat;
 
 public class MainGameScreen extends ScreenAdapter {
+    private static DBManager db = new DBManager();
     private SpriteBatch batch;
     private User userL;
     private Stage stage;
@@ -66,6 +69,11 @@ public class MainGameScreen extends ScreenAdapter {
 
     @Override
     public void show() {
+        try {
+            db.uptadeAllUserData(userL);
+        } catch (DBException e) {
+            e.printStackTrace();
+        }
         super.show();
         logger.info("Juego contemplado.");
         batch = new SpriteBatch();
