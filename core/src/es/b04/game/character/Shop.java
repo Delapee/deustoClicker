@@ -121,8 +121,8 @@ public class Shop {
             @Override
             public void tap(InputEvent event, float x, float y, int count, int button) {
                 super.tap(event, x, y, count, button);
-                if (user.getGold() >= 1500) {
-                    user.setGold(user.getGold() - 500);
+                if (user.getGold() >= 0) {
+                    user.setGold(user.getGold());
                     game.setScreen(game.getScreens().get(3));
                     try {
                         db.uptadeAllUserData(user);

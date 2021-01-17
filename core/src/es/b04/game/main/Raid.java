@@ -49,9 +49,14 @@ public class Raid extends ScreenAdapter {
     private ProgressBar eBUp;
     private ProgressBar eBLeftBot;
     private ProgressBar eBRightBot;
+    private boolean mercenarioUlt;
+    private boolean pesteUlt;
+    private boolean magoUlt;
+    private boolean pirataUlt;
+    private float dmgBoost;
     private IButton exitRaid;
     private DecimalFormat timeFormat = new DecimalFormat("#.00");
-    private static final Logger logger = LogManager.getLogger(MainGameScreen.class);
+    private static final Logger logger = LogManager.getLogger(Raid.class);
 
     public Raid(MainGame game){
         this.game = game;
@@ -77,6 +82,7 @@ public class Raid extends ScreenAdapter {
         fontDung50 = new CustomFont(50,255,255,255,1.0f,0,
                 1.5f,Color.BLACK).getCustomFont();
         team();
+        dmgBoost = 10.f;
         raidLevel = userL.getRaidLevel();
         getTotalDmg();
         leftProgess = totalRaidHp/5;
@@ -84,6 +90,7 @@ public class Raid extends ScreenAdapter {
         upProgress = totalRaidHp/5;
         bottonLeft = totalRaidHp/5;
         bottonRight = totalRaidHp/5;
+        logger.info("Modo raid iniciado");
         exitRaid.addListener(new ActorGestureListener(){
             @Override
             public void tap(InputEvent event, float x, float y, int count, int button) {
@@ -131,13 +138,59 @@ public class Raid extends ScreenAdapter {
         raidTime -= Gdx.graphics.getRawDeltaTime();
         if(raidTime < 0 ){
             game.setScreen(game.getScreens().get(0));
-
+            raidTime = 20.f;
+            mercenarioUlt = false;
+            pesteUlt = false;
+            magoUlt = false;
+            pirataUlt = false;
         }
     }
     public void team(){
         int countX = 0;
-        for(Champion c : userL.getSquad()){
-           IButton championB = new IButton(c, 153 + countX, 151);
+        for(final Champion c : userL.getSquad()){
+           final IButton championB = new IButton(c, 153 + countX, 151);
+           championB.addListener(new ActorGestureListener(){
+               @Override
+               public void tap(InputEvent event, float x, float y, int count, int button) {
+                   super.tap(event, x, y, count, button);
+                   if(c.getName().equals("Mercenario") && !mercenarioUlt){
+                        raidTime += 10;
+                        mercenarioUlt = true;
+                   }
+                   if(c.getName().equals("MPeste") && !pesteUlt){
+                        upProgress -= upProgress*0.5;
+                        pesteUlt = true;
+                   }
+                   if(c.getName().equals("Mago") && !magoUlt){
+                       leftProgess -= c.getDmg()*2;
+                       if(leftProgess < 0){
+                           leftProgess = 0;
+                       }
+                       rightProgress -= c.getDmg()*2;
+                       if(rightProgress < 0){
+                           leftProgess = 0;
+                       }
+                       upProgress -= c.getDmg()*2;
+                       if(upProgress < 0){
+                           upProgress = 0;
+                       }
+                       bottonLeft -= c.getDmg()*2;
+                       if(bottonLeft < 0){
+                           bottonLeft = 0;
+                       }
+                       bottonRight -= c.getDmg()*2;
+                       if(bottonRight < 0){
+                           bottonRight = 0;
+                       }
+                       magoUlt = true;
+                   }
+                   if(c.getName().equals("Pirata") && !pirataUlt){
+                        userL.setGold(userL.getGold() + 500);
+                        raidTime += 4;
+                        pirataUlt = true;
+                   }
+               }
+           });
            stage.addActor(championB);
            countX += 170;
         }
@@ -249,14 +302,17 @@ public class Raid extends ScreenAdapter {
 
 
     }
-    public void enemyDmg(){
 
-    }
     public void endRaid(){
         if(leftProgess == 0 && rightProgress == 0 && bottonRight == 0 && bottonLeft == 0 && upProgress == 0){
             userL.setGold(userL.getGold() + 25000 * userL.getRaidLevel());
             userL.setRaidLevel(userL.getRaidLevel() + 1);
             game.setScreen(game.getScreens().get(0));
+            raidTime = 20.f;
+            mercenarioUlt = false;
+            pesteUlt = false;
+            magoUlt = false;
+            pirataUlt = false;
 
         }
     }
