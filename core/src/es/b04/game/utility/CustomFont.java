@@ -1,20 +1,17 @@
 package es.b04.game.utility;
 
-import com.badlogic.gdx.Files;
-import com.badlogic.gdx.Gdx;
+
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator.FreeTypeFontParameter;
-import com.sun.org.apache.bcel.internal.util.ClassPath;
-
 import java.io.File;
-import java.net.URI;
 import java.util.ArrayList;
+import java.util.List;
 
 public class CustomFont {
-    private static ArrayList<String> fonts;
+    private static List<String> fonts;
 
     private int size;
     private float r;
@@ -31,7 +28,7 @@ public class CustomFont {
         this.g = g/255f;
         this.b = b/255f;
         this.a = a;
-        this.fontDir = String.valueOf(fontIndex);
+        this.fontDir = takeFont(fontIndex);
         this.borderWidth = borderWidth;
         this.borderColor = borderColor;
     }
@@ -58,11 +55,11 @@ public class CustomFont {
         this.borderColor = copy.borderColor;
     }
 
-    public static ArrayList<String> getFonts() {
+    public static List<String> getFonts() {
         return fonts;
     }
 
-    public static void setFonts(ArrayList<String> fonts) {
+    public static void setFonts(List<String> fonts) {
         CustomFont.fonts = fonts;
     }
 
@@ -145,9 +142,12 @@ public class CustomFont {
     }
 
     //Metodo que recoje todas la fuentes guardadas en el directorio especificado
-    /*private String takeFont(int i){
-        fonts = new ArrayList<String>();
-        File dir = new File("core/assets/fonts");
+    private String takeFont(int i){
+        fonts = new ArrayList<>();
+        fonts.add("1_dung.ttf");
+        fonts.add("core/assets/fonts/2_King_Arthur_Legend.ttf");
+
+        /*File dir = new File("core/assets/fonts");
 
         File[] files = dir.listFiles();
 
@@ -156,14 +156,14 @@ public class CustomFont {
             if (file.isFile() && (file.getName().endsWith(".ttf") || file.getName().endsWith(".fnt"))) {
                 fonts.add("core/assets/fonts/" + file.getName());
             }
-        }
+        }*/
 
         return fonts.get(i);
-    }*/
+    }
 
     //Metodo que te crea la fuente a tu gusto y te la devuelve en un formato con la que GDX sabe tabajar
     public BitmapFont getCustomFont(){
-        FreeTypeFontGenerator generator = new FreeTypeFontGenerator(new FileHandle(new File("1_dung.ttf")));
+        FreeTypeFontGenerator generator = new FreeTypeFontGenerator(new FileHandle(new File(fontDir)));
         FreeTypeFontParameter parameter = new FreeTypeFontParameter();
         parameter.size = size;
         parameter.color = new Color(r,g,b,a);
