@@ -1,5 +1,6 @@
 package es.b04.game.adminTables;
 
+import es.b04.game.character.Champion;
 import es.b04.game.dataBase.DBException;
 import es.b04.game.dataBase.DBManager;
 import es.b04.game.log.Login;
@@ -31,12 +32,13 @@ public class UserViewer extends JFrame implements WindowListener {
     private JLabel totalUsers;
 
     public UserViewer() throws DBException {
+
         db = new DBManager();
-        db.connection("dungeonClicker.db");
 
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setSize(960, 600);
         setTitle("Vista de usuarios");
+        setIconImage(Toolkit.getDefaultToolkit().getImage("core/assets/icon/dragon.png"));
 
         addWindowListener(this);
 
@@ -64,7 +66,7 @@ public class UserViewer extends JFrame implements WindowListener {
         JMenuItem playItem = new JMenuItem("Jugar");
         optionsJMenu.add(playItem);
 
-        JMenuItem playAsItem = new JMenuItem("Jugar como..");
+        JMenuItem playAsItem = new JMenuItem("Jugar como...");
         optionsJMenu.add(playAsItem);
 
         JMenuItem loginItem = new JMenuItem("Login");
@@ -89,9 +91,30 @@ public class UserViewer extends JFrame implements WindowListener {
         toolsJMenu.add(champDeleteItem);
 
 
+        playItem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Login.close = true;
+                dispose();
+            }
+        });
+
+        playAsItem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (userJList.getSelectedIndex() != -1) {
+                    User u = userJList.getSelectedValue();
+                    Login.userPlaying = new User(u);
+                    Login.close = true;
+                    dispose();
+                }
+            }
+        });
+
         loginItem.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                Login.isAdmin = false;
                 SwingUtilities.invokeLater(new Runnable() {
                     @Override
                     public void run() {
@@ -105,6 +128,7 @@ public class UserViewer extends JFrame implements WindowListener {
         registerItem.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                Login.isAdmin = false;
                 SwingUtilities.invokeLater(new Runnable() {
                     @Override
                     public void run() {
@@ -123,6 +147,84 @@ public class UserViewer extends JFrame implements WindowListener {
             @Override
             public void actionPerformed(ActionEvent e) {
                 exit();
+            }
+        });
+
+        userAddItem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Login.isAdmin = true;
+                SwingUtilities.invokeLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            new Register();
+                        } catch (DBException dbException) {
+                            dbException.printStackTrace();
+                        }
+                    }
+                });
+                dispose();
+            }
+        });
+
+        userDeleteItem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (userJList.getSelectedIndex() != -1) {
+                    User u = userJList.getSelectedValue();
+                    if(!u.getName().equals("admin")){
+                        try {
+                            db.deleteUser(u);
+                        } catch (DBException dbException) {
+                            dbException.printStackTrace();
+                        }
+                        SwingUtilities.invokeLater(new Runnable() {
+                            @Override
+                            public void run() {
+                                try {
+                                    new UserViewer();
+                                } catch (DBException dbException) {
+                                    dbException.printStackTrace();
+                                }
+                            }
+                        });
+                        dispose();
+                    }
+                }
+            }
+        });
+
+        champAddItem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
+
+        champDeleteItem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (championTable.getSelectedRow() !=1){
+                    User u = userJList.getSelectedValue();
+                    Champion c = championTableModel.getChampion(championTable.getSelectedRow());
+                    try {
+                        db.deleteChampion(u.getId(), c.getId());
+                    } catch (DBException dbException) {
+                        dbException.printStackTrace();
+                    }
+                    SwingUtilities.invokeLater(new Runnable() {
+                        @Override
+                        public void run() {
+                            try {
+                                new UserViewer();
+                            } catch (DBException dbException) {
+                                dbException.printStackTrace();
+                            }
+                        }
+                    });
+                    dispose();
+                }
             }
         });
 
@@ -160,7 +262,7 @@ public class UserViewer extends JFrame implements WindowListener {
         });
     }
 
-    private void updateUI() {
+    public void updateUI() {
         if (userJList.getSelectedIndex() != -1) {
             User u = userJList.getSelectedValue();
             userInfoPanel.setUser(u);

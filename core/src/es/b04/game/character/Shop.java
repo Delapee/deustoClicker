@@ -57,7 +57,10 @@ public class Shop {
                 if (user.getGold() >= 500){
                     user.setGold(user.getGold() - 500);
                     try {
-                        user.addChampionInventory(db.getChampionDrop(randomChampType(),randomChampRare(user)));
+                        Champion c = db.getChampionDrop(randomChampType(),randomChampRare(user));
+                        user.addChampionInventory(c);
+                        db.storeNewChampion(c, user.getId());
+                        db.uptadeAllUserData(user);
                     } catch (DBException e) {
                         e.printStackTrace();
                     }

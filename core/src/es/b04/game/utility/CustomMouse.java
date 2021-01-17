@@ -63,7 +63,6 @@ public class CustomMouse {
         camera.update();
         mousePosition.set(Gdx.input.getX(), Gdx.input.getY(), 0);
         camera.unproject(mousePosition);
-        System.out.println(mousePosition);
     }
 
 }

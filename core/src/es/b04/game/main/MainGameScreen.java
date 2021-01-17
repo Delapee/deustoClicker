@@ -100,7 +100,6 @@ public class MainGameScreen extends ScreenAdapter {
                 super.tap(event, x, y, count, button);
 
                 cEnemy.setHealth(cEnemy.getHealth() - getTotalDmg());
-                System.out.println(getTotalDmg());
 
                 enemyHp();
             }
@@ -284,7 +283,6 @@ public class MainGameScreen extends ScreenAdapter {
         totalDmg = 0;
         for(Champion c : userL.getSquad()){
             totalDmg += c.getDmg();
-            System.out.println(totalDmg);
         }
         return totalDmg;
     }

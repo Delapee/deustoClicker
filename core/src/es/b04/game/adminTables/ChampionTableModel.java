@@ -92,4 +92,8 @@ public class ChampionTableModel extends AbstractTableModel{
         else if (columnIndex == 9) return Boolean.class;
         else return int.class;
     }
+
+    public Champion getChampion(int rowIndex){
+        return champions.get(rowIndex);
+    }
 }

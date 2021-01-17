@@ -11,10 +11,14 @@ import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class Login extends JFrame {
 
     public static volatile boolean close = false;
+    public static volatile boolean isAdmin = false;
+    public static volatile User userPlaying;
     private DBManager db;
     private static final Logger logger = LogManager.getLogger(Login.class);
 
@@ -27,10 +31,10 @@ public class Login extends JFrame {
         db = new DBManager();
 
         JButton resgistro = new JButton("Registrarse");
-        JButton iniciar = new JButton("Iniciar sesion");
+        final JButton iniciar = new JButton("Iniciar sesion");
 
-        JLabel user = new JLabel("Usuario");
-        JLabel pass = new JLabel("Contraseña");
+        final JLabel user = new JLabel("Usuario");
+        final JLabel pass = new JLabel("Contraseña");
 
         final JTextField usuario = new JTextField();
         final JPasswordField contrasena = new JPasswordField();
@@ -75,7 +79,9 @@ public class Login extends JFrame {
                 if (todoOk){
                     try {
                         if (db.isPassOk(usuario.getText(), String.valueOf(contrasena.getPassword()))){
+                            userPlaying = db.getUser(usuario.getText());
                             if (usuario.getText().equals("admin")){
+                                isAdmin = true;
                                 SwingUtilities.invokeLater(new Runnable() {
                                     @Override
                                     public void run() {
@@ -87,7 +93,6 @@ public class Login extends JFrame {
                                     }
                                 });
                             }else{
-                                User user = db.getUser(usuario.getText());
                                 close = true;
                                 logger.info("Inicio de sesion realizada correctamente");
                             }
@@ -104,6 +109,19 @@ public class Login extends JFrame {
                 }
             }
         });
+
+        KeyAdapter enterKey = new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                int key = e.getKeyCode();
+                if (key == KeyEvent.VK_ENTER) {
+                    iniciar.doClick();
+                }
+            }
+        };
+
+        usuario.addKeyListener(enterKey);
+        contrasena.addKeyListener(enterKey);
 
         JPanel mainPanel = new JPanel();
         mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.PAGE_AXIS));

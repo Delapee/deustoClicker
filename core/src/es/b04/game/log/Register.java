@@ -1,7 +1,10 @@
 package es.b04.game.log;
 
+
+import es.b04.game.adminTables.UserViewer;
 import es.b04.game.dataBase.DBException;
 import es.b04.game.dataBase.DBManager;
+
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 import java.awt.*;
@@ -13,6 +16,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Register extends JFrame {
+
     public static final Pattern emailValidRegex =
             Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
     private DBManager db;
@@ -22,7 +26,7 @@ public class Register extends JFrame {
         db = new DBManager();
         usersNames = new ArrayList<>(db.getAllUserNames());
 
-        setTitle("Dungeon clicker");
+        setTitle("Dungeon Clicker");
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         setIconImage(Toolkit.getDefaultToolkit().getImage("core/assets/icon/dragon.png"));
         setSize(500,350);
@@ -159,7 +163,20 @@ public class Register extends JFrame {
                     } catch (DBException dbException) {
                         dbException.printStackTrace();
                     }
-                    loginWindow();
+                    if (!Login.isAdmin){
+                        loginWindow();
+                    }else{
+                        SwingUtilities.invokeLater(new Runnable() {
+                            @Override
+                            public void run() {
+                                try {
+                                    new UserViewer();
+                                } catch (DBException dbException) {
+                                    dbException.printStackTrace();
+                                }
+                            }
+                        });
+                    }
                     dispose();
                 }
 

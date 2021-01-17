@@ -4,6 +4,7 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.assets.AssetManager;
 import es.b04.game.character.Champion;
+import es.b04.game.log.Login;
 import es.b04.game.utility.CustomMouse;
 import es.b04.game.log.User;
 
@@ -71,8 +72,8 @@ public class MainGame extends Game {
 		logger.debug("debug");
 		logger.info("Juego creado");
 		customMouse = new CustomMouse("cursor.png");
-		user = new User();
-		loadUserA();
+		user = new User(Login.userPlaying);
+		logger.info("user cargado");
 		this.setScreen(new GameMenuScreen(this));
 		screens = new ArrayList<>();
 		MainGameScreen gameScreen = new MainGameScreen(this);
@@ -91,46 +92,4 @@ public class MainGame extends Game {
 	public User getUser() {
 		return user;
 	}
-
-	// CARGAR USER PRUEBA
-	public void loadUserA(){
-		user.setName("UserPrueba");
-		user.setGold(8000000);
-		user.setLevel(1);
-		user.setExpMax(1000);
-		user.setExpProgress(500);
-
-		ArrayList<String> sPirate = new ArrayList<>();
-		sPirate.add("champ/pira/pira_n.png");
-		sPirate.add("champ/pira/pira_p.png");
-		sPirate.add("champ/pira/pira_f.png");
-
-		ArrayList<String> sMed = new ArrayList<>();
-		sMed.add("champ/med/med_n.png");
-		sMed.add("champ/med/med_p.png");
-		sMed.add("champ/med/med_f.png");
-
-		ArrayList<String> sWar = new ArrayList<>();
-		sWar.add("champ/war/war_n.png");
-		sWar.add("champ/war/war_p.png");
-		sWar.add("champ/war/war_f.png");
-
-		Champion c1 = new Champion(sPirate,"El PIRATA",1,1,100,10,15,33,15,false);
-		Champion c2 = new Champion(sWar,"El PERRATA",2,1,120,12,25,43,25,false);
-		Champion c3 = new Champion(sWar,"El TONTITO",1,1,100,21,25,13,35,false);
-		Champion c4 = new Champion(sMed,"El CURATOR",2,1,120,33,45,23,45,false);
-		Champion c5 = new Champion(sMed,"El PINOS",1,1,100,41,15,33,13,false);
-
-		ArrayList<Champion> invent = new ArrayList<>();
-		invent.add(c1);
-		invent.add(c2);
-		invent.add(c3);
-		invent.add(c4);
-		invent.add(c5);
-
-		user.setInventory(invent);
-		logger.info("user cargado");
-
-	}
-
 }

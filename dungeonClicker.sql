@@ -19,16 +19,16 @@ CREATE TABLE user(
 
 CREATE TABLE champion(
 	id VARCHAR(36) PRIMARY KEY NOT NULL,
-	name VARCHAR(16) NOT NULL,
-	level INT(3) NOT NULL,
-	levelMax INT(3) NOT NULL,
-	rare INT(2) NOT NULL,
-	dmg INT(10) NOT NULL,
-	accuracy DEC(3,2) NOT NULL,
-    attackSpeed DEC(3,2) NOT NULL,
-    criticProb DEC(3,2) NOT NULL,
-    dodgeProb DEC(3,2) NOT NULL,
-	onSquad BOOL NOT NULL,
+	name VARCHAR(16),
+	level INT(3),
+	levelMax INT(3),
+	rare INT(2),
+	dmg INT(10),
+	accuracy DEC(3,2),
+    attackSpeed DEC(3,2),
+    criticProb DEC(3,2),
+    dodgeProb DEC(3,2),
+	onSquad BOOL,
     id_user VARCHAR(36) NOT NULL,
     
     FOREIGN KEY(id_user) REFERENCES user(id) ON DELETE CASCADE ON UPDATE CASCADE);

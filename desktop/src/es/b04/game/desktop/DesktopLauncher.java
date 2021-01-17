@@ -16,15 +16,15 @@ public class DesktopLauncher {
 
 	public static void main (String[] arg) throws DBException {
 
+		DBManager db = new DBManager();
+		db.connection(dbPath);
+
 		SwingUtilities.invokeLater(new Runnable() {
 			@Override
 			public void run() {
 				new Login();
 			}
 		});
-
-		DBManager db = new DBManager();
-		db.connection(dbPath);
 
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
 		config.addIcon("icon/dragonMini.png", Files.FileType.Classpath);
