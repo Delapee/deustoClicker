@@ -24,8 +24,7 @@ public class Shop {
         itemList.add(new IButton("shop/ShopIten2_n.png","shop/ShopIten2_p.png",1775,850));
         itemList.add(new IButton("shop/ShopIten3_n.png","shop/ShopIten3_p.png",1620,700));
         itemList.add(new IButton("shop/ShopIten4_n.png","shop/ShopIten4_p.png",1775,700));
-        itemList.add(new IButton("ShopIten.png","ShopIten2.png",1620,550));
-        itemList.add(new IButton("shop/ShopIten6_n.png","shop/ShopIten6_p.png",1775,550));
+        itemList.add(new IButton("shop/ShopIten6_n.png","shop/ShopIten6_p.png",1620,550));
         this.game = game;
     }
 
@@ -117,7 +116,7 @@ public class Shop {
             }
         });
         // Iniciar Raid
-        itemList.get(5).addListener(new ActorGestureListener(){
+        itemList.get(4).addListener(new ActorGestureListener(){
             @Override
             public void tap(InputEvent event, float x, float y, int count, int button) {
                 super.tap(event, x, y, count, button);

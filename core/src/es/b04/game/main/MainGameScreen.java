@@ -47,7 +47,7 @@ public class MainGameScreen extends ScreenAdapter {
     private int levelStage = 1;
     private int fase = 1;
     private final int dmgAvg = 150;
-    private final int touchAvg = 7;
+    private final int touchAvg = 4;
     private int faseM = 5 * levelStage;
     private int hpAlgorithm;
     private ProgressBar enemyHpBar;
@@ -79,7 +79,7 @@ public class MainGameScreen extends ScreenAdapter {
         batch = new SpriteBatch();
         stage = new Stage(new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()));
         cEnemy = new CEnemy("C1.png","C2.png",hpAlgorithm,10,50);
-        IButton squadButton = new IButton("B1.png","B2.png",280,
+        IButton squadButton = new IButton("boton/b_squadN.png","boton/b_squadP.png",250,
                 37, (ScreenAdapter) game.getScreens().get(2), game);
         enemyHpBar = new ProgressBar("hpbar2.png", "hpbar1.png", (float)cEnemy.getMaxhelth(),
                 (float)cEnemy.getHealth(), 730, 590, 264, 35);

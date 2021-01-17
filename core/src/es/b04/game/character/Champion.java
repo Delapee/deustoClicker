@@ -224,6 +224,7 @@ public class Champion {
 
     public int getUpgradeGold(){
         int result = 0;
+
         for (int i = 1; i < 7; i++) {
             result += 100 * this.level * (1 + 0.2 * (i-1)) * 2;
         }

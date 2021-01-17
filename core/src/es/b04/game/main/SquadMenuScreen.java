@@ -214,8 +214,10 @@ public class SquadMenuScreen extends ScreenAdapter {
             public void tap(InputEvent event, float x, float y, int count, int button) {
                 super.tap(event, x, y, count, button);
                 if (userl.getGold() >= userl.getInventory().get(inspect).getUpgradeGold()){
-                    userl.setGold(userl.getGold()-userl.getInventory().get(inspect).getUpgradeGold());
-                    userl.getInventory().get(inspect).upgrade();
+                    if(userl.getInventory().get(inspect).getLevel() <= userl.getInventory().get(inspect).getLevelMax()) {
+                        userl.setGold(userl.getGold() - userl.getInventory().get(inspect).getUpgradeGold());
+                        userl.getInventory().get(inspect).upgrade();
+                    }
                 }
             }
         });
@@ -305,6 +307,10 @@ public class SquadMenuScreen extends ScreenAdapter {
                             break;
                     }
                     batch.draw(new Texture(rare),491 + 195 * j, 645 - 244 * i);
+
+                    if (userl.getInventory().get(cont).isOnSquad()){
+                        batch.draw(new Texture("lock.png"),600 + 195 * j, 645 - 244 * i);
+                    }
                     cont++;
                 }catch (Exception e){
 
