@@ -148,7 +148,7 @@ public class Raid extends ScreenAdapter {
     public void team(){
         int countX = 0;
         for(final Champion c : userL.getSquad()){
-           final IButton championB = new IButton(c, 153 + countX, 151);
+           final IButton championB = new IButton(c, 100 + countX, 160);
            championB.addListener(new ActorGestureListener(){
                @Override
                public void tap(InputEvent event, float x, float y, int count, int button) {
